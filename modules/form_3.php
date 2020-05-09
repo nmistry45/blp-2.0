@@ -1,12 +1,13 @@
 <?php
-// include('navbar.php');
-//if(!isset($_SESSION['id'])){
-  //  echo"<script>
-    //alert('Please Login in');
-    //document.location.href = 'login.php';
-    //</script>
-    //";
-//}
+session_start();
+include ('logout.php');
+if(!isset($_SESSION['id'])){
+   echo"<script>
+    alert('Please Login');
+    document.location.href = 'login.php';
+    </script>
+    ";
+}
 
   $servername = "localhost";
 	$username = "root";

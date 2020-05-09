@@ -1,5 +1,14 @@
 <?php
-
+   session_start();
+   include ('logout.php');
+   if(!isset($_SESSION['id'])){
+       echo"<script>
+       alert('Please Login');
+       document.location.href = 'login.php';
+       </script>
+       ";
+   }
+   
   $servername = "localhost";
 	$username = "root";
 	$password = "";
@@ -9,8 +18,8 @@
 
 	if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
-
-	}
+    }
+ 
 
 ?>
 
