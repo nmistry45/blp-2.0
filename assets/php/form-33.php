@@ -2,12 +2,12 @@
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -162,7 +162,7 @@
 
 		if(query($q1, 'Others_Details3') ) {
 
-			// $Pid = $conn->insert_id;
+			$f3id = $conn->insert_id;
 			// echo "Pid is " . $Pid . "<br>";
 			
 			foreach ($others_drug_name as $key => $value) {
@@ -172,11 +172,12 @@
 				$others_drug_duration[$key] = escape(empty($_POST['others_drug_duration'][$key]) ? 'Unknown' : $_POST['others_drug_duration'][$key]);
 		
 				$q2 = "insert into `form3_others` (
+				`f3id`,
 				`pid`,
 				`others_drug_name`,
 				`others_drug_dosage`,
 				`others_drug_duration`
-			) VALUES ('$pid', '$others_drug_name[$key]', '$others_drug_dosage[$key]', '$others_drug_duration[$key]');";
+			) VALUES ('$f3id','$pid', '$others_drug_name[$key]', '$others_drug_dosage[$key]', '$others_drug_duration[$key]');";
 			query($q2, 'form3_others');
 			}
 			header("location:../../modules/display_form_1-6.php?pid=".$pid);

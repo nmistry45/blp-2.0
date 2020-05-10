@@ -2,12 +2,12 @@
 //  include 'predni.php';
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -221,14 +221,14 @@
 		
 		$q1 = "insert into form2 (patient_name,clinic_id,study_no,date,staff_name,current_reaction_status,first_had_enl,firstPDate,first_sym,date_started_predni,current_dose_predni,current_dose_clofa,current_dose_thal,nfa,change_in_nfi,change_in_nfi_desc,eess_2,qol_2_score,vas_for_pig_2,obs,drug_dose_predni,drug_dur_predni,drug_dose_clofa,drug_dur_clofa,next_asse_date) 
 		values ('$patient_name','$clinic_id','$study_no','$date','$staff_name','$current_reaction_status','$first_had_enl','$firstPDate','$first_sym','$date_started_predni','$current_dose_predni','$current_dose_clofa','$current_dose_thal','$nfa','$change_in_nfi','$change_in_nfi_desc','$eess_2','$qol_2_score','$vas_for_pig_2','$obs','$drug_dose_predni','$drug_dur_predni','$drug_dose_clofa','$drug_dur_clofa','$next_asse_date');";
-		echo $q1;
+// 		echo $q1;
 
 		// $qu1 = "insert into form2_checkBox2 values $current_anti_reaction";
 
 		$check_0 = isset($_POST['current_anti_reaction'][0]) ? 'yes' : 'no';
 		$check_1 = isset($_POST['current_anti_reaction'][1]) ? 'yes' : 'no';
 		$check_2 = isset($_POST['current_anti_reaction'][2]) ? 'yes' : 'no';
-		$query = "INSERT INTO form2_checkBox2 VALUES ('$id', '$check_0','$check_1','$check_2')";
+		$query = "INSERT INTO form2_checkbox2 VALUES ('$check_0','$check_1','$check_2')";
 		mysqli_query($conn, $query);
 
 		$check_0a = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
@@ -247,7 +247,7 @@
 		$check_13a = isset($_POST['adverse_predni'][13]) ? 'yes' : 'no';
 		$check_14a = isset($_POST['adverse_predni'][14]) ? 'yes' : 'no';
 		$check_15a = isset($_POST['adverse_predni'][15]) ? 'yes' : 'no';
-		$query1 = "INSERT INTO form2_checkbox VALUES ('$id', '$check_0a','$check_1a','$check_2a', '$check_3a','$check_4a','$check_5a', '$check_6a','$check_7a','$check_8a', '$check_9a','$check_10a','$check_11a', '$check_12a','$check_13a','$check_14a','$check_15a')";
+		$query1 = "INSERT INTO form2_checkbox VALUES ('$check_0a','$check_1a','$check_2a', '$check_3a','$check_4a','$check_5a', '$check_6a','$check_7a','$check_8a', '$check_9a','$check_10a','$check_11a', '$check_12a','$check_13a','$check_14a','$check_15a')";
 		mysqli_query($conn, $query1);
 		
 		if(query($q1, 'Others_Details') ) {

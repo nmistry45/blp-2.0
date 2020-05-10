@@ -2,19 +2,19 @@
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  $servername = "localhost";
-  $username = "root";
-  $password = "";
-  $dbname = "blp_db";
-
-      $conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
       if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
   }
 
   $id = $_GET['pid'];
-
+$f3id = $_GET['f3id'];
   function query ( $query, $message = '' ) {
       global $conn;
       $insert = mysqli_query($conn, $query);
@@ -177,14 +177,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       `advise_ad` = '$advise_ad',
       `assessment_date` = '$assessment_date',
       `prednisolone_review` =  '$prednisolone_review'
-      WHERE `pid`=".$id."";
-      echo $q1;
+      WHERE `f3id`=".$f3id."";
+    //   echo $q1;
 
       if(query($q1, 'Others_Details3') ) {
 
         //   $Pid = $conn->insert_id;
         //   echo "Pid is " . $Pid . "<br>";
-        mysqli_query($conn,"DELETE FROM `form3_others` WHERE `pid` = $id");
+        mysqli_query($conn,"DELETE FROM `form3_others` WHERE `f3id` = $f3id");
 
           foreach ($others_drug_name as $key => $value) {
 
@@ -193,12 +193,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               $others_drug_duration[$key] = escape(empty($_POST['others_drug_duration'][$key]) ? 'Unknown' : $_POST['others_drug_duration'][$key]);
             
               $q2 = "insert into `form3_others` (
+                `f3id`,
                 `pid`,
                 `others_drug_name`,
                 `others_drug_dosage`,
                 `others_drug_duration`
-            ) VALUES ('$id', '$others_drug_name[$key]', '$others_drug_dosage[$key]', '$others_drug_duration[$key]');";
-              
+            ) VALUES ('$f3id', '$id', '$others_drug_name[$key]', '$others_drug_dosage[$key]', '$others_drug_duration[$key]');";
+            //   echo $q2;
           query($q2, 'form3_others');
           }
           header("location:../../modules/display_form_1-6.php?pid=".$id);

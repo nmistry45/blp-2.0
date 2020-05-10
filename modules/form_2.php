@@ -146,11 +146,11 @@ if(!isset($_SESSION['id'])){
                             <label  for="current_anti_reaction" class="form-label">Current anti-reaction therapy</label>
 
                             <div class="form-radio-item">              									
-                                <input type="checkbox"  name="current_anti_reaction[0]" value="y" id="Prednisolone"/>
+                                <input type="checkbox"  name="current_anti_reaction[0]" value="yes" id="Prednisolone"/>
                                 <label style="width:115px;"for="Prednisolone">Prednisolone</label>
-                                <input type="checkbox"   name="current_anti_reaction[1]" value="y" id="Clofazmine"/>
+                                <input type="checkbox"   name="current_anti_reaction[1]" value="yes" id="Clofazmine"/>
                                 <label style="width:115px;"for="Clofazmine">Clofazmine</label>            
-                                <input type="checkbox"  name="current_anti_reaction[2]" value="y" id="Thalidamide"/>
+                                <input type="checkbox"  name="current_anti_reaction[2]" value="yes" id="Thalidamide"/>
                                 <label style="width:115px;"for="Thalidamide">Thalidamide</label>
                             </div>
                         </div>

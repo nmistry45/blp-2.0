@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 09, 2020 at 12:58 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Host: localhost:3306
+-- Generation Time: May 10, 2020 at 01:43 PM
+-- Server version: 5.6.43-84.3-log
+-- PHP Version: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `blp_db`
+-- Database: `bombaoim_blp_db`
 --
 
 -- --------------------------------------------------------
@@ -153,6 +153,7 @@ CREATE TABLE `form2_checkbox2` (
 --
 
 CREATE TABLE `form2_others` (
+  `oid` bigint(20) NOT NULL,
   `pid` bigint(20) NOT NULL,
   `others_drug_name` varchar(255) NOT NULL,
   `others_drug_dosage` varchar(255) NOT NULL,
@@ -194,8 +195,9 @@ CREATE TABLE `form3` (
 --
 
 CREATE TABLE `form3_others` (
+  `f3id` bigint(20) NOT NULL,
   `pid` bigint(20) NOT NULL,
-  `others_drug_name` varchar(255) NOT NULL,
+  `others_drug_name` varchar(100) NOT NULL,
   `others_drug_dosage` varchar(255) NOT NULL,
   `others_drug_duration` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -231,6 +233,7 @@ CREATE TABLE `form4` (
 --
 
 CREATE TABLE `form4_checkbox` (
+  `f4id` bigint(20) NOT NULL,
   `pid` bigint(20) NOT NULL,
   `Mild_Indigestion` varchar(255) NOT NULL,
   `Peptic_Ulcer` varchar(255) NOT NULL,
@@ -257,6 +260,7 @@ CREATE TABLE `form4_checkbox` (
 --
 
 CREATE TABLE `form4_checkbox2` (
+  `f4id` bigint(20) NOT NULL,
   `pid` bigint(20) NOT NULL,
   `Mild_Indigestion` varchar(255) NOT NULL,
   `Vomiting` varchar(255) NOT NULL,
@@ -307,6 +311,7 @@ CREATE TABLE `form5` (
 --
 
 CREATE TABLE `form5_checkbox` (
+  `f5id` bigint(20) NOT NULL,
   `pid` bigint(20) NOT NULL,
   `Mild_Indigestion` varchar(255) NOT NULL,
   `Peptic_Ulcer` varchar(255) NOT NULL,
@@ -333,6 +338,7 @@ CREATE TABLE `form5_checkbox` (
 --
 
 CREATE TABLE `form5_checkbox2` (
+  `f5id` bigint(20) NOT NULL,
   `pid` bigint(20) NOT NULL,
   `Mild_Indigestion` varchar(255) NOT NULL,
   `Vomiting` varchar(255) NOT NULL,
@@ -389,6 +395,7 @@ CREATE TABLE `form6` (
 --
 
 CREATE TABLE `form6_checkbox` (
+  `f6id` bigint(20) NOT NULL,
   `pid` bigint(20) NOT NULL,
   `Mild_Indigestion` varchar(255) NOT NULL,
   `Peptic_Ulcer` varchar(255) NOT NULL,
@@ -415,6 +422,7 @@ CREATE TABLE `form6_checkbox` (
 --
 
 CREATE TABLE `form6_checkbox2` (
+  `f6id` bigint(20) NOT NULL,
   `pid` bigint(20) NOT NULL,
   `Mild_Indigestion` varchar(255) NOT NULL,
   `Vomiting` varchar(255) NOT NULL,
@@ -437,6 +445,7 @@ CREATE TABLE `form6_checkbox2` (
 --
 
 CREATE TABLE `form6_checkbox3` (
+  `f6id` bigint(20) NOT NULL,
   `pid` bigint(20) NOT NULL,
   `Protocol_Violation` varchar(255) NOT NULL,
   `Patient_refused_followup` varchar(255) NOT NULL,
@@ -503,7 +512,7 @@ ALTER TABLE `form2_checkbox2`
 -- Indexes for table `form2_others`
 --
 ALTER TABLE `form2_others`
-  ADD PRIMARY KEY (`pid`,`others_drug_name`,`others_drug_dosage`,`others_drug_duration`) USING BTREE;
+  ADD PRIMARY KEY (`oid`) USING BTREE;
 
 --
 -- Indexes for table `form3`
@@ -515,7 +524,7 @@ ALTER TABLE `form3`
 -- Indexes for table `form3_others`
 --
 ALTER TABLE `form3_others`
-  ADD PRIMARY KEY (`pid`,`others_drug_name`,`others_drug_dosage`,`others_drug_duration`) USING BTREE;
+  ADD PRIMARY KEY (`f3id`,`others_drug_name`,`pid`) USING BTREE;
 
 --
 -- Indexes for table `form4`
@@ -527,13 +536,13 @@ ALTER TABLE `form4`
 -- Indexes for table `form4_checkbox`
 --
 ALTER TABLE `form4_checkbox`
-  ADD PRIMARY KEY (`pid`);
+  ADD PRIMARY KEY (`f4id`,`pid`) USING BTREE;
 
 --
 -- Indexes for table `form4_checkbox2`
 --
 ALTER TABLE `form4_checkbox2`
-  ADD PRIMARY KEY (`pid`);
+  ADD PRIMARY KEY (`f4id`,`pid`) USING BTREE;
 
 --
 -- Indexes for table `form5`
@@ -545,13 +554,13 @@ ALTER TABLE `form5`
 -- Indexes for table `form5_checkbox`
 --
 ALTER TABLE `form5_checkbox`
-  ADD PRIMARY KEY (`pid`);
+  ADD PRIMARY KEY (`pid`,`f5id`) USING BTREE;
 
 --
 -- Indexes for table `form5_checkbox2`
 --
 ALTER TABLE `form5_checkbox2`
-  ADD PRIMARY KEY (`pid`);
+  ADD PRIMARY KEY (`pid`,`f5id`) USING BTREE;
 
 --
 -- Indexes for table `form6`
@@ -563,25 +572,19 @@ ALTER TABLE `form6`
 -- Indexes for table `form6_checkbox`
 --
 ALTER TABLE `form6_checkbox`
-  ADD PRIMARY KEY (`pid`);
+  ADD PRIMARY KEY (`pid`,`f6id`) USING BTREE;
 
 --
 -- Indexes for table `form6_checkbox2`
 --
 ALTER TABLE `form6_checkbox2`
-  ADD PRIMARY KEY (`pid`);
+  ADD PRIMARY KEY (`pid`,`f6id`) USING BTREE;
 
 --
 -- Indexes for table `form6_checkbox3`
 --
 ALTER TABLE `form6_checkbox3`
-  ADD PRIMARY KEY (`pid`);
-
---
--- Indexes for table `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`id`,`name`) USING BTREE;
+  ADD PRIMARY KEY (`pid`,`f6id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -612,6 +615,12 @@ ALTER TABLE `form2_checkbox2`
   MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `form2_others`
+--
+ALTER TABLE `form2_others`
+  MODIFY `oid` bigint(20) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `form3`
 --
 ALTER TABLE `form3`
@@ -624,34 +633,10 @@ ALTER TABLE `form4`
   MODIFY `f4id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `form4_checkbox`
---
-ALTER TABLE `form4_checkbox`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `form4_checkbox2`
---
-ALTER TABLE `form4_checkbox2`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `form5`
 --
 ALTER TABLE `form5`
   MODIFY `f5id` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `form5_checkbox`
---
-ALTER TABLE `form5_checkbox`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `form5_checkbox2`
---
-ALTER TABLE `form5_checkbox2`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `form6`
@@ -660,28 +645,56 @@ ALTER TABLE `form6`
   MODIFY `f6id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `form6_checkbox`
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `form3_others`
+--
+ALTER TABLE `form3_others`
+  ADD CONSTRAINT `form3_others_ibfk_1` FOREIGN KEY (`f3id`) REFERENCES `form3` (`f3id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `form4_checkbox`
+--
+ALTER TABLE `form4_checkbox`
+  ADD CONSTRAINT `form4_checkbox_ibfk_1` FOREIGN KEY (`f4id`) REFERENCES `form4` (`f4id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `form4_checkbox2`
+--
+ALTER TABLE `form4_checkbox2`
+  ADD CONSTRAINT `form4_checkbox2_ibfk_1` FOREIGN KEY (`f4id`) REFERENCES `form4` (`f4id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `form5_checkbox`
+--
+ALTER TABLE `form5_checkbox`
+  ADD CONSTRAINT `form5_checkbox_ibfk_1` FOREIGN KEY (`f5id`) REFERENCES `form5` (`f5id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `form5_checkbox2`
+--
+ALTER TABLE `form5_checkbox2`
+  ADD CONSTRAINT `form5_checkbox2_ibfk_1` FOREIGN KEY (`f5id`) REFERENCES `form5` (`f5id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `form6_checkbox`
 --
 ALTER TABLE `form6_checkbox`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  ADD CONSTRAINT `form6_checkbox_ibfk_1` FOREIGN KEY (`f6id`) REFERENCES `form6` (`f6id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- AUTO_INCREMENT for table `form6_checkbox2`
+-- Constraints for table `form6_checkbox2`
 --
 ALTER TABLE `form6_checkbox2`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  ADD CONSTRAINT `form6_checkbox2_ibfk_1` FOREIGN KEY (`f6id`) REFERENCES `form6` (`f6id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- AUTO_INCREMENT for table `form6_checkbox3`
+-- Constraints for table `form6_checkbox3`
 --
 ALTER TABLE `form6_checkbox3`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `login`
---
-ALTER TABLE `login`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  ADD CONSTRAINT `form6_checkbox3_ibfk_1` FOREIGN KEY (`f6id`) REFERENCES `form6` (`f6id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

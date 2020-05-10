@@ -8,12 +8,13 @@ if(!isset($_SESSION['id'])){
     </script>
     ";
 }
-  $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "blp_db";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
@@ -28,8 +29,8 @@ $result_form2_others = mysqli_query($conn, "SELECT * from form2_others where pid
 
 
 while ($row_form_2 = mysqli_fetch_assoc($result_form_2)){
-            while ($row_form2_checkBox2 = mysqli_fetch_assoc($result_form2_checkBox2)){
-                while ($row_form2_checkBox = mysqli_fetch_assoc($result_form2_checkBox)){
+            
+                
 
 ?>
 
@@ -190,11 +191,12 @@ while ($row_form_2 = mysqli_fetch_assoc($result_form_2)){
                             <label for="first_sym" class="form-label">When first symptoms(number of days ago)</label>
                             <input style="width: 180px" type="number" name="first_sym" id="first_sym" value="<?php echo $row_form_2['first_sym']; ?>"/>
                         </div>
-        
+                        
                         <div class="form-radio" style="padding-left: 34px">
                             <label  for="current_anti_reaction" class="form-label">Current anti-reaction therapy</label>
 
-                            <div class="form-radio-item">              									
+                            <div class="form-radio-item">            
+                            <?php while ($row_form2_checkBox2 = mysqli_fetch_assoc($result_form2_checkBox2)){ ?>
                             <?php if($row_form2_checkBox2['Prednisolone'] === 'yes') { ?>
                                 <input type="checkbox" name="current_anti_reaction[0]" value="yes" id="Prednisolone" checked  />
                                 <label style="width:115px;"for="Prednisolone">Prednisolone</label>
@@ -215,6 +217,7 @@ while ($row_form_2 = mysqli_fetch_assoc($result_form_2)){
                             <?php }else{ ?>
                                 <input type="checkbox" name="current_anti_reaction[2]" value="yes" id="Thalidamide"/>
                                 <label style="width:115px;"for="Thalidamide">Thalidamide</label>
+                            <?php } ?>
                             <?php } ?>
                             </div>
                         </div>
@@ -354,6 +357,7 @@ while ($row_form_2 = mysqli_fetch_assoc($result_form_2)){
                 
                           <!-- <form>-->
                                 <div class="row">
+                                <?php while ($row_form2_checkBox = mysqli_fetch_assoc($result_form2_checkBox)){ ?>
                                 <?php if($row_form2_checkBox['Mild_Indigestion'] === 'yes') { ?>
                                     <label class="checkbox-inline"style="padding-left:4px">
                                         <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px" checked>Mild indigestion 
@@ -363,7 +367,7 @@ while ($row_form_2 = mysqli_fetch_assoc($result_form_2)){
                                         <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px">Mild indigestion 
                                     </label>
 
-                                <?php } if($row_form2_checkBox['Peptic_Ulcer'] === 'y'){?>  
+                                <?php } if($row_form2_checkBox['Peptic_Ulcer'] === 'yes'){?>  
                                     <label class="checkbox-inline"style="padding-left:4px">
                                         <input type="checkbox" name="adverse_predni[1]" value="yes" style="padding-left:4px" checked>Peptic Ulcer
                                     </label>
@@ -498,6 +502,7 @@ while ($row_form_2 = mysqli_fetch_assoc($result_form_2)){
                                         <input type="checkbox"  name="adverse_predni[15]"  value="yes" style="padding-left:4px">Acne
                                     </label>
                                 <?php } ?>
+                                <?php } ?>
 
                                 </div>
                             
@@ -572,20 +577,29 @@ while ($row_form_2 = mysqli_fetch_assoc($result_form_2)){
                                 <label  class="form-label">Others</label>
                                     <table style="padding-left: 34px ;margin-top: 9px;" id="tb6" class="tab orlist">
                                         <tbody>
-                                        <?php
-                                        while ($row_form2_others = mysqli_fetch_assoc($result_form2_others)){ ?>
                                             <tr class="tr-header">
                                                 <th>Drug Name</th>
                                                 <th>Drug Dosage</th>
                                                 <th>Drug Duration</th>
                                                 <th><a href="javascript:void(0);" style="font-size:18px;" id="addMore6" title="Add More Person"><span class="fa fa-plus"></span></a></th>   
                                             </tr> 
+                                            <?php
+                                            if (mysqli_num_rows($result_form2_others)>0){
+                                            while ($row_form2_others = mysqli_fetch_assoc($result_form2_others)){
+                                            ?>
                                             <tr style="padding: 2px;" >
                                                 <td><input type="text" name="others_drug_name[]" class="valid" value="<?php echo $row_form2_others['others_drug_name']; ?>"></td>
                                                 <td><input type="text" name="others_drug_dosage[]" class="valid" value="<?php echo $row_form2_others['others_drug_dosage']; ?>"></td>
                                                 <td><input type="text" name="others_drug_duration[]" class="valid"  value="<?php echo $row_form2_others['others_drug_duration']; ?>"></td>
                                                 <td><a href='javascript:void(0);' style="font-size:18px;" class='remove6'><span class='fa fa-minus'></span></a></td>                                            
                                             </tr>     
+                                            <?php }}else{ ?>
+                                            <tr style="padding: 2px;" >
+                                              <td><input type="text" name="others_drug_name[]" class="valid" value=""></td>
+                                              <td><input type="text" name="others_drug_dosage[]" class="valid" value=""></td>
+                                              <td><input type="text" name="others_drug_duration[]" class="valid" value=""></td>
+                                              <td><a href='javascript:void(0);' style="font-size:18px;" class='remove6'><span class='fa fa-minus'></span></a></td>                                            
+                                          </tr>
                                         <?php } ?>                                              
                                         </tbody>
                                            
@@ -605,8 +619,6 @@ while ($row_form_2 = mysqli_fetch_assoc($result_form_2)){
                     						</div>
                             </div>
 
-                            <?php } ?>
-                            <?php } ?>
                             <?php } ?>
                             
                             

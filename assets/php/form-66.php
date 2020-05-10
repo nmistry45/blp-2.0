@@ -1,12 +1,12 @@
 <?php
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -244,7 +244,10 @@
 		'$no_weeks_extra_clofazimine','$enl_at_randomisation','$duration_first_episode','$flare_of_enl','$if_flare_how_long','$eess_at_flare','$recurrent_enl_steroids','$chronic_enl_randomisation','$total_steroids_consumed',
 		'$change_in_nfa','$change_in_nfa_desc','$change_in_qol','$adverse_effect_of_drug','$drug_desc','$others');";
 
-		$check_0f = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
+		
+		if(query($q1, 'form6') ) {
+		$f6id = $conn->insert_id;
+        $check_0f = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
 		$check_1f = isset($_POST['adverse_predni'][1]) ? 'yes' : 'no';
 		$check_2f = isset($_POST['adverse_predni'][2]) ? 'yes' : 'no';
 		$check_3f = isset($_POST['adverse_predni'][3]) ? 'yes' : 'no';
@@ -260,7 +263,7 @@
 		$check_13f = isset($_POST['adverse_predni'][13]) ? 'yes' : 'no';
 		$check_14f = isset($_POST['adverse_predni'][14]) ? 'yes' : 'no';
 		$check_15f = isset($_POST['adverse_predni'][15]) ? 'yes' : 'no';
-		$query1 = "INSERT INTO form6_checkbox VALUES ('$pid', '$check_0f','$check_1f','$check_2f', '$check_3f','$check_4f','$check_5f', '$check_6f','$check_7f','$check_8f', '$check_9f','$check_10f','$check_11f', '$check_12f','$check_13f','$check_14f','$check_15f')";
+		$query1 = "INSERT INTO form6_checkbox VALUES ('$f6id', '$pid', '$check_0f','$check_1f','$check_2f', '$check_3f','$check_4f','$check_5f', '$check_6f','$check_7f','$check_8f', '$check_9f','$check_10f','$check_11f', '$check_12f','$check_13f','$check_14f','$check_15f')";
 		mysqli_query($conn, $query1);
 
 		$check_0g = isset($_POST['adverse_clofa'][0]) ? 'yes' : 'no';
@@ -275,7 +278,7 @@
         $check_9g = isset($_POST['adverse_clofa'][9]) ? 'yes' : 'no';
         $check_10g = isset($_POST['adverse_clofa'][10]) ? 'yes' : 'no';
         $check_11g = isset($_POST['adverse_clofa'][11]) ? 'yes' : 'no';
-		$query2 = "INSERT INTO form6_checkbox2 VALUES ('$pid', '$check_0g','$check_1g','$check_2g', '$check_3g','$check_4g','$check_5g', '$check_6g','$check_7g','$check_8g', '$check_9g','$check_10g','$check_11g')";
+		$query2 = "INSERT INTO form6_checkbox2 VALUES ('$f6id','$pid', '$check_0g','$check_1g','$check_2g', '$check_3g','$check_4g','$check_5g', '$check_6g','$check_7g','$check_8g', '$check_9g','$check_10g','$check_11g')";
 		mysqli_query($conn, $query2);
 
 		$check_0h = isset($_POST['withdraw'][0]) ? 'yes' : 'no';
@@ -284,15 +287,11 @@
         $check_3h = isset($_POST['withdraw'][3]) ? 'yes' : 'no';
         $check_4h = isset($_POST['withdraw'][4]) ? 'yes' : 'no';
 		$check_5h = isset($_POST['withdraw'][5]) ? 'yes' : 'no';
-		$query3 = "INSERT INTO form6_checkbox3 VALUES ('$pid', '$check_0h','$check_1h','$check_2h', '$check_3h','$check_4h','$check_5h')";
+		$query3 = "INSERT INTO form6_checkbox3 VALUES ('$f6id','$pid', '$check_0h','$check_1h','$check_2h', '$check_3h','$check_4h','$check_5h')";
 		mysqli_query($conn, $query3);
-	
-		if(query($q1, 'form6') ) {
-
-			// $Pid = $conn->insert_id;
-			// echo "Pid is " . $Pid . "<br>";
-
-			header("location:../../modules/display_form_1-6.php?pid=".$pid);
+		
+		header("location:../../modules/display_form_1-6.php?pid=".$pid);
+		
 		} else {
 			echo "<br>Person could not be made.";
 		}

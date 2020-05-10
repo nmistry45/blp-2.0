@@ -2,12 +2,12 @@
 //  include 'predni.php';
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -132,20 +132,40 @@
 		else{
 			$nfa = "NAN";
 		}
-
+		
 		if(isset($_POST['change_in_nfi'])){
 			$change_in_nfi = $_POST['change_in_nfi'];
-		}
-		else{
-			$change_in_nfi = "NAN";
-		}
+			
+			if($change_in_nfi=='no'){
+			    $change_in_nfi_desc = '';
+			}else{
+			    
+			    if(isset($_POST['change_in_nfi_desc'])){
+        			$change_in_nfi_desc = $_POST['change_in_nfi_desc'];
+        		}else{
+        			
+        			$change_in_nfi_desc = "NAN";
+        		    }
+        		}
+        		                                }
+        	else{
+        		
+    			$change_in_nfi = "NAN";
+    		}
 
-		if(isset($_POST['change_in_nfi_desc'])){
-			$change_in_nfi_desc = $_POST['change_in_nfi_desc'];
-		}
-		else{
-			$change_in_nfi_desc = "NAN";
-		}
+// 		if(isset($_POST['change_in_nfi'])){
+// 			$change_in_nfi = $_POST['change_in_nfi'];
+// 		}
+// 		else{
+// 			$change_in_nfi = "NAN";
+// 		}
+
+// 		if(isset($_POST['change_in_nfi_desc'])){
+// 			$change_in_nfi_desc = $_POST['change_in_nfi_desc'];
+// 		}
+// 		else{
+// 			$change_in_nfi_desc = "NAN";
+// 		}
 
 		if(isset($_POST['eess_2'])){
 			$eess_2 = $_POST['eess_2'];
@@ -250,7 +270,7 @@
 		$check_0 = isset($_POST['current_anti_reaction'][0]) ? 'yes' : 'no';
 		$check_1 = isset($_POST['current_anti_reaction'][1]) ? 'yes' : 'no';
 		$check_2 = isset($_POST['current_anti_reaction'][2]) ? 'yes' : 'no';
-		$query = "UPDATE form2_checkBox2 SET 
+		$query = "UPDATE form2_checkbox2 SET 
 		`pid`='$id', 
 		`Prednisolone`='$check_0',
 		`Clofazmine`='$check_1',

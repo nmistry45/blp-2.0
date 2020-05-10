@@ -2,17 +2,18 @@
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 	}
 	$id = $_GET['pid'];
+	$f4id = $_GET['f4id'];
 	function query ( $query, $message = '' ) {
 		global $conn;
 		$insert = mysqli_query($conn, $query);
@@ -135,7 +136,7 @@
         `advised_admission` = '$advised_admission',
         `nextDate` = '$nextDate',
         `nextPDate` = '$nextPDate' 
-		 WHERE `pid`=".$id."";
+		 WHERE `f4id`=".$f4id."";
 		// echo $q;
 
         $check_0b = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
@@ -172,7 +173,7 @@
 		`Haematemesis`='$check_13b',
 		`Extensive_Ringworm`='$check_14b',
 		`Acne`='$check_15b'
-		WHERE `pid` = ".$id."";
+		WHERE `f4id` = ".$f4id."";
         mysqli_query($conn, $query1);
         
         $check_0c = isset($_POST['adverse_clofa'][0]) ? 'yes' : 'no';
@@ -202,7 +203,7 @@
 		`Diarrhoea,Chronic`='$check_9c',
 		`Chronic_Dysentery`='$check_10c',
 		`Skin_Discolouration`='$check_11c'
-		WHERE `pid` = ".$id."";
+		WHERE `f4id` = ".$f4id."";
         mysqli_query($conn, $query2);
 
 		if(query($q, 'form4') ) {

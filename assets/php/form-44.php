@@ -2,12 +2,12 @@
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -125,6 +125,9 @@
 		values ('$pid','$formDate','$staff_name','$current_status','$nfa_4','$eess_4','$qol_4','$vas_4','$enl_present_time_since',
 		'$time_since_last_received_prednisolone','$recurrent_enl_start_predni','$advised_admission','$nextDate','$nextPDate');";
 		// echo $q;
+
+		if(query($q, 'form4') ) {
+        $f4id = $conn->insert_id;
 		$check_0b = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
 		$check_1b = isset($_POST['adverse_predni'][1]) ? 'yes' : 'no';
 		$check_2b = isset($_POST['adverse_predni'][2]) ? 'yes' : 'no';
@@ -141,7 +144,7 @@
 		$check_13b = isset($_POST['adverse_predni'][13]) ? 'yes' : 'no';
 		$check_14b = isset($_POST['adverse_predni'][14]) ? 'yes' : 'no';
 		$check_15b = isset($_POST['adverse_predni'][15]) ? 'yes' : 'no';
-		$query1 = "INSERT INTO form4_checkbox VALUES ('$pid', '$check_0b','$check_1b','$check_2b', '$check_3b','$check_4b','$check_5b', '$check_6b','$check_7b','$check_8b', '$check_9b','$check_10b','$check_11b', '$check_12b','$check_13b','$check_14b','$check_15b')";
+		$query1 = "INSERT INTO form4_checkbox VALUES ('$f4id','$pid', '$check_0b','$check_1b','$check_2b', '$check_3b','$check_4b','$check_5b', '$check_6b','$check_7b','$check_8b', '$check_9b','$check_10b','$check_11b', '$check_12b','$check_13b','$check_14b','$check_15b')";
 		mysqli_query($conn, $query1);
 
 		$check_0c = isset($_POST['adverse_clofa'][0]) ? 'yes' : 'no';
@@ -156,15 +159,11 @@
 		$check_9c = isset($_POST['adverse_clofa'][9]) ? 'yes' : 'no';
 		$check_10c = isset($_POST['adverse_clofa'][10]) ? 'yes' : 'no';
 		$check_11c = isset($_POST['adverse_clofa'][11]) ? 'yes' : 'no';
-		$query2 = "INSERT INTO form4_checkbox2 VALUES ('$pid', '$check_0c','$check_1c','$check_2c', '$check_3c','$check_4c','$check_5c', '$check_6c','$check_7c','$check_8c', '$check_9c','$check_10c','$check_11c')";
+		$query2 = "INSERT INTO form4_checkbox2 VALUES ('$f4id','$pid', '$check_0c','$check_1c','$check_2c', '$check_3c','$check_4c','$check_5c', '$check_6c','$check_7c','$check_8c', '$check_9c','$check_10c','$check_11c')";
 		mysqli_query($conn, $query2);
 
-		if(query($q, 'form4') ) {
-
-			// $Pid = $conn->insert_id;
-			// echo "Pid is " . $Pid . "<br>";
-
-			header("location:../../modules/display_form_1-6.php?pid=".$pid);
+		header("location:../../modules/display_form_1-6.php?pid=".$pid);
+		
 		} else {
 			echo "<br>Person could not be made.";
 		}

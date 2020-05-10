@@ -8,28 +8,28 @@ if(!isset($_SESSION['id'])){
     </script>
     ";
 }
-  $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "blp_db";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+    
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     
 
 $id = $_GET['pid'];
+$f5id = $_GET['f5id'];
 
-$result_form_5 = mysqli_query($conn, "SELECT * from form5 where pid = $id");
-$result_form5_checkBox2 = mysqli_query($conn, "SELECT * from form5_checkbox2 where pid = $id");
-$result_form5_checkBox = mysqli_query($conn, "SELECT * from form5_checkbox where pid = $id");
-
+$result_form_5 = mysqli_query($conn, "SELECT * from form5 where pid = $id and f5id = $f5id");
 
 
 while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
-            while ($row_form5_checkBox2 = mysqli_fetch_assoc($result_form5_checkBox2)){
-                while ($row_form5_checkBox = mysqli_fetch_assoc($result_form5_checkBox)){
+    $result_form5_checkBox2 = mysqli_query($conn, "SELECT * from form5_checkbox2 where f5id = $f5id");
+    $result_form5_checkBox = mysqli_query($conn, "SELECT * from form5_checkbox where f5id = $f5id");
+            
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +97,7 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
             $result_form_5_1 = mysqli_query($conn, "SELECT patient_name, clinic_id, study_no from form1 where pid = $id");
             while ($row_form_5_1 = mysqli_fetch_assoc($result_form_5_1)){
             ?>
-            <form method="POST" id="signup-form" class="signup-form" onsubmit="return checkDate(this)" action="../assets/php/update_form_5.php?pid=<?php echo $id; ?>" enctype="multipart/form-data">
+            <form method="POST" id="signup-form" class="signup-form" onsubmit="return checkDate(this)" action="../assets/php/update_form_5.php?pid=<?php echo $id; ?>&f5id=<?php echo $f5id ?>" enctype="multipart/form-data">
                 <div class="form-group" style="margin-top: 20px">
                             <label for="patient_name" class="form-label">Patient Name:</label>
                             <label for="op_patient_name" class="form-label" style="margin-left: -125px;"><?php echo $row_form_5_1['patient_name']; ?></label>
@@ -245,6 +245,7 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
   
  <!-- <form   method="POST" id="signup-form" class="signup-form" action="form-66.php">-->
                                     <div class="row">
+                                        <?php while ($row_form5_checkBox = mysqli_fetch_assoc($result_form5_checkBox)){ ?>
                                             <?php if($row_form5_checkBox['Mild_Indigestion'] === 'yes') { ?>
                                                 <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
                                                 <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Mild indigestion 
@@ -278,13 +279,12 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
                                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                                 <input type="checkbox" name="adverse_predni[3]" value="yes" style="padding-left:4px;margin-top:9px">Herpes Zoster
                                             </label>
-                                            <?php }if($row_form5_checkBox['Hyperglycaemia'] === 'yes') { ?>
+                                            <?php } ?>
+                                            
                                     </div>
 
-
-
                                     <div class="row">
-
+                                    <?php if($row_form5_checkBox['Hyperglycaemia'] === 'yes') { ?>
                                     <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox"  name="adverse_predni[4]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Hyperglycaemia 
                                 </label>
@@ -309,18 +309,19 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
                                     <input type="checkbox"  name="adverse_predni[6]"  value="yes" style="padding-left:4px;margin-top:9px">Malaena
                                 </label>
                                             <?php } if($row_form5_checkBox['Glaucoma'] === 'yes') { ?>
-                                                <label class="checkbox-inline" style="padding-left:0px;margin-top:9px">
+                                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox"  name="adverse_predni[7]"  value="yes" style="padding-left:0px;margin-top:9px" checked>Glaucoma
                                 </label>
                                             <?php }else{ ?>
-                                                <label class="checkbox-inline" style="padding-left:0px;margin-top:9px">
+                                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox"  name="adverse_predni[7]"  value="yes" style="padding-left:0px;margin-top:9px">Glaucoma
                                 </label>
-                                            <?php } if($row_form5_checkBox['Truncal_Obesity'] === 'yes') { ?>
+                                <?php } ?>
+                                            
 
                                     </div>
                                     <div class="row">
-
+                                    <?php if($row_form5_checkBox['Truncal_Obesity'] === 'yes') { ?>
                                     <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox"  name="adverse_predni[8]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Truncal Obesity  
                                 </label>
@@ -352,11 +353,11 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
                                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox"  name="adverse_predni[11]"  value="yes" style="padding-left:4px;margin-top:9px">Psychosis
                                 </label>
-                                            <?php }if($row_form5_checkBox['Gastrointestinal_bleeding'] === 'yes') { ?>
+                                            <?php } ?>
 
                                                 </div>
                                                 <div class="row">
-
+                                                <?php if($row_form5_checkBox['Gastrointestinal_bleeding'] === 'yes') { ?>
                                                 <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
                                 <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Gastrointestinal bleeding
                                 </label>
@@ -389,6 +390,7 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
                                     <input type="checkbox"  name="adverse_predni[15]"  value="yes" style="padding-left:4px;margin-top:9px">Acne
                                 </label>
                                             <?php } ?>
+                                            <?php } ?>
 
                                     </div>
 
@@ -403,6 +405,7 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
 									
 				<!--<form>	-->				
                                 <div class="row">
+                                    <?php while ($row_form5_checkBox2 = mysqli_fetch_assoc($result_form5_checkBox2)){ ?>
                                         <?php if($row_form5_checkBox2['Mild_Indigestion'] === 'yes') { ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                                 <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Mild indigestion 
@@ -436,12 +439,12 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
                                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                                 <input type="checkbox" name="adverse_clofa[3]" value="yes" style="padding-left:4px;margin-top:9px">Abdominal Pain
                                             </label>
-                                        <?php }if($row_form5_checkBox2['Diarrhoea,Acute'] === 'yes') { ?>
+                                        <?php } ?>
             	                </div>
 
 
 	                            <div class="row">
-
+                                            <?php if($row_form5_checkBox2['Diarrhoea,Acute'] === 'yes') { ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                                 <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Diarrhoea,Acute 
                                             </label>
@@ -473,13 +476,13 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                                 <input type="checkbox"  name="adverse_clofa[7]"  value="yes" style="padding-left:4px;margin-top:9px">Conjuctiva
                                             </label>
-                                        <?php } if($row_form5_checkBox2['Persistent_Indigestion'] === 'yes') { ?>
+                                        <?php } ?>
 
                               	</div>
 
 	
 	                            <div class="row">
-
+                                            <?php if($row_form5_checkBox2['Persistent_Indigestion'] === 'yes') { ?>
                                             <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
                                                 <input type="checkbox"  name="adverse_clofa[8]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Persistent<br> Indigestion  
                                             </label>
@@ -511,6 +514,7 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                                 <input type="checkbox"  name="adverse_clofa[11]"  value="yes" style="padding-left:4px;margin-top:9px">Skin <br>Discolouration
                                             </label>
+                                        <?php } ?>
                                         <?php } ?>
 
             	                </div>
@@ -632,8 +636,6 @@ while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
                             <input style="margin-left: -18px;" type="date" name="date_of_next_assessment_5" id="date_of_next_assessment_5"  value="<?php echo $row_form_5['date_of_next_assessment_5']; ?>" />
                         </div>
 						
-						<?php } ?>
-                        <?php } ?>
                         <?php } ?>
 
                         <input type="submit" value="submit" name="submit" id="submit">

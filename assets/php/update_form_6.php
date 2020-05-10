@@ -1,18 +1,19 @@
 <?php
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 		}
 		
 		$id = $_GET['pid'];
+		$f6id = $_GET['f6id'];
 		function query ( $query, $message = '' ) {
 		global $conn;
 		$insert = mysqli_query($conn, $query);
@@ -184,21 +185,41 @@
 		
 		if(isset($_POST['change_in_nfa'])){
 			$change_in_nfa = $_POST['change_in_nfa'];
-		}
-
-		else{
 			
-			$change_in_nfa = "NAN";
-		}
+			if($change_in_nfa =='no'){
+			    $change_in_nfa_desc  = '';
+			}else{
+			    
+			    if(isset($_POST['change_in_nfa_desc'])){
+        			$change_in_nfa_desc = $_POST['change_in_nfa_desc'];
+        		}else{
+        			
+        			$change_in_nfa_desc = "NAN";
+        		    }
+        		}
+        		                          }
+        else{
+        		
+    			$change_in_nfa = "NAN";
+    		}
+		
+// 		if(isset($_POST['change_in_nfa'])){
+// 			$change_in_nfa = $_POST['change_in_nfa'];
+// 		}
 
-		if(isset($_POST['change_in_nfa_desc'])){
-			$change_in_nfa_desc = $_POST['change_in_nfa_desc'];
-		}
-
-		else{
+// 		else{
 			
-			$change_in_nfa_desc = "NAN";
-		}
+// 			$change_in_nfa = "NAN";
+// 		}
+
+// 		if(isset($_POST['change_in_nfa_desc'])){
+// 			$change_in_nfa_desc = $_POST['change_in_nfa_desc'];
+// 		}
+
+// 		else{
+			
+// 			$change_in_nfa_desc = "NAN";
+// 		}
 
 		if(isset($_POST['change_in_qol'])){
 			$change_in_qol = $_POST['change_in_qol'];
@@ -211,23 +232,41 @@
 		
 		if(isset($_POST['adverse_effect_of_drug'])){
 			$adverse_effect_of_drug = $_POST['adverse_effect_of_drug'];
-		}
-
-		else{
 			
-			$adverse_effect_of_drug = "NAN";
-		}
+			if($adverse_effect_of_drug =='no'){
+			    $drug_desc  = '';
+			}else{
+			    
+			    if(isset($_POST['drug_desc'])){
+        			$drug_desc = $_POST['drug_desc'];
+        		}else{
+        			
+        			$drug_desc = "NAN";
+        		    }
+        		}
+        		                                }
+        else{
+        		
+    			$adverse_effect_of_drug = "NAN";
+    		}
+		
+// 		if(isset($_POST['adverse_effect_of_drug'])){
+// 			$adverse_effect_of_drug = $_POST['adverse_effect_of_drug'];
+// 		}
 
-		if(isset($_POST['drug_desc'])){
-			$drug_desc = $_POST['drug_desc'];
-		}
-
-		else{
+// 		else{
 			
-			$drug_desc = "NAN";
-		}
+// 			$adverse_effect_of_drug = "NAN";
+// 		}
 
-	
+// 		if(isset($_POST['drug_desc'])){
+// 			$drug_desc = $_POST['drug_desc'];
+// 		}
+
+// 		else{
+			
+// 			$drug_desc = "NAN";
+// 		}
 
 		if(isset($_POST['others'])){
 			$others = $_POST['others'];
@@ -260,10 +299,10 @@
         `change_in_nfa` ='$change_in_nfa' ,
         `change_in_nfa_desc` = '$change_in_nfa_desc',
         `change_in_qol` = '$change_in_qol',
-        `adverse_effect_of_drug` ='$adverse_effect_of_drug' ,
+        `adverse_effect_of_drug` ='$adverse_effect_of_drug',
         `drug_desc` = '$drug_desc',
         `others` =  '$others'
-		WHERE `pid`=".$id."";
+		WHERE `f6id`=".$f6id."";
 
         $check_0f = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
         $check_1f = isset($_POST['adverse_predni'][1]) ? 'yes' : 'no';
@@ -299,7 +338,7 @@
         `Haematemesis`='$check_13f',
         `Extensive_Ringworm`='$check_14f',
         `Acne`='$check_15f'
-        WHERE `pid` = ".$id."";
+        WHERE `f6id` = ".$f6id."";
         mysqli_query($conn, $query1);
 
         $check_0g = isset($_POST['adverse_clofa'][0]) ? 'yes' : 'no';
@@ -329,7 +368,7 @@
         `Diarrhoea,Chronic`='$check_9g',
         `Chronic_Dysentery`='$check_10g',
         `Skin_Discolouration`='$check_11g'
-        WHERE `pid` = ".$id."";
+        WHERE `f6id` = ".$f6id."";
         mysqli_query($conn, $query2);
 
         $check_0h = isset($_POST['withdraw'][0]) ? 'yes' : 'no';
@@ -339,7 +378,7 @@
         $check_4h = isset($_POST['withdraw'][4]) ? 'yes' : 'no';
         $check_5h = isset($_POST['withdraw'][5]) ? 'yes' : 'no';
 
-        $query3 = "UPDATE  form6_checkbox2 SET 
+        $query3 = "UPDATE  form6_checkbox3 SET 
         `pid`='$id', 
         `Protocol_Violation`='$check_0h',
         `Patient_refused_followup`='$check_1h',
@@ -347,7 +386,7 @@
         `Severe_adverse_effects`='$check_3h',
         `Died`='$check_4h',
         `Others`='$check_5h'
-        WHERE `pid` = ".$id."";
+        WHERE `f6id` = ".$f6id."";
         mysqli_query($conn, $query3);
 
 	

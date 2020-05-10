@@ -2,12 +2,12 @@
 	
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
@@ -216,19 +216,23 @@
 
 		if(isset($_POST['other_serious_illness'])){
 			$other_serious_illness = $_POST['other_serious_illness'];
-		}
-		else{
 			
-			$other_serious_illness = "NAN";
-		}
-
-		if(isset($_POST['other_illness_desc'])){
-			$other_illness_desc = $_POST['other_illness_desc'];
-		}
-		else{
-			
-			$other_illness_desc = "NAN";
-		}
+			if($other_serious_illness=='yes' or $other_serious_illness=='no'){
+			    $other_illness_desc = '';
+			}else{
+			    
+			    if(isset($_POST['other_illness_desc'])){
+        			$other_illness_desc = $_POST['other_illness_desc'];
+        		}else{
+        			
+        			$other_illness_desc = "NAN";
+        		    }
+        		}
+        		                                }
+        	else{
+        		
+    			$other_serious_illness = "NAN";
+    		}
 		
 		if(isset($_POST['inform_consent'])){
 			$inform_consent = $_POST['inform_consent'];
@@ -291,25 +295,24 @@
 
 		if(query($q, 'Contact') ) {
 
-			$Pid = $conn->insert_id;
+// 			$Pid = $conn->insert_id;
 			// echo "Pid is " . $Pid . "<br>";
+			mysqli_query($conn,"DELETE FROM `form1_contact` WHERE `pid` = $id");
 			
 			foreach ($Contact as $key => $value) {
 
 				$Contact[$key] = empty($_POST['Contact'][$key]) ? 0000000000 : $_POST['Contact'][$key];
 		
-				$q2 = "UPDATE `form1_contact` SET 
-				`pid` = '$Pid',
-				`contact_no` = ' $Contact[$key]' 
-				WHERE `pid` = ".$id."";
+				$q2 = "insert into `form1_contact` (
+				`pid`,
+				`contact_no` 
+				) values ('$id','$Contact[$key]');";
 				query($q2, 'form1_contact');
-				   
+				
 		
 				if( $Contact[$key] == 0000000000 ) break;
-			  }
-
-			// header("location:../../modules/edit_form_2.php?pid=".$id);
-			header("location:../../modules/display_form_1-6.php?pid=".$id);
+				
+			  }header("location:../../modules/display_form_1-6.php?pid=".$id);
 		} else {
 			echo "<br>Person could not be made.";
 		}

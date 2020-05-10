@@ -1,11 +1,11 @@
 <?php
 
-  $servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-	$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 	if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);

@@ -8,12 +8,12 @@ if(!isset($_SESSION['id'])){
   </script>
   ";
 }
-  $servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-	$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 	if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -220,11 +220,12 @@ td{
         <td colspan="6"><?php echo $row_form_1_mdiag_Age_Weight_Height_BMI_no_contra_indication_steroids_able_to_attend_regularly_pregnant_tuberculosis_diabetes_other_serious_illness_other_illness_desc_inform_consent['other_serious_illness']; ?></td>
       </tr>
 
+<?php if($row_form_1_mdiag_Age_Weight_Height_BMI_no_contra_indication_steroids_able_to_attend_regularly_pregnant_tuberculosis_diabetes_other_serious_illness_other_illness_desc_inform_consent['other_illness_desc']!=''){ ?>
       <tr>
         <th colspan="" id="">Serious Illness Description</th>
         <td colspan="6"><?php echo $row_form_1_mdiag_Age_Weight_Height_BMI_no_contra_indication_steroids_able_to_attend_regularly_pregnant_tuberculosis_diabetes_other_serious_illness_other_illness_desc_inform_consent['other_illness_desc']; ?></td>
       </tr>
-
+<?php } ?>
       <tr>
         <th colspan="" id="">Does patient give informed consent?</th>
         <td colspan="6"><?php echo $row_form_1_mdiag_Age_Weight_Height_BMI_no_contra_indication_steroids_able_to_attend_regularly_pregnant_tuberculosis_diabetes_other_serious_illness_other_illness_desc_inform_consent['inform_consent']; ?></td>
@@ -477,12 +478,12 @@ td{
 
 <?php
 
-  $servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-	$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 	if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -510,7 +511,8 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
    $result_form_3_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
    $result_form_3_clinic_id = mysqli_query($conn, "SELECT clinic_id from form1 where pid = $id");
    $result_form_3_study_no = mysqli_query($conn, "SELECT study_no from form1 where pid = $id");
-   $result_form_3_others_drug_name_others_drug_dosage_others_drug_duration = mysqli_query($conn, "SELECT * from form3_others where pid = $id");
+   $f3id = $row_form3['f3id'];
+   $result_form_3_others_drug_name_others_drug_dosage_others_drug_duration = mysqli_query($conn, "SELECT * from form3_others where f3id = $f3id");
    ?>
 
     <tbody>
@@ -648,6 +650,12 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 
   </tbody>
 </table>
+<div class="d-flex justify-content-center">
+<a href="edit_form_3.php?pid=<?php echo $id; ?>&f3id=<?php echo $f3id;?>" target="_blank" class="">
+    <button type="button" class="btn btn-danger ">Edit Form3 Details</button>
+</a>
+</div>
+<br>
 <?php } ?>
 </div>
 
@@ -661,8 +669,9 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
     $result_form_4_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
     $result_form_4_clinic_id = mysqli_query($conn, "SELECT clinic_id from form1 where pid = $id");
     $result_form_4_study_no = mysqli_query($conn, "SELECT study_no from form1 where pid = $id");
-    $result_form_4_checklist_predni = mysqli_query($conn, "SELECT * from form4_checkbox where pid = $id");
-    $result_form_4_checklist_clofa = mysqli_query($conn, "SELECT * from form4_checkbox2 where pid = $id");
+    $f4id = $row_form4['f4id'];
+    $result_form_4_checklist_predni = mysqli_query($conn, "SELECT * from form4_checkbox where f4id = $f4id");
+    $result_form_4_checklist_clofa = mysqli_query($conn, "SELECT * from form4_checkbox2 where f4id = $f4id");
     ?>
 
     <tbody>
@@ -851,6 +860,12 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
      
    </tbody>
 </table>
+<div class="d-flex justify-content-center">
+<a href="edit_form_4.php?pid=<?php echo $id; ?>&f4id=<?php echo $f4id;?>" target="_blank" class="">
+    <button type="button" class="btn btn-danger ">Edit Form4 Details</button>
+</a>
+</div>
+<br>
 <?php } ?>
 </div>
 
@@ -864,8 +879,9 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
     $result_form5_cid = mysqli_query($conn, "SELECT clinic_id from form1 where pid = $id");
     $result_form5_ptn = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
     $result_form5_sn = mysqli_query($conn, "SELECT study_no from form1 where pid = $id");
-    $result_form5_ad_pred  = mysqli_query($conn, "SELECT * from form5_checkbox where pid = $id");
-    $result_form5_ad_clofa  = mysqli_query($conn, "SELECT * from form5_checkbox2 where pid = $id");
+    $f5id = $row_form5['f5id'];
+    $result_form5_ad_pred  = mysqli_query($conn, "SELECT * from form5_checkbox where f5id = $f5id");
+    $result_form5_ad_clofa  = mysqli_query($conn, "SELECT * from form5_checkbox2 where f5id = $f5id");
      ?>
 
     <tbody>
@@ -1039,6 +1055,12 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       
   </tbody>
 </table>
+<div class="d-flex justify-content-center">
+<a href="edit_form_5.php?pid=<?php echo $id; ?>&f5id=<?php echo $f5id;?>" target="_blank" class="">
+    <button type="button" class="btn btn-danger ">Edit Form5 Details</button>
+</a>
+</div>
+<br>
 <?php } ?>
 </div>
 
@@ -1052,9 +1074,10 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
     $result_form_6_clinic_id = mysqli_query($conn, "SELECT clinic_id from form1 where pid = $id");
     $result_form_6_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
     $result_form_6_study_no = mysqli_query($conn, "SELECT study_no from form1 where pid = $id");
-    $result_form6_ad_pred  = mysqli_query($conn, "SELECT * from form6_checkbox where pid = $id");
-    $result_form6_ad_clofa  = mysqli_query($conn, "SELECT * from form6_checkbox2 where pid = $id");
-    $result_form6_with  = mysqli_query($conn, "SELECT * from form6_checkbox3 where pid = $id");
+    $f6id = $row_form6['f6id'];
+    $result_form6_ad_pred  = mysqli_query($conn, "SELECT * from form6_checkbox where f6id = $f6id");
+    $result_form6_ad_clofa  = mysqli_query($conn, "SELECT * from form6_checkbox2 where f6id = $f6id");
+    $result_form6_with  = mysqli_query($conn, "SELECT * from form6_checkbox3 where f6id = $f6id");
     ?>
 
     <tbody>
@@ -1299,6 +1322,12 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
         
   </tbody>
 </table>
+<div class="d-flex justify-content-center">
+<a href="edit_form_6.php?pid=<?php echo $id; ?>&f6id=<?php echo $f6id;?>" target="_blank" class="">
+    <button type="button" class="btn btn-danger ">Edit Form6 Details</button>
+</a>
+</div>
+<br>
 <?php } ?>
 </div>
 
@@ -1311,15 +1340,6 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
   </a><br>
 </div>
 
-<div class="btn btn-light-blue" style="display: flex; justify-content:space-around; padding-left:205px;" >
-  <a href="edit_form_3.php?pid=<?php echo $id; ?>" target="_blank" class="">
-    <button type="button" class="btn btn-danger ">Edit Form3 Details</button>
-  </a><br>
-  <a href="edit_form_4.php?pid=<?php echo $id; ?>" target="_blank" class="">
-    <button type="button" class="btn btn-danger ">Edit Form4 Details</button>
-  </a><br>
-</div>
-
 <div class="btn btn-light-blue" style="display: flex; justify-content:space-around; padding-left:115px;">
   <a href="form_5.php?pid=<?php echo $id; ?>" target="_blank" class="">
     <button type="button" class="btn btn-primary btn-lg btn-block">5. Clinical Record Sheet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -1328,15 +1348,6 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
   </a><br>
   <a href="form_6.php?pid=<?php echo $id; ?>" target="_blank" class="">
     <button type="button" class="btn btn-primary btn-lg btn-block" >6. Final follow up sheet at end of 24m of randomization&nbsp;&nbsp;&nbsp;</button>
-  </a><br>
-</div>
-
-<div class="btn btn-light-blue" style="display: flex; justify-content:space-around; padding-left:205px;" >
-  <a href="edit_form_5.php?pid=<?php echo $id; ?>" target="_blank" class="">
-    <button type="button" class="btn btn-danger ">Edit Form5 Details</button>
-  </a><br>
-  <a href="edit_form_6.php?pid=<?php echo $id; ?>" target="_blank" class="">
-    <button type="button" class="btn btn-danger ">Edit Form6 Details</button>
   </a><br>
 </div>
 

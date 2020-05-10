@@ -1,0 +1,46 @@
+[09-May-2020 13:30:16 Etc/GMT] PHP Warning:  mysqli::__construct(): (28000/1045): Access denied for user 'root'@'localhost' (using password: NO) in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 485
+[09-May-2020 13:39:13 Etc/GMT] PHP Parse error:  syntax error, unexpected '>' in /home/bombaoim/public_html/blp/modules/edit_form_2.php on line 360
+[10-May-2020 07:24:43 Etc/GMT] PHP Notice:  Undefined index: other_serious_desc in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 223
+[10-May-2020 07:24:56 Etc/GMT] PHP Notice:  Undefined index: other_serious_desc in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 223
+[10-May-2020 07:25:11 Etc/GMT] PHP Notice:  Undefined index: other_serious_desc in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 223
+[10-May-2020 07:41:58 Etc/GMT] PHP Notice:  Undefined variable: f4id in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 859
+[10-May-2020 07:42:28 Etc/GMT] PHP Notice:  Undefined variable: f4id in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 859
+[10-May-2020 07:42:28 Etc/GMT] PHP Notice:  Undefined variable: f4id in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 859
+[10-May-2020 08:02:53 Etc/GMT] PHP Notice:  Undefined index: pid in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 23
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 104
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 115
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 123
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 143
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 150
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 158
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 164
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 235
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 264
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 273
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 299
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 309
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 316
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 344
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 372
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 390
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 425
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 450
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 461
+[10-May-2020 08:02:53 Etc/GMT] PHP Notice:  Undefined index: pid in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 492
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 506
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 663
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 869
+[10-May-2020 08:02:53 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 1060
+[10-May-2020 08:17:01 Etc/GMT] PHP Notice:  Undefined variable: f4id in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 863
+[10-May-2020 08:17:36 Etc/GMT] PHP Notice:  Undefined variable: f4id in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 863
+[10-May-2020 08:17:36 Etc/GMT] PHP Notice:  Undefined variable: f4id in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 863
+[10-May-2020 08:17:52 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/edit_form_4.php on line 27
+[10-May-2020 08:17:58 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/edit_form_4.php on line 27
+[10-May-2020 08:20:01 Etc/GMT] PHP Notice:  Undefined variable: f4id in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 863
+[10-May-2020 08:20:31 Etc/GMT] PHP Notice:  Undefined variable: f4id in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 863
+[10-May-2020 08:20:31 Etc/GMT] PHP Notice:  Undefined variable: f4id in /home/bombaoim/public_html/blp/modules/display_form_1-6.php on line 863
+[10-May-2020 08:22:16 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/edit_form_4.php on line 27
+[10-May-2020 12:43:03 Etc/GMT] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bombaoim/public_html/blp/modules/edit_form_6.php on line 885
+[10-May-2020 12:43:15 Etc/GMT] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bombaoim/public_html/blp/modules/edit_form_6.php on line 885
+[10-May-2020 12:49:49 Etc/GMT] PHP Notice:  Undefined index: pid in /home/bombaoim/public_html/blp/modules/form_6.php on line 97
+[10-May-2020 12:49:49 Etc/GMT] PHP Warning:  mysqli_fetch_assoc() expects parameter 1 to be mysqli_result, bool given in /home/bombaoim/public_html/blp/modules/form_6.php on line 99

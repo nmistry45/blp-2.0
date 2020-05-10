@@ -1,17 +1,18 @@
 <?php
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-	$servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-		$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 		if ($conn->connect_error) {
 			die("Connection failed: " . $conn->connect_error);
 	}
     $id = $_GET['pid'];
+    $f5id = $_GET['f5id'];
 	function query ( $query, $message = '' ) {
 		global $conn;
 		$insert = mysqli_query($conn, $query);
@@ -62,6 +63,7 @@
 			
 			$clofazimine_vitamins = "NAN";
 		}		
+		
 		if(isset($_POST['nfa_5'])){
 			$nfa_5 = $_POST['nfa_5'];
 		}
@@ -69,20 +71,41 @@
 			
 			$nfa_5 = "NAN";
 		}
+		
 		if(isset($_POST['new_nfi_5'])){
 			$new_nfi_5 = $_POST['new_nfi_5'];
-		}
-		else{
 			
-			$new_nfi_5 = "NAN";
-		}
-		if(isset($_POST['if_yes'])){
-			$if_yes = $_POST['if_yes'];
-		}
-		else{
+			if($new_nfi_5 =='no'){
+			    $if_yes  = '';
+			}else{
+			    
+			    if(isset($_POST['if_yes'])){
+        			$if_yes = $_POST['if_yes'];
+        		}else{
+        			
+        			$if_yes = "NAN";
+        		    }
+        		}
+        		                          }
+        else{
+        		
+    			$new_nfi_5 = "NAN";
+    		}
+		
+// 		if(isset($_POST['new_nfi_5'])){
+// 			$new_nfi_5 = $_POST['new_nfi_5'];
+// 		}
+// 		else{
 			
-			$if_yes = "NAN";
-		}
+// 			$new_nfi_5 = "NAN";
+// 		}
+// 		if(isset($_POST['if_yes'])){
+// 			$if_yes = $_POST['if_yes'];
+// 		}
+// 		else{
+			
+// 			$if_yes = "NAN";
+// 		}
 		if(isset($_POST['eess_score_5'])){
 			$eess_score_5 = $_POST['eess_score_5'];
 		}
@@ -151,8 +174,6 @@
 			$date_of_next_assessment_5 = "NAN";
 		}
 
-		
-		
 		$q1 = "UPDATE form5 SET
         `pid` = '$id',
         `date` = '$date',
@@ -172,7 +193,7 @@
         `dura_add_predni` = '$dura_add_predni',
         `advised_admission` = '$advised_admission',
 		`date_of_next_assessment_5`='$date_of_next_assessment_5' 
-        WHERE `pid`=".$id."";
+        WHERE `f5id`=".$f5id."";
 
 		$check_0d = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
 		$check_1d = isset($_POST['adverse_predni'][1]) ? 'yes' : 'no';
@@ -208,7 +229,7 @@
 		`Haematemesis`='$check_13d',
 		`Extensive_Ringworm`='$check_14d',
 		`Acne`='$check_15d'
-		WHERE `pid` = ".$id."";
+		WHERE `f5id` = ".$f5id."";
 		mysqli_query($conn, $query1);
 
 		$check_0e = isset($_POST['adverse_clofa'][0]) ? 'yes' : 'no';
@@ -238,7 +259,7 @@
 		`Diarrhoea,Chronic`='$check_9e',
 		`Chronic_Dysentery`='$check_10e',
 		`Skin_Discolouration`='$check_11e'
-		WHERE `pid` = ".$id."";
+		WHERE `f5id` = ".$f5id."";
 		mysqli_query($conn, $query2);
 
 

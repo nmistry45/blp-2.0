@@ -9,12 +9,12 @@
        ";
    }
 
-  $servername = "localhost";
-	$username = "root";
-	$password = "";
-	$dbname = "blp_db";
-
-	$conn = new mysqli($servername, $username, $password, $dbname);
+    $dbname='bombaoim_blp_db';
+    $dbhost='localhost';
+    $dbpass='asdf1234';
+    $dbuser='bombaoim_sakec';
+    
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
 	if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -233,8 +233,7 @@
 						
 						<div class="form-group" >
                             <label for="current_antireaction_therapy" class="form-label" >Current anti_reaction therapy</label>
-                            <textarea rows="4" cols="50" name="current_antireaction_therapy" id="current_anti_reaction_therapy" style="height:150px" placeholder="">
-							</textarea>
+                            <textarea rows="4" cols="50" name="current_antireaction_therapy" id="current_anti_reaction_therapy" style="height:150px" placeholder=""></textarea>
                         </div>
 						
 						
