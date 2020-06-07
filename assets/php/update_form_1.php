@@ -1,17 +1,9 @@
 <?php
-	
+
+include('connection.php');	
+
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-	}
 
 	$id = $_GET['pid'];
 
@@ -19,7 +11,7 @@
 		global $conn;
 		$update = mysqli_query($conn, $query);
 		if($update){
-		  echo"Successfully Updated ".$message."<br>";
+		  //echo"Successfully Updated ".$message."<br>";
 		  return 1;
 		}
 		else{
@@ -27,8 +19,6 @@
 		  return 0;
 		}
 	}
-
-		//mysqli_select_db($con , 'blp_db');
 		
 		if(isset($_POST['patient_name'])){
 			$patient_name = ($_POST['patient_name']);
@@ -292,7 +282,6 @@
 		
 		WHERE `pid`=".$id."";
 
-
 		if(query($q, 'Contact') ) {
 
 // 			$Pid = $conn->insert_id;
@@ -308,20 +297,16 @@
 				`contact_no` 
 				) values ('$id','$Contact[$key]');";
 				query($q2, 'form1_contact');
-				
 		
 				if( $Contact[$key] == 0000000000 ) break;
 				
-			  }header("location:../../modules/display_form_1-6.php?pid=".$id);
+			  }
+			 // header("location:../../modules/display_form_1-6.php?pid=".$id);
+			 echo("<script>location.href = '../../modules/display_form_1-6.php?pid=$id'</script>");
+			  
 		} else {
 			echo "<br>Person could not be made.";
 		}
-
-		// if ($conn->query($q) === TRUE) {
-		// 	echo "New record created successfully";
-		// } else {
-		// 	echo "Error: " . $q . "<br>" . $conn->error;
-		// }
 
 $conn->close();
 
@@ -330,6 +315,4 @@ $conn->close();
 		echo "not a post request";
 	}
 
-	
-
- ?>
+?>

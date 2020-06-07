@@ -1,24 +1,17 @@
 <?php
-	
+
+include('connection.php');	
+
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-	}
 	$id = $_GET['pid'];
 	$f4id = $_GET['f4id'];
 	function query ( $query, $message = '' ) {
 		global $conn;
 		$insert = mysqli_query($conn, $query);
 		if($insert){
-		  echo"Successful Insertion ".$message."<br>";
+		  //echo"Successful Insertion ".$message."<br>";
 		  return 1;
 		}
 		else{
@@ -26,8 +19,6 @@
 		  return 0;
 		}
 	}
-		
-		//mysqli_select_db($con , 'blp_db');
 
 		if(isset($_POST['formDate'])){
 			$formDate = $_POST['formDate'];
@@ -211,16 +202,12 @@
 			// $Pid = $conn->insert_id;
 			// echo "Pid is " . $Pid . "<br>";
 
-			header("location:../../modules/display_form_1-6.php?pid=".$id);
+// 			header("location:../../modules/display_form_1-6.php?pid=".$id);
+			echo("<script>location.href = '../../modules/display_form_1-6.php?pid=$id'</script>");
+			
 		} else {
 			echo "<br>Person could not be made.";
 		}
-
-		// if ($conn->query($q) === TRUE) {
-		// 	echo "New record created successfully";
-		// } else {
-		// 	echo "Error: " . $q . "<br>" . $conn->error;
-		// }
 
 		$conn->close();
 
@@ -229,7 +216,4 @@
 		echo "not a post request";
 	}
 
-	
-
- ?>
-
+?>

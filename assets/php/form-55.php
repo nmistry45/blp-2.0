@@ -1,22 +1,16 @@
- <?php
+<?php
+
+include('connection.php');
+
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-	}
 	$pid = $_GET['pid'];
 	function query ( $query, $message = '' ) {
 		global $conn;
 		$insert = mysqli_query($conn, $query);
 		if($insert){
-		  echo"Successful Insertion ".$message."<br>";
+		  //echo"Successful Insertion ".$message."<br>";
 		  return 1;
 		}
 		else{
@@ -24,8 +18,6 @@
 		  return 0;
 		}
 	}
-		
-		//mysqli_select_db($con , 'blp_db');
 
 		if(isset($_POST['date'])){
 			$date = $_POST['date'];
@@ -98,6 +90,7 @@
 			
 			$patient_worse = "NAN";
 		}
+		
 		if(isset($_POST['time_since_flare_began'])){
 			$time_since_flare_began = $_POST['time_since_flare_began'];
 		}
@@ -195,17 +188,12 @@
 		$query2 = "INSERT INTO form5_checkbox2 VALUES ('$f5id','$pid', '$check_0e','$check_1e','$check_2e', '$check_3e','$check_4e','$check_5e', '$check_6e','$check_7e','$check_8e', '$check_9e','$check_10e','$check_11e')";
 		mysqli_query($conn, $query2);
 		
-        header("location:../../modules/display_form_1-6.php?pid=".$pid);
+        // header("location:../../modules/display_form_1-6.php?pid=".$pid);
+        echo("<script>location.href = '../../modules/display_form_1-6.php?pid=$pid'</script>");
         
 		} else {
 			echo "<br>Person could not be made.";
 		}
-		// echo $q1;
-		// if ($conn->query($q1) === TRUE) {
-		// 	echo "New record created successfully";
-		// } else {
-		// 	echo "Error: " . $q1 . "<br>" . $conn->error;
-		// }
 
 $conn->close();
 
@@ -214,7 +202,4 @@ $conn->close();
 		echo "not a post request";
 	}
 
-	
-
- ?>
-
+?>

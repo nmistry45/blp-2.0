@@ -1,16 +1,9 @@
 <?php
+
+include('connection.php');
+
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
 		
 		$id = $_GET['pid'];
 		$f6id = $_GET['f6id'];
@@ -18,7 +11,7 @@
 		global $conn;
 		$insert = mysqli_query($conn, $query);
 		if($insert){
-		  echo"Successful Insertion ".$message."<br>";
+		  //echo"Successful Insertion ".$message."<br>";
 		  return 1;
 		}
 		else{
@@ -26,8 +19,6 @@
 		  return 0;
 		}
 	}
-		
-		//mysqli_select_db($con , 'blp_db');
 		
 		if(isset($_POST['date'])){
 			$date = $_POST['date'];
@@ -99,8 +90,6 @@
 			
 			$current_antireaction_therapy = "NAN";
 		}
-
-		
 
 		if(isset($_POST['no_weeks_extra_clofazimine'])){
 			$no_weeks_extra_clofazimine = $_POST['no_weeks_extra_clofazimine'];
@@ -202,24 +191,6 @@
         		
     			$change_in_nfa = "NAN";
     		}
-		
-// 		if(isset($_POST['change_in_nfa'])){
-// 			$change_in_nfa = $_POST['change_in_nfa'];
-// 		}
-
-// 		else{
-			
-// 			$change_in_nfa = "NAN";
-// 		}
-
-// 		if(isset($_POST['change_in_nfa_desc'])){
-// 			$change_in_nfa_desc = $_POST['change_in_nfa_desc'];
-// 		}
-
-// 		else{
-			
-// 			$change_in_nfa_desc = "NAN";
-// 		}
 
 		if(isset($_POST['change_in_qol'])){
 			$change_in_qol = $_POST['change_in_qol'];
@@ -249,24 +220,6 @@
         		
     			$adverse_effect_of_drug = "NAN";
     		}
-		
-// 		if(isset($_POST['adverse_effect_of_drug'])){
-// 			$adverse_effect_of_drug = $_POST['adverse_effect_of_drug'];
-// 		}
-
-// 		else{
-			
-// 			$adverse_effect_of_drug = "NAN";
-// 		}
-
-// 		if(isset($_POST['drug_desc'])){
-// 			$drug_desc = $_POST['drug_desc'];
-// 		}
-
-// 		else{
-			
-// 			$drug_desc = "NAN";
-// 		}
 
 		if(isset($_POST['others'])){
 			$others = $_POST['others'];
@@ -388,23 +341,18 @@
         `Others`='$check_5h'
         WHERE `f6id` = ".$f6id."";
         mysqli_query($conn, $query3);
-
 	
 		if(query($q1, 'form6') ) {
 
 			// $Pid = $conn->insert_id;
 			// echo "Pid is " . $Pid . "<br>";
 
-			header("location:../../modules/display_form_1-6.php?pid=".$id);
+// 			header("location:../../modules/display_form_1-6.php?pid=".$id);
+			echo("<script>location.href = '../../modules/display_form_1-6.php?pid=$id'</script>");
+			
 		} else {
 			echo "<br>Person could not be made.";
 		}
-
-		//if ($conn->query($q1) === TRUE) {
-		//	echo "New record created successfully";
-		//} else {
-			//echo "Error: " . $q1 . "<br>" . $conn->error;
-		//}
 
 $conn->close();
 

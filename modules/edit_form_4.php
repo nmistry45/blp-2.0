@@ -1,6 +1,10 @@
 <?php
+
 session_start();
+
 include ('logout.php');
+include ('../assets/php/connection.php');
+
 if(!isset($_SESSION['id'])){
     echo"<script>
     alert('Please Login');
@@ -8,17 +12,6 @@ if(!isset($_SESSION['id'])){
     </script>
     ";
 }
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-    
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    
 
 $id = $_GET['pid'];
 $f4id = $_GET['f4id'];
@@ -29,6 +22,7 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
     $result_form4_checkBox = mysqli_query($conn, "SELECT * from form4_checkbox where f4id = $f4id");
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,23 +87,21 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
         <div class="container">
             <h2>Bombay Leprosy Project </h2>
             <?php 
-            $result_form_4_1 = mysqli_query($conn, "SELECT patient_name, clinic_id, study_no from form1 where pid = $id");
+            $result_form_4_1 = mysqli_query($conn, "SELECT patient_name, clinic_id from form1 where pid = $id");
             while ($row_form_4_1 = mysqli_fetch_assoc($result_form_4_1)){
             ?>
             <form method="POST" id="signup-form" class="signup-form" action="../assets/php/update_form_4.php?pid=<?php echo $id; ?>&f4id=<?php echo $f4id ?>" enctype="multipart/form-data">
                 <div class="form-group" style="margin-top: 20px">
-                            <label for="patient_name" class="form-label">Patient Name:</label>
-                            <label for="op_patient_name" class="form-label" style="margin-left: -125px;"><?php echo $row_form_4_1['patient_name']; ?></label>
-                            <label for="clinic_id" class="form-label" style="margin-left: 100px;">Clinic ID:</label>
-                            <label for="op_clinic_id" class="form-label" style="margin-left: -150px;"><?php echo $row_form_4_1['clinic_id']; ?></label>
-                            <label for="study_no" class="form-label" style="margin-left: 175px;">Study Number:</label>
-                            <label for="op_study_no" class="form-label" style="margin-left: -150px;"><?php echo $row_form_4_1['study_no']; ?></label>
+                            <label for="patient_name" class="form-label" style="margin-left: 200px;">Patient Name:</label>
+                            <label for="op_patient_name" class="form-label" style="margin-left: -140px;"><?php echo $row_form_4_1['patient_name']; ?></label>
+                            <label for="clinic_id" class="form-label" style="margin-left: 215px;">Clinic ID:</label>
+                            <label for="op_clinic_id" class="form-label" style="margin-left: -175px;"><?php echo $row_form_4_1['clinic_id']; ?></label>
             <?php } ?>
 				
 				  </div>
     	<hr>
             <h3>
-                <span class="title_text"><center><b>4. Post-randomisation 3 monthly routine follow up sheet (while no ENL treatment)<b></center></span>
+                <span class="title_text"><center><b>4. Post-Randomisation 3 Monthly Routine Follow-Up Sheet<b></center></span>
             </h3>
         <hr>
         
@@ -254,21 +246,38 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
                             <label  class="form-label" style="color:blue;" ><u><b>Patient Experience Assessment:</u></b></label>
                             </div>
               </fieldset>
-              
-                          <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                              <label for="qol_4" class="form-label">QOL(SF36) score</label>
-                              <input style="width: 180px;"type="text" name="qol_4" id="qol_4" placeholder="QOL score"  value="<?php echo $row_form_4['qol_4']; ?>" />
+                          
+                          <div class="form-radio" style="padding-left: 34px">
+                              <label for="qol_4" class="form-label">QOL (SF36) Score</label>
+                                    <div class="form-radio-item">
+                                        <?php if($row_form_4['qol_4'] === 'done') { ?>
+                                            <input type="radio" name="qol_4" value="done" id="done" checked />
+                                            <label for="done" style="width:75px;">Done</label>
+                                        
+                                        <?php }else{?>
+                                            <input type="radio" name="qol_4" value="done" id="done" />
+                                            <label for="done" style="width:75px;">Done</label>
+                                        
+                                        <?php } if($row_form_4['qol_4'] === 'not done') { ?>
+                                            <input type="radio" name="qol_4" value="not done" id="not done" checked/>
+                                            <label for="not done" style="width:85px;">Not Done</label>
+
+                                        <?php } else{ ?>
+                                            <input type="radio" name="qol_4" value="not done" id="not done" />
+                                            <label for="not done" style="width:85px;">Not Done</label>
+                                        <?php } ?>
+                                    </div>
                           </div>
 
                           <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                              <label for="vas_4" class="form-label">VAS for pigmentation</label>
+                              <label for="vas_4" class="form-label">VAS for Pigmentation</label>
                               <input style="width: 180px;" type="text" name="vas_4" id="vas_4" placeholder="VAS between 0-100"  value="<?php echo $row_form_4['vas_4']; ?>"  />
                           </div>
 
 
 
 						<div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                                <label for="adverse_effect_prednisolone">Checklist for adverse effects of prednisolone</label>&ensp;&ensp;&ensp;&ensp;
+                                <label for="adverse_effect_prednisolone">Checklist for Adverse Effects of Prednisolone</label>&ensp;&ensp;&ensp;&ensp;
                                 <div class="container" style="margin-top: 9px">
   
                                     <!-- <form   method="POST" id="signup-form" class="signup-form" action="form-66.php">-->
@@ -276,11 +285,11 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
                                         <?php while ($row_form4_checkBox = mysqli_fetch_assoc($result_form4_checkBox)){ ?>
                                             <?php if($row_form4_checkBox['Mild_Indigestion'] === 'yes') { ?>
                                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                    <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Mild indigestion 
+                                                    <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Mild Indigestion 
                                                 </label>
                                             <?php }else{ ?>
                                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                    <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild indigestion 
+                                                    <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion 
                                                 </label>
 
                                             <?php } if($row_form4_checkBox['Peptic_Ulcer'] === 'yes'){?>  
@@ -387,11 +396,11 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
                                     <div class="row">
                                             <?php if($row_form4_checkBox['Gastrointestinal_bleeding'] === 'yes') { ?>
                                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Gastrointestinal bleeding
+                                                <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Gastrointestinal Bleeding
                                                 </label>
                                             <?php }else{ ?>
                                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px">Gastrointestinal bleeding
+                                                <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px">Gastrointestinal Bleeding
                                                 </label>
                                             <?php }if($row_form4_checkBox['Haematemesis'] === 'yes') { ?>
                                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
@@ -425,7 +434,7 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
                                 </div>
                         </div>
                         <div class="form-group" style="margin-top: 9px;padding-left:34px">
-                            <label for="adverse_effect_clofazimine">Checklist for adverse effects of Clofazimine</label>&ensp;&ensp;&ensp;&ensp;
+                            <label for="adverse_effect_clofazimine">Checklist for Adverse Effects of Clofazimine</label>&ensp;&ensp;&ensp;&ensp;
                             <div class="container" style="margin-top: 9px">
 									
 				                <!--<form>	-->				
@@ -433,11 +442,11 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
                                     <?php while ($row_form4_checkBox2 = mysqli_fetch_assoc($result_form4_checkBox2)){ ?>
                                         <?php if($row_form4_checkBox2['Mild_Indigestion'] === 'yes') { ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Mild indigestion 
+                                        <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Mild Indigestion 
                                     </label>
                                         <?php }else{ ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild indigestion 
+                                        <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion 
                                     </label>
 
                                         <?php } if($row_form4_checkBox2['Vomiting'] === 'yes'){?>  
@@ -470,11 +479,11 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
                               	<div class="row">
                                         <?php if($row_form4_checkBox2['Diarrhoea,Acute'] === 'yes') { ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Diarrhoea,Acute 
+                                                <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Diarrhoea, Acute 
                                             </label>
                                         <?php }else{ ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea,Acute 
+                                                <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea, Acute 
                                             </label>
                                         <?php }if($row_form4_checkBox2['Ichthyosis'] === 'yes') { ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
@@ -486,11 +495,11 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
                                             </label>
                                         <?php } if($row_form4_checkBox2['Weight_loss'] === 'yes') { ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                <input type="checkbox"  name="adverse_clofa[6]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Weight loss
+                                                <input type="checkbox"  name="adverse_clofa[6]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Weight Loss
                                             </label>
                                         <?php }else{ ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                <input type="checkbox"  name="adverse_clofa[6]"  value="yes" style="padding-left:4px;margin-top:9px">Weight loss
+                                                <input type="checkbox"  name="adverse_clofa[6]"  value="yes" style="padding-left:4px;margin-top:9px">Weight Loss
                                             </label>
                                         <?php } if($row_form4_checkBox2['Conjuctiva'] === 'yes') { ?>
                                             <label class="checkbox-inline" style="padding-left:4px">
@@ -515,11 +524,11 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
                                             </label>
                                         <?php }if($row_form4_checkBox2['Diarrhoea,Chronic'] === 'yes') { ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                <input type="checkbox"  name="adverse_clofa[9]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Diarrhoea,<br>Chronic
+                                                <input type="checkbox"  name="adverse_clofa[9]"  value="yes" style="padding-left:4px;margin-top:9px" checked>Diarrhoea,<br> Chronic
                                             </label>
                                         <?php }else{ ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                                <input type="checkbox"  name="adverse_clofa[9]"  value="yes" style="padding-left:4px;margin-top:9px" >Diarrhoea,<br>Chronic
+                                                <input type="checkbox"  name="adverse_clofa[9]"  value="yes" style="padding-left:4px;margin-top:9px" >Diarrhoea,<br> Chronic
                                             </label>
                                         <?php }if($row_form4_checkBox2['Chronic_Dysentery'] === 'yes') { ?>
                                             <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
@@ -549,30 +558,30 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
 					
 						 
                         <div class="form-group" style="padding-left:34px">
-                            <label for="enl_present_time_since" class="form-label">If ENL present, time since onset of this episode?</label>
-                            <input type="text" name="enl_present_time_since" id="enl_present_time_since" placeholder="" value="<?php echo $row_form_4['enl_present_time_since']; ?>"  />
+                            <label for="enl_present_time_since" class="form-label">If ENL present, Time Since Onset of this Episode?</label>
+                            <input type="text" name="enl_present_time_since" id="enl_present_time_since" placeholder="Number of weeks" value="<?php echo $row_form_4['enl_present_time_since']; ?>"  />
                         </div>
 						
 
 							<div class="form-group" style="padding-left:34px">
-								<label for="time_since_last_received_prednisolone" class="form-label">Time since last received prednisolone<br>(days/weeks)?</label>
-								<input type="text" name="time_since_last_received_prednisolone" id="time_since_last_received_prednisolone" placeholder="" value="<?php echo $row_form_4['time_since_last_received_prednisolone']; ?>"  />
+								<label for="time_since_last_received_prednisolone" class="form-label">Time Since Last Received Prednisolone?</label>
+								<input type="text" name="time_since_last_received_prednisolone" id="time_since_last_received_prednisolone" placeholder="Days/Weeks" value="<?php echo $row_form_4['time_since_last_received_prednisolone']; ?>"  />
 							</div>
 							 
 						 
 							<div class="form-group" style="padding-left:34px">
-										<label for="recurrent_enl_start_predni" class="form-label">If recurrent ENL ,start prednisolone and move to fornightly observations</label>
+										<label for="recurrent_enl_start_predni" class="form-label">If Flare of ENL, Start or Add Prednisolone and Move to Fornightly Observations</label>
 										<input type="text" name="recurrent_enl_start_predni" id="recurrent_enl_start_predni" placeholder="" value="<?php echo $row_form_4['recurrent_enl_start_predni']; ?>" />
 									</div>
 									 
 						 						 
 						<div class="form-group" style="margin-top: 9px; text-align:left;"> 
-                            <label  class="form-label" style="color:blue;" ><u><b>Treatment prescribed:</u></b></label>
+                            <label  class="form-label" style="color:blue;" ><u><b>Treatment Prescribed:</u></b></label>
                             </div>
 							
  
 				<div class="form-radio" style="padding-left:34px">
-                                <label for="advised_admission" class="form-label">Advised admission</label>
+                                <label for="advised_admission" class="form-label">Advised Admission</label>
                                 <div class="form-radio-item">
                                     									
 									<?php if($row_form_4['advised_admission'] === 'yes') { ?>
@@ -598,19 +607,19 @@ while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
 				
 
 						<div class="form-group" style="padding-left:34px">
-                            <label for="nextDate" class="form-label">Date for next routine assessment</label>
+                            <label for="nextDate" class="form-label">Date for Next Routine Assessment</label>
                             <input style="width:170px"type="date" name="nextDate" id="nextDate" value="<?php echo $row_form_4['nextDate']; ?>" > 
                         </div>
 							
 							
 							<div class="form-group" style="padding-left:34px">
-                            <label for="nextPDate" class="form-label">Date of Prednisolone review</label>
+                            <label for="nextPDate" class="form-label">Date of Prednisolone Review</label>
                             <input style="width:170px"type="date" name="nextPDate" id="nextPDate" value="<?php echo $row_form_4['nextPDate']; ?>" > 
                         </div>
                                         <?php }?>
                                         
 							
-							<input type="submit" value="submit" name="submit" id="submit">                       
+							<input type="submit" value="Submit" name="submit" id="submit">                       
                     <br>
                      <h4 id="result"></h4> 
 					<h4 id="result1"></h4> 			

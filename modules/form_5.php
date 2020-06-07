@@ -1,6 +1,9 @@
 <?php
+
    session_start();
    include ('logout.php');
+   include ('../assets/php/connection.php');
+   
    if(!isset($_SESSION['id'])){
        echo"<script>
        alert('Please Login');
@@ -8,18 +11,6 @@
        </script>
        ";
    }
-   
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-	if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
- 
 
 ?>
 
@@ -95,17 +86,15 @@
         <div class="container">
             <h2>Bombay Leprosy Project </h2>
             <?php $pid = $_GET['pid'];
-            $result_form_5 = mysqli_query($conn, "SELECT patient_name, clinic_id, study_no from form1 where pid = $pid");
+            $result_form_5 = mysqli_query($conn, "SELECT patient_name, clinic_id from form1 where pid = $pid");
             while ($row_form_5 = mysqli_fetch_assoc($result_form_5)){
             ?>
             <form method="POST" id="signup-form" class="signup-form" onsubmit="return checkDate(this)" action="../assets/php/form-55.php?pid=<?php echo $pid; ?>" enctype="multipart/form-data">
                 <div class="form-group" style="margin-top: 20px">
-                            <label for="patient_name" class="form-label">Patient Name:</label>
-                            <label for="op_patient_name" class="form-label" style="margin-left: -125px;"><?php echo $row_form_5['patient_name']; ?></label>
-                            <label for="clinic_id" class="form-label" style="margin-left: 100px;">Clinic ID:</label>
-                            <label for="op_clinic_id" class="form-label" style="margin-left: -150px;"><?php echo $row_form_5['clinic_id']; ?></label>
-                            <label for="study_no" class="form-label" style="margin-left: 175px;">Study Number:</label>
-                            <label for="op_study_no" class="form-label" style="margin-left: -150px;"><?php echo $row_form_5['study_no']; ?></label>
+                            <label for="patient_name" class="form-label" style="margin-left: 200px;">Patient Name:</label>
+                            <label for="op_patient_name" class="form-label" style="margin-left: -140px;"><?php echo $row_form_5['patient_name']; ?></label>
+                            <label for="clinic_id" class="form-label" style="margin-left: 215px;">Clinic ID:</label>
+                            <label for="op_clinic_id" class="form-label" style="margin-left: -175px;"><?php echo $row_form_5['clinic_id']; ?></label>
                 </div>
             <?php } ?>
         <hr>
@@ -127,7 +116,7 @@
 
                     <div class="fieldset-content">
                         <div class="form-group">
-                            <label for="patient_since_last_visit" class="form-label">How was patient since last visit</label>
+                            <label for="patient_since_last_visit" class="form-label">How was Patient Since Last Visit</label>
                              <textarea name="patient_since_last_visit" id="patient_since_last_visit" placeholder="Describe Here" ></textarea>
                         </div>
                          <div class="form-group">
@@ -145,7 +134,7 @@
                         </div>
 
                          <div class="form-group">
-                            <label for="physical_assessment" class="form-label" style="color: blue;"><u><b>Physical assessment: </u></b></label>
+                            <label for="physical_assessment" class="form-label" style="color: blue;"><u><b>Physical Assessment: </u></b></label>
                         </div>
 
                        <div class="fieldset-content">
@@ -170,7 +159,7 @@
                              </select>
                          </div>
                         <div style="padding-left: 34px" class="form-textarea" id="IfyesHDiv">
-                            <label for="if_yes" class="form-label">If yes?</label>
+                            <label for="if_yes" class="form-label">If Yes?</label>
                             <td><input type="text" id="IfyesH" name="if_yes" placeholder="If yes?" class="valid"></td>
                         </div>
                             
@@ -222,14 +211,14 @@
                             </div>
                             
                             <div class="form-group" style="padding-left:15px">
-                                <label for="adverse_effect_prednisolone">Checklist for adverse effects of prednisolone</label>&ensp;&ensp;&ensp;
+                                <label for="adverse_effect_prednisolone">Checklist for Adverse Effects of Prednisolone</label>&ensp;&ensp;&ensp;
                                 <div class="container">
   
  <!-- <form   method="POST" id="signup-form" class="signup-form" action="form-66.php">-->
                             <div class="row">
 
                                 <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                                    <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild indigestion 
+                                    <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion 
                                 </label>
                                 <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox" name="adverse_predni[1]" value="yes" style="padding-left:4px;margin-top:9px">Peptic Ulcer
@@ -279,7 +268,7 @@
                             <div class="row">
 
                                 <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                                <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px">Gastrointestinal bleeding
+                                <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px">Gastrointestinal Bleeding
                                 </label>
                                 <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox" name="adverse_predni[13]"  value="yes" style="padding-left:4px;margin-top:9px">Haematemesis
@@ -298,7 +287,7 @@
 </div>
 
 						<div class="form-group" style="padding-left:15px">
-                        <label for="adverse_effect_clofazimine">Checklist for adverse effects of Clofazimine</label>&ensp;&ensp;&ensp;
+                        <label for="adverse_effect_clofazimine">Checklist for Adverse Effects of Clofazimine</label>&ensp;&ensp;&ensp;
                                
 						<div class="container">
 									
@@ -306,7 +295,7 @@
                             <div class="row">
 
                                 <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                                    <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild indigestion 
+                                    <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion 
                                 </label>
                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox" name="adverse_clofa[1]" value="yes" style="padding-left:4px;margin-top:9px">Vomiting
@@ -323,13 +312,13 @@
                             <div class="row">
 
                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                    <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea,Acute 
+                                    <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea, Acute 
                                 </label>
                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox" name="adverse_clofa[5]"  value="yes" style="padding-left:4px;margin-top:9px">Ichthyosis
                                 </label>
                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                    <input type="checkbox"  name="adverse_clofa[6]"  value="yes" style="padding-left:4px;margin-top:9px">Weight loss
+                                    <input type="checkbox"  name="adverse_clofa[6]"  value="yes" style="padding-left:4px;margin-top:9px">Weight Loss
                                 </label>
                                 <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox"  name="adverse_clofa[7]"  value="yes"style="padding-left:4px;margin-top:9px">Conjuctiva
@@ -343,7 +332,7 @@
                                     <input type="checkbox"  name="adverse_clofa[8]"  value="yes" style="padding-left:4px;margin-top:9px">Persistent<br> Indigestion 
                                 </label>
                                 <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                                    <input type="checkbox"  name="adverse_clofa[9]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea,<br>Chronic
+                                    <input type="checkbox"  name="adverse_clofa[9]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea,<br> Chronic
                                 </label>
                                 <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
                                     <input type="checkbox"  name="adverse_clofa[10]"  value="yes" style="padding-left:4px;margin-top:9px">Chronic<br> Dysentery
@@ -364,55 +353,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="time_since_flare_began">Time since flare began</label>
-                            <input type="range"style="border:1px solid;background-color: lightblue;" name="time_since_flare_began" id="time_since_flare_began" min="1" max="14" value="7" onchange="show_value3(this.value)">
-                          <span id="slider_value3" style="color:black;font-weight:bold;"></span><br>
-								 <span id="slider_value3" style="color:black;font-weight:bold;"></span>
-								
-								<style type="text/css">
-                                #time_since_flare_began{
-                                    height:0px ;
-                                    -webkit-appearance:none;
-                                    border-radius: 5px;
-                                    background-color: black;
-                                    box-shadow: inset 0 3px 18px rgba(0,0,0,0.6);
-                                }
-
-                                #time_since_flare_began::-webkit-slider-thumb{
-                                    -webkit-appearance:none;
-                                    width: 40px;
-                                    height: 40px;
-                                    background-color: white;
-                                    border-radius: 50%;
-                                    cursor: pointer;
-                                    outline: none;
-                                }
-
-                                #time_since_flare_began::-webkit-slider-thumb:hover{
-                                    box-shadow: 0 0 0 3px black,
-                                                0 0 0 6px white;
-                                 }
-
-                                #time_since_flare_began:active::-webkit-slider-thumb{
-                                    box-shadow: 0 0 0 3px black,
-                                                0 0 0 6px white;
-                                }
-                            </style>
-								
-								<script type="text/javascript">
-								function show_value3(x)
-								{
-									document.getElementById("slider_value3").innerHTML=x;
-								} 
-								</script>
+                            <label for="time_since_flare_began">Time Since Flare Began</label>
+                            <input type="text" name="time_since_flare_began" id="time_since_flare_began" placeholder="Number of Days / Number of Weeks" />
                         </div>
 
-                        <label style="color:blue;"><u><b>Treatment prescribed:</u></b></label>
-						 
-						 
+                        <label style="color:blue;"><u><b>Treatment Prescribed:</u></b></label>
 						 
                        <div class="form-group" style="padding-left: 34px">
-                          <label for="dp" class="form-label">(a) Continue standard steroid course</label>
+                          <label for="dp" class="form-label">(a) Continue Standard Steroid Course</label>
                              <table style="padding-left: 34px ;margin-top: 9px;" id="tb5" class="tab orlist">
                                 
                                     <tbody>
@@ -436,7 +384,7 @@
                         </div>
                         
 						<div class="form-group" style="padding-left: 34px">
-                          <label for="dp" class="form-label">(b)Additional prednisolone</label>
+                          <label for="dp" class="form-label">(b)Additional Prednisolone</label>
                              <table style="padding-left: 34px ;margin-top: 9px;" id="tb5" class="tab orlist">
                                 
                                     <tbody>
@@ -461,18 +409,18 @@
                         
 
 						<div class="form-group">
-                                <label for="advised_admission" class="form-label">Advised admission:</label>
+                                <label for="advised_admission" class="form-label">Advised Admission:</label>
                                 <input type="text" name="advised_admission" id="advised_admission" placeholder="Describe condition" />
                         </div>
 
                         <div class="form-group" style="padding-left: 0px ;margin-top: 9px;">
-                            <label for="date_of_next_assessment_5" class="form-label">Date of next assessment:</label>&ensp;&ensp;
+                            <label for="date_of_next_assessment_5" class="form-label">Date of Next Assessment:</label>&ensp;&ensp;
                             <input style="margin-left: -18px;" type="date" name="date_of_next_assessment_5" id="date_of_next_assessment_5" />
                         </div>
 						
 						
 
-                        <input type="submit" value="submit" name="submit" id="submit">
+                        <input type="submit" value="Submit" name="submit" id="submit">
 				<br>
                      <h4 id="result"></h4> 
 					<h4 id="result1"></h4> 		

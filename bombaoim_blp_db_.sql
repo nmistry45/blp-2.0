@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 10, 2020 at 01:43 PM
+-- Generation Time: Jun 07, 2020 at 08:25 AM
 -- Server version: 5.6.43-84.3-log
 -- PHP Version: 7.2.7
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bombaoim_blp_db`
+-- Database: `bombaoim_blp_db_`
 --
 
 -- --------------------------------------------------------
@@ -60,6 +60,15 @@ CREATE TABLE `form1` (
   `history_of_enl` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form1`
+--
+
+INSERT INTO `form1` (`pid`, `patient_name`, `clinic_id`, `study_no`, `date`, `staff_name`, `patient_name1`, `sex`, `clinic_regno`, `address`, `dateMDT`, `dateRFT`, `SmearDiagnosis`, `SmearDate`, `mdiag`, `Age`, `Weight`, `Height`, `BMI`, `no_contra_indication_steroids`, `able_to_attend_regularly`, `pregnant`, `tuberculosis`, `diabetes`, `other_serious_illness`, `other_illness_desc`, `inform_consent`, `allocate_study_no`, `history_of_enl`) VALUES
+(1, 'nishit', '1', '1', '2020-06-06', 'mistry', 'nishit', 'male', '1825', 'malad west', '2018-06-06', '2019-06-06', '2', '2020-06-06', 'yes', '20', '85', '1.7', '29.41', 'no', 'yes', 'no', 'no', 'no', 'no', '', 'yes', '1', 'yes'),
+(3, 'parth', '2', '2', '2020-06-06', 'joshi', 'parth', 'male', '1234', 'malad west', '2018-06-06', '2019-06-06', '2', '2020-06-07', 'yes', '20', '100', '1.9', '27.70', 'no', 'yes', 'no', 'no', 'no', 'no', '', 'yes', '2', 'yes'),
+(4, 'neha', '3', '3', '2020-06-07', 'kirtikar', 'neha', 'female', '1510', 'churchgate', '2018-06-07', '2019-06-07', '1', '2020-06-07', 'yes', '20', '50', '1.4', '25.51', 'no', 'yes', 'no', 'no', 'no', 'no', '', 'yes', '3', 'yes');
+
 -- --------------------------------------------------------
 
 --
@@ -70,6 +79,15 @@ CREATE TABLE `form1_contact` (
   `pid` bigint(20) NOT NULL,
   `contact_no` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `form1_contact`
+--
+
+INSERT INTO `form1_contact` (`pid`, `contact_no`) VALUES
+(1, 9819604336),
+(3, 9876543210),
+(4, 9082532141);
 
 -- --------------------------------------------------------
 
@@ -107,6 +125,15 @@ CREATE TABLE `form2` (
   `next_asse_date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form2`
+--
+
+INSERT INTO `form2` (`pid`, `patient_name`, `clinic_id`, `study_no`, `date`, `staff_name`, `current_reaction_status`, `first_had_enl`, `firstPDate`, `first_sym`, `current_anti_reaction`, `date_started_predni`, `current_dose_predni`, `current_dose_clofa`, `current_dose_thal`, `nfa`, `change_in_nfi`, `change_in_nfi_desc`, `eess_2`, `qol_2_score`, `vas_for_pig_2`, `obs`, `drug_dose_predni`, `drug_dur_predni`, `drug_dose_clofa`, `drug_dur_clofa`, `next_asse_date`) VALUES
+(1, 'nishit', '1', '1', '2020-06-05', 'mistry', 'RR', '2020-06-05', '2020-06-05', '5', '', '2020-06-05', '5', '', '', 'no', 'no', '', '5', '10', '10', 'observation', '5', '5', '6', '6', '2020-06-12'),
+(3, 'parth', '2', '2', '2020-06-07', 'joshi', 'RR', '2020-06-07', '2020-06-07', '5', '', '2020-06-07', '5', '5', '5', 'no', 'no', '', '10', '10', '10', 'obs', '5', '5', '6', '6', '2020-06-21'),
+(4, 'neha', '3', '3', '2020-06-07', 'kirtikar', 'RR', '2020-06-07', '2020-06-07', '7', '', '2020-06-07', '7', '', '', 'no', 'no', '', '10', 'not done', '10', 'obs', '5', '5', '6', '6', '2020-06-21');
+
 -- --------------------------------------------------------
 
 --
@@ -133,6 +160,15 @@ CREATE TABLE `form2_checkbox` (
   `Acne` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form2_checkbox`
+--
+
+INSERT INTO `form2_checkbox` (`pid`, `Mild_Indigestion`, `Peptic_Ulcer`, `Striae`, `Herpes_Zoster`, `Hyperglycaemia`, `Hypertension`, `Malaena`, `Glaucoma`, `Truncal_Obesity`, `Osteoporosis`, `Moon_Face`, `Psychosis`, `Gastrointestinal_bleeding`, `Haematemesis`, `Extensive_Ringworm`, `Acne`) VALUES
+(1, 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes'),
+(3, 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no'),
+(4, 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no');
+
 -- --------------------------------------------------------
 
 --
@@ -145,6 +181,15 @@ CREATE TABLE `form2_checkbox2` (
   `Clofazmine` varchar(255) NOT NULL,
   `Thalidamide` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `form2_checkbox2`
+--
+
+INSERT INTO `form2_checkbox2` (`pid`, `Prednisolone`, `Clofazmine`, `Thalidamide`) VALUES
+(1, 'yes', 'no', 'no'),
+(3, 'yes', 'yes', 'yes'),
+(4, 'yes', 'no', 'no');
 
 -- --------------------------------------------------------
 
@@ -159,6 +204,15 @@ CREATE TABLE `form2_others` (
   `others_drug_dosage` varchar(255) NOT NULL,
   `others_drug_duration` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `form2_others`
+--
+
+INSERT INTO `form2_others` (`oid`, `pid`, `others_drug_name`, `others_drug_dosage`, `others_drug_duration`) VALUES
+(1, 1, 'bc/ca', '7', '7'),
+(3, 3, 'bc/ca', '7', '7'),
+(5, 4, 'bc/ca', '7', '7');
 
 -- --------------------------------------------------------
 
@@ -188,6 +242,14 @@ CREATE TABLE `form3` (
   `prednisolone_review` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form3`
+--
+
+INSERT INTO `form3` (`f3id`, `pid`, `date`, `staff_name`, `current_reaction_status`, `nfa_3`, `new_nfi_3`, `Add1`, `eess_3`, `qol_3`, `vas_for_pig_3`, `rand_date`, `drug_dose_predni`, `drug_dura_predni`, `drug_dose_clofa`, `drug_dura_clofa`, `advise_ad`, `assessment_date`, `prednisolone_review`) VALUES
+(1, 1, '2020-06-05', 'mistry', 'RR', 'no', 'no', '', '5', '10', '10', '2020-06-05', '5', '5', '6', '6', 'yes', '2020-09-05', '2020-06-19'),
+(2, 4, '2020-06-07', 'kirtikar', 'RR', 'no', 'no', '', '5', 'done', '10', '2020-06-07', '5', '5', '6', '6', 'yes', '2020-09-07', '2020-06-21');
+
 -- --------------------------------------------------------
 
 --
@@ -201,6 +263,14 @@ CREATE TABLE `form3_others` (
   `others_drug_dosage` varchar(255) NOT NULL,
   `others_drug_duration` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `form3_others`
+--
+
+INSERT INTO `form3_others` (`f3id`, `pid`, `others_drug_name`, `others_drug_dosage`, `others_drug_duration`) VALUES
+(1, 1, 'bc/ca', '7', '7'),
+(2, 4, 'bc/ca', '7', '7');
 
 -- --------------------------------------------------------
 
@@ -225,6 +295,14 @@ CREATE TABLE `form4` (
   `nextDate` date NOT NULL,
   `nextPDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `form4`
+--
+
+INSERT INTO `form4` (`f4id`, `pid`, `formDate`, `staff_name`, `current_status`, `nfa_4`, `eess_4`, `qol_4`, `vas_4`, `enl_present_time_since`, `time_since_last_received_prednisolone`, `recurrent_enl_start_predni`, `advised_admission`, `nextDate`, `nextPDate`) VALUES
+(1, 1, '2020-06-05', 'mistry', 'RR', 'no', '5', '10', '10', '5', '5', '5', 'yes', '2020-06-05', '2020-06-05'),
+(2, 4, '2020-06-07', 'kirtikar', 'RR', 'no', '5', 'not done', '10', '5', '7', '5', 'yes', '2020-06-07', '2020-06-07');
 
 -- --------------------------------------------------------
 
@@ -253,6 +331,14 @@ CREATE TABLE `form4_checkbox` (
   `Acne` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form4_checkbox`
+--
+
+INSERT INTO `form4_checkbox` (`f4id`, `pid`, `Mild_Indigestion`, `Peptic_Ulcer`, `Striae`, `Herpes_Zoster`, `Hyperglycaemia`, `Hypertension`, `Malaena`, `Glaucoma`, `Truncal_Obesity`, `Osteoporosis`, `Moon_Face`, `Psychosis`, `Gastrointestinal_bleeding`, `Haematemesis`, `Extensive_Ringworm`, `Acne`) VALUES
+(1, 1, 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes'),
+(2, 4, 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'no', 'no', 'no');
+
 -- --------------------------------------------------------
 
 --
@@ -275,6 +361,14 @@ CREATE TABLE `form4_checkbox2` (
   `Chronic_Dysentery` varchar(255) NOT NULL,
   `Skin_Discolouration` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `form4_checkbox2`
+--
+
+INSERT INTO `form4_checkbox2` (`f4id`, `pid`, `Mild_Indigestion`, `Vomiting`, `Nausea`, `Abdominal_Pain`, `Diarrhoea,Acute`, `Ichthyosis`, `Weight_loss`, `Conjuctiva`, `Persistent_Indigestion`, `Diarrhoea,Chronic`, `Chronic_Dysentery`, `Skin_Discolouration`) VALUES
+(1, 1, 'no', 'no', 'no', 'yes', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no'),
+(2, 4, 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no');
 
 -- --------------------------------------------------------
 
@@ -304,6 +398,14 @@ CREATE TABLE `form5` (
   `date_of_next_assessment_5` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `form5`
+--
+
+INSERT INTO `form5` (`f5id`, `pid`, `date`, `staff_name`, `patient_since_last_visit`, `prednisolone_5`, `clofazimine_vitamins`, `nfa_5`, `new_nfi_5`, `if_yes`, `eess_score_5`, `patient_worse`, `time_since_flare_began`, `dose_std_course`, `dura_std_course`, `dose_add_predni`, `dura_add_predni`, `advised_admission`, `date_of_next_assessment_5`) VALUES
+(1, 1, '2020-06-05', 'mistry', 'good', '5', '5', 'no', 'no', '', '5', 'no', '5', '5', '5', '6', '6', 'well', '2020-06-19'),
+(2, 3, '2020-06-07', 'joshi', 'good', '5', '5', 'no', 'no', '', '5', 'no', '10', '5', '5', '6', '6', 'good', '2020-06-21');
+
 -- --------------------------------------------------------
 
 --
@@ -331,6 +433,14 @@ CREATE TABLE `form5_checkbox` (
   `Acne` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form5_checkbox`
+--
+
+INSERT INTO `form5_checkbox` (`f5id`, `pid`, `Mild_Indigestion`, `Peptic_Ulcer`, `Striae`, `Herpes_Zoster`, `Hyperglycaemia`, `Hypertension`, `Malaena`, `Glaucoma`, `Truncal_Obesity`, `Osteoporosis`, `Moon_Face`, `Psychosis`, `Gastrointestinal_bleeding`, `Haematemesis`, `Extensive_Ringworm`, `Acne`) VALUES
+(1, 1, 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes'),
+(2, 3, 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no');
+
 -- --------------------------------------------------------
 
 --
@@ -353,6 +463,14 @@ CREATE TABLE `form5_checkbox2` (
   `Chronic_Dysentery` varchar(255) NOT NULL,
   `Skin_Discolouration` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `form5_checkbox2`
+--
+
+INSERT INTO `form5_checkbox2` (`f5id`, `pid`, `Mild_Indigestion`, `Vomiting`, `Nausea`, `Abdominal_Pain`, `Diarrhoea,Acute`, `Ichthyosis`, `Weight_loss`, `Conjuctiva`, `Persistent_Indigestion`, `Diarrhoea,Chronic`, `Chronic_Dysentery`, `Skin_Discolouration`) VALUES
+(1, 1, 'no', 'no', 'no', 'yes', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no'),
+(2, 3, 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no');
 
 -- --------------------------------------------------------
 
@@ -388,6 +506,14 @@ CREATE TABLE `form6` (
   `others` varchar(700) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form6`
+--
+
+INSERT INTO `form6` (`f6id`, `pid`, `date`, `staff_name`, `current_status`, `nfa`, `eess`, `qol`, `vas`, `current_antireaction_therapy`, `no_weeks_extra_clofazimine`, `enl_at_randomisation`, `duration_first_episode`, `flare_of_enl`, `if_flare_how_long`, `eess_at_flare`, `recurrent_enl_steroids`, `chronic_enl_randomisation`, `total_steroids_consumed`, `change_in_nfa`, `change_in_nfa_desc`, `change_in_qol`, `adverse_effect_of_drug`, `drug_desc`, `others`) VALUES
+(1, 1, '2020-06-05', 'mistry', 'RR', 'no', '5', '10', '10', 'none', '5', 'yes', '5', 'yes', '7', '7', 'no', 'no', '1.85', 'no', '', 'decrease', 'no', '', ''),
+(2, 4, '2020-06-07', 'kirtikar', 'RR', 'no', '5', 'not done', '10', 'none \r\n							', '5', 'yes', '5', 'yes', '7', '7', 'yes', 'yes', '1.85', 'no', '', 'decrease', 'no', '', '');
+
 -- --------------------------------------------------------
 
 --
@@ -415,6 +541,14 @@ CREATE TABLE `form6_checkbox` (
   `Acne` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form6_checkbox`
+--
+
+INSERT INTO `form6_checkbox` (`f6id`, `pid`, `Mild_Indigestion`, `Peptic_Ulcer`, `Striae`, `Herpes_Zoster`, `Hyperglycaemia`, `Hypertension`, `Malaena`, `Glaucoma`, `Truncal_Obesity`, `Osteoporosis`, `Moon_Face`, `Psychosis`, `Gastrointestinal_bleeding`, `Haematemesis`, `Extensive_Ringworm`, `Acne`) VALUES
+(1, 1, 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'no', 'yes'),
+(2, 4, 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no');
+
 -- --------------------------------------------------------
 
 --
@@ -438,6 +572,14 @@ CREATE TABLE `form6_checkbox2` (
   `Skin_Discolouration` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `form6_checkbox2`
+--
+
+INSERT INTO `form6_checkbox2` (`f6id`, `pid`, `Mild_Indigestion`, `Vomiting`, `Nausea`, `Abdominal_Pain`, `Diarrhoea,Acute`, `Ichthyosis`, `Weight_loss`, `Conjuctiva`, `Persistent_Indigestion`, `Diarrhoea,Chronic`, `Chronic_Dysentery`, `Skin_Discolouration`) VALUES
+(1, 1, 'no', 'no', 'no', 'yes', 'no', 'no', 'yes', 'no', 'yes', 'yes', 'no', 'no'),
+(2, 4, 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no');
+
 -- --------------------------------------------------------
 
 --
@@ -454,6 +596,14 @@ CREATE TABLE `form6_checkbox3` (
   `Died` varchar(255) NOT NULL,
   `Others` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `form6_checkbox3`
+--
+
+INSERT INTO `form6_checkbox3` (`f6id`, `pid`, `Protocol_Violation`, `Patient_refused_followup`, `Uncontrolled_reaction`, `Severe_adverse_effects`, `Died`, `Others`) VALUES
+(1, 1, 'yes', 'no', 'no', 'no', 'no', 'no'),
+(2, 4, 'yes', 'no', 'no', 'no', 'no', 'no');
 
 -- --------------------------------------------------------
 
@@ -594,55 +744,55 @@ ALTER TABLE `form6_checkbox3`
 -- AUTO_INCREMENT for table `form1`
 --
 ALTER TABLE `form1`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `form2`
 --
 ALTER TABLE `form2`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `form2_checkbox`
 --
 ALTER TABLE `form2_checkbox`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `form2_checkbox2`
 --
 ALTER TABLE `form2_checkbox2`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `form2_others`
 --
 ALTER TABLE `form2_others`
-  MODIFY `oid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `oid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `form3`
 --
 ALTER TABLE `form3`
-  MODIFY `f3id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `f3id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `form4`
 --
 ALTER TABLE `form4`
-  MODIFY `f4id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `f4id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `form5`
 --
 ALTER TABLE `form5`
-  MODIFY `f5id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `f5id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `form6`
 --
 ALTER TABLE `form6`
-  MODIFY `f6id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `f6id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

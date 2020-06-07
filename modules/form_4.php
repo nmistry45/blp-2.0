@@ -1,6 +1,10 @@
 <?php
+
 session_start();
+
 include ('logout.php');
+include ('../assets/php/connection.php');
+
 if(!isset($_SESSION['id'])){
     echo"<script>
     alert('Please Login');
@@ -8,18 +12,6 @@ if(!isset($_SESSION['id'])){
     </script>
     ";
 }
-
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-	if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    
 
 ?>
 
@@ -95,22 +87,20 @@ if(!isset($_SESSION['id'])){
         <div class="container">
             <h2>Bombay Leprosy Project </h2>
             <?php $pid = $_GET['pid'];
-            $result_form_4 = mysqli_query($conn, "SELECT patient_name, clinic_id, study_no from form1 where pid = $pid");
+            $result_form_4 = mysqli_query($conn, "SELECT patient_name, clinic_id from form1 where pid = $pid");
             while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
             ?>
             <form method="POST" id="signup-form" class="signup-form" action="../assets/php/form-44.php?pid=<?php echo $pid; ?>" enctype="multipart/form-data">
                 <div class="form-group" style="margin-top: 20px">
-                            <label for="patient_name" class="form-label">Patient Name:</label>
-                            <label for="op_patient_name" class="form-label" style="margin-left: -125px;"><?php echo $row_form_4['patient_name']; ?></label>
-                            <label for="clinic_id" class="form-label" style="margin-left: 100px;">Clinic ID:</label>
-                            <label for="op_clinic_id" class="form-label" style="margin-left: -150px;"><?php echo $row_form_4['clinic_id']; ?></label>
-                            <label for="study_no" class="form-label" style="margin-left: 175px;">Study Number:</label>
-                            <label for="op_study_no" class="form-label" style="margin-left: -150px;"><?php echo $row_form_4['study_no']; ?></label>
+                            <label for="patient_name" class="form-label" style="margin-left: 200px;">Patient Name:</label>
+                            <label for="op_patient_name" class="form-label" style="margin-left: -140px;"><?php echo $row_form_4['patient_name']; ?></label>
+                            <label for="clinic_id" class="form-label" style="margin-left: 215px;">Clinic ID:</label>
+                            <label for="op_clinic_id" class="form-label" style="margin-left: -175px;"><?php echo $row_form_4['clinic_id']; ?></label>
             <?php } ?>
 				  
 				  </div>
 	  <hr>
-      <h3><span class="title_text"><center><b>4. Post-randomisation 3 monthly routine follow up sheet (while no ENL treatment)<b></center></span></h3>
+      <h3><span class="title_text"><center><b>4. Post-Randomisation 3 Monthly Routine Follow-Up Sheet<b></center></span></h3>
                 
                 <hr>
                 <!--<fieldset>-->
@@ -225,26 +215,31 @@ if(!isset($_SESSION['id'])){
                             <label  class="form-label" style="color:blue;" ><u><b>Patient Experience Assessment:</u></b></label>
                             </div>
               </fieldset>
-              
-                          <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                              <label for="qol_4" class="form-label">QOL(SF36) score</label>
-                              <input style="width: 180px;"type="text" name="qol_4" id="qol_4" placeholder="QOL score"/>
-                          </div>
+                          
+                            <div class="form-radio" style="padding-left: 34px">
+                              <label for="qol_4" class="form-label">QOL (SF36) Score</label>
+                              <div class="form-radio-item">
+                                    <input type="radio" name="qol_4" value="done" id="done" />
+                                    <label for="done" style="width:75px;">Done</label>
+                                    <input type="radio" name="qol_4" value="not done" id="not done" />
+                                    <label for="not done" style="width:85px;">Not Done</label>
+                                </div>
+                            </div>
 
                           <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                              <label for="vas_4" class="form-label">VAS for pigmentation</label>
+                              <label for="vas_4" class="form-label">VAS for Pigmentation</label>
                               <input style="width: 180px;" type="text" name="vas_4" id="vas_4" placeholder="VAS between 0-100"/ >
                           </div>
 
                           <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                <label for="adverse_effect_prednisolone">Checklist for adverse effects of prednisolone</label>&ensp;&ensp;&ensp;&ensp;
+                <label for="adverse_effect_prednisolone">Checklist for Adverse Effects of Prednisolone</label>&ensp;&ensp;&ensp;&ensp;
                   <div class="container" style="margin-top: 9px" >
   
                  <!-- <form>-->
                       <div class="row">
 
                         <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild indigestion 
+                            <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion 
                         </label>
                         <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
                             <input type="checkbox" name="adverse_predni[1]" value="yes" style="padding-left:4px;margin-top:9px">Peptic Ulcer
@@ -293,7 +288,7 @@ if(!isset($_SESSION['id'])){
                       <div class="row">
 
                         <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                          <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px">Gastrointestinal bleeding
+                          <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px">Gastrointestinal Bleeding
                         </label>
                         <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
                             <input type="checkbox" name="adverse_predni[13]"  value="yes" style="padding-left:4px;margin-top:9px">Haematemesis
@@ -311,14 +306,14 @@ if(!isset($_SESSION['id'])){
 </div>
 </div>
             <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                <label for="adverse_effect_clofazimine">Checklist for adverse effects of Clofazimine</label>&ensp;&ensp;&ensp;&ensp;
+                <label for="adverse_effect_clofazimine">Checklist for Adverse Effects of Clofazimine</label>&ensp;&ensp;&ensp;&ensp;
 						      <div class="container" >
 									
                       <!-- <form>-->
                     <div class="row">
 
                                     <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild indigestion 
+                                        <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion 
                                     </label>
                                     <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                         <input type="checkbox" name="adverse_clofa[1]" value="yes" style="padding-left:4px;margin-top:9px">Vomiting
@@ -334,13 +329,13 @@ if(!isset($_SESSION['id'])){
                     <div class="row">
 
                                     <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea,Acute 
+                                        <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea, Acute 
                                     </label>
                                     <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                         <input type="checkbox" name="adverse_clofa[5]"  value="yes" style="padding-left:4px;margin-top:9px">Ichthyosis
                                     </label>
                                     <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[6]"  value="yes" style="padding-left:4px;margin-top:9px">Weight loss
+                                        <input type="checkbox"  name="adverse_clofa[6]"  value="yes" style="padding-left:4px;margin-top:9px">Weight Loss
                                     </label>
                                     <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
                                         <input type="checkbox"  name="adverse_clofa[7]"  value="yes" style="padding-left:4px;margin-top:9px">Conjuctiva
@@ -354,7 +349,7 @@ if(!isset($_SESSION['id'])){
                                         <input type="checkbox"  name="adverse_clofa[8]"  value="yes" style="padding-left:4px;margin-top:9px">Persistent<br> Indigestion 
                                     </label>
                                     <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[9]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea,<br>Chronic
+                                        <input type="checkbox"  name="adverse_clofa[9]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea,<br> Chronic
                                     </label>
                                     <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
                                         <input type="checkbox"  name="adverse_clofa[10]"  value="yes" style="padding-left:4px;margin-top:9px">Chronic<br> Dysentery
@@ -371,30 +366,30 @@ if(!isset($_SESSION['id'])){
 						</div>
 
                         <div class="form-group">
-                            <label for="enl_present_time_since" class="form-label">If ENL present, time since onset of this episode?</label>
-                            <input type="text" name="enl_present_time_since" id="enl_present_time_since" placeholder="" />
+                            <label for="enl_present_time_since" class="form-label">If ENL present, Time Since Onset of this Episode?</label>
+                            <input type="text" name="enl_present_time_since" id="enl_present_time_since" placeholder="Number of weeks" />
                         </div>
 						
 
 							<div class="form-group">
-								<label for="time_since_last_received_prednisolone" class="form-label">Time since last received prednisolone<br>(days/weeks)?</label>
-								<input type="text" name="time_since_last_received_prednisolone" id="time_since_last_received_prednisolone" placeholder="" />
+								<label for="time_since_last_received_prednisolone" class="form-label">Time Since Last Received Prednisolone?</label>
+								<input type="text" name="time_since_last_received_prednisolone" id="time_since_last_received_prednisolone" placeholder="Days/Weeks" />
 							</div>
 							 
 						 
 							<div class="form-group">
-										<label for="recurrent_enl_start_predni" class="form-label">If recurrent ENL ,start prednisolone and move to fornightly observations</label>
+										<label for="recurrent_enl_start_predni" class="form-label">If Flare of ENL, Start or Add Prednisolone and Move to Fornightly Observations</label>
 										<input type="text" name="recurrent_enl_start_predni" id="recurrent_enl_start_predni" placeholder="" />
 									</div>
 									 
 						 						 
 						<div class="form-group" style="margin-top: 9px; text-align:left;"> 
-                            <label  class="form-label" style="color:blue;" ><u><b>Treatment prescribed:</u></b></label>
+                            <label  class="form-label" style="color:blue;" ><u><b>Treatment Prescribed:</u></b></label>
                             </div>
 							
  
 				<div class="form-radio" style="padding-right:-30px">
-                                <label for="advised_admission" class="form-label">Advised admission</label>
+                                <label for="advised_admission" class="form-label">Advised Admission</label>
                                 <div class="form-radio-item">
                                     <input type="radio" name="advised_admission" value="yes" id="yes1" />
                                     <label for="yes1" style="width:75px;">Yes</label>
@@ -410,17 +405,17 @@ if(!isset($_SESSION['id'])){
 				
 
 						<div class="form-group">
-                            <label for="nextDate" class="form-label">Date for next routine assessment</label>
-                            <input style="width:170px"type="date" name="nextDate" id="nextDate" > 
+                            <label for="nextDate" class="form-label">Date for Next Routine Assessment</label>
+                            <input style="width:200px"type="date" name="nextDate" id="nextDate" > 
                         </div>
 							
 							
 							<div class="form-group">
-                            <label for="nextPDate" class="form-label">Date of Prednisolone review</label>
-                            <input style="width:170px"type="date" name="nextPDate" id="nextPDate"> 
+                            <label for="nextPDate" class="form-label">Date of Prednisolone Review</label>
+                            <input style="width:200px"type="date" name="nextPDate" id="nextPDate"> 
                         </div>
 							
-							<input type="submit" value="submit" name="submit" id="submit">                       
+							<input type="submit" value="Submit" name="submit" id="submit">                       
                     <br>
                      <h4 id="result"></h4> 
 					<h4 id="result1"></h4> 			

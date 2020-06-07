@@ -1,15 +1,6 @@
 <?php
 
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+include('connection.php');
 
     session_start();
 
@@ -30,7 +21,7 @@
 			$_SESSION['password'] = $password;
 			$_SESSION['id'] = $row['id'];
 			echo "<script>alert('Welcome $name');
-				window.location.href = '../../modules/form_1.php';
+				window.location.href = '../../modules/searchindex2.php';
 				</script>";
 			
 		}
@@ -42,4 +33,5 @@
 		}	
 	
 	}
+	
 ?>

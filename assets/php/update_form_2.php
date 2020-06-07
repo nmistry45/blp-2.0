@@ -1,23 +1,15 @@
 <?php
-//  include 'predni.php';
+
+include('connection.php');
+
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-	}
 	$id = $_GET['pid'];
 	function query ( $query, $message = '' ) {
 		global $conn;
 		$insert = mysqli_query($conn, $query);
 		if($insert){
-		  echo"Successful Insertion ".$message."<br>";
+		  //echo"Successful Insertion ".$message."<br>";
 		  return 1;
 		}
 		else{
@@ -30,8 +22,6 @@
 		global $conn;
 		return mysqli_real_escape_string($conn, $string);
 	}
-		
-		//mysqli_select_db($con , 'blp_db');
 
 		if(isset($_POST['patient_name'])){
 			$patient_name = $_POST['patient_name'];
@@ -153,20 +143,6 @@
     			$change_in_nfi = "NAN";
     		}
 
-// 		if(isset($_POST['change_in_nfi'])){
-// 			$change_in_nfi = $_POST['change_in_nfi'];
-// 		}
-// 		else{
-// 			$change_in_nfi = "NAN";
-// 		}
-
-// 		if(isset($_POST['change_in_nfi_desc'])){
-// 			$change_in_nfi_desc = $_POST['change_in_nfi_desc'];
-// 		}
-// 		else{
-// 			$change_in_nfi_desc = "NAN";
-// 		}
-
 		if(isset($_POST['eess_2'])){
 			$eess_2 = $_POST['eess_2'];
 		}
@@ -230,8 +206,6 @@
 			$next_asse_date = "NAN";
 		}
 
-
-
 		$others_drug_name = empty($_POST['others_drug_name']) ? 'Unknown' : $_POST['others_drug_name'];
 		$others_drug_dosage = empty($_POST['others_drug_dosage']) ? 'Unknown' : $_POST['others_drug_dosage'];
 		$others_drug_duration = empty($_POST['others_drug_duration']) ? 'Unknown' : $_POST['others_drug_duration'];
@@ -264,8 +238,6 @@
         `next_asse_date` = '$next_asse_date' 
 		
         WHERE `pid`=".$id."";
-
-		// $qu1 = "insert into form2_checkBox2 values $current_anti_reaction";
 
 		$check_0 = isset($_POST['current_anti_reaction'][0]) ? 'yes' : 'no';
 		$check_1 = isset($_POST['current_anti_reaction'][1]) ? 'yes' : 'no';
@@ -335,23 +307,18 @@
 			
 			query($q2, 'form2_others');
 
-			}header("location:../../modules/display_form_1-6.php?pid=".$id);
+			}
+// 			header("location:../../modules/display_form_1-6.php?pid=".$id);
+			echo("<script>location.href = '../../modules/display_form_1-6.php?pid=$id'</script>");
+			
 		}else {
 			echo "<br>Person could not be made.";
 		}
 		
-		// if ($conn->query($q1) === TRUE) {
-		// 	echo "New record created successfully";
-		// } else {
-		// 	echo "Error: " . $q1 . "<br>" . $conn->error;
-		// }
 		$conn->close();
 } else  {
 		// do get
 		echo "not a post request";
 	}
 
-	
-
- ?>
-
+?>

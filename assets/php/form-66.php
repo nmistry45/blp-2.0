@@ -1,22 +1,16 @@
 <?php
+
+include('connection.php');
+
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // do post
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-		}
 		$pid = $_GET['pid'];
 		function query ( $query, $message = '' ) {
 		global $conn;
 		$insert = mysqli_query($conn, $query);
 		if($insert){
-		  echo"Successful Insertion ".$message."<br>";
+		  //echo"Successful Insertion ".$message."<br>";
 		  return 1;
 		}
 		else{
@@ -24,8 +18,6 @@
 		  return 0;
 		}
 	}
-		
-		//mysqli_select_db($con , 'blp_db');
 		
 		if(isset($_POST['date'])){
 			$date = $_POST['date'];
@@ -244,7 +236,6 @@
 		'$no_weeks_extra_clofazimine','$enl_at_randomisation','$duration_first_episode','$flare_of_enl','$if_flare_how_long','$eess_at_flare','$recurrent_enl_steroids','$chronic_enl_randomisation','$total_steroids_consumed',
 		'$change_in_nfa','$change_in_nfa_desc','$change_in_qol','$adverse_effect_of_drug','$drug_desc','$others');";
 
-		
 		if(query($q1, 'form6') ) {
 		$f6id = $conn->insert_id;
         $check_0f = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
@@ -290,17 +281,12 @@
 		$query3 = "INSERT INTO form6_checkbox3 VALUES ('$f6id','$pid', '$check_0h','$check_1h','$check_2h', '$check_3h','$check_4h','$check_5h')";
 		mysqli_query($conn, $query3);
 		
-		header("location:../../modules/display_form_1-6.php?pid=".$pid);
+// 		header("location:../../modules/display_form_1-6.php?pid=".$pid);
+        echo("<script>location.href = '../../modules/display_form_1-6.php?pid=$pid'</script>");
 		
 		} else {
 			echo "<br>Person could not be made.";
 		}
-
-		//if ($conn->query($q1) === TRUE) {
-		//	echo "New record created successfully";
-		//} else {
-			//echo "Error: " . $q1 . "<br>" . $conn->error;
-		//}
 
 $conn->close();
 
@@ -309,5 +295,5 @@ $conn->close();
 		// do get
 		echo "not a post request";
 	}
-
+	
 ?>

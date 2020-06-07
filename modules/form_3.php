@@ -1,6 +1,10 @@
 <?php
+
 session_start();
+
 include ('logout.php');
+include ('../assets/php/connection.php');
+
 if(!isset($_SESSION['id'])){
    echo"<script>
     alert('Please Login');
@@ -9,19 +13,8 @@ if(!isset($_SESSION['id'])){
     ";
 }
 
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-	if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-
-	}
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,22 +87,20 @@ if(!isset($_SESSION['id'])){
         <div class="container">
             <h2>Bombay Leprosy Project </h2>
             <?php $pid = $_GET['pid'];
-            $result_form_3 = mysqli_query($conn, "SELECT patient_name, clinic_id, study_no from form1 where pid = $pid");
+            $result_form_3 = mysqli_query($conn, "SELECT patient_name, clinic_id from form1 where pid = $pid");
             while ($row_form_3 = mysqli_fetch_assoc($result_form_3)){
             ?>
             <form method="POST" id="signup-form" class="signup-form" onsubmit="return formThreeJavascript(this)" action="../assets/php/form-33.php?pid=<?php echo $pid; ?>" enctype="multipart/form-data">
                 <div class="form-group" style="margin-top: 20px">
-                            <label for="patient_name" class="form-label">Patient Name:</label>
-                            <label for="op_patient_name" class="form-label" style="margin-left: -125px;"><?php echo $row_form_3['patient_name']; ?></label>
-                            <label for="clinic_id" class="form-label" style="margin-left: 100px;">Clinic ID:</label>
-                            <label for="op_clinic_id" class="form-label" style="margin-left: -150px;"><?php echo $row_form_3['clinic_id']; ?></label>
-                            <label for="study_no" class="form-label" style="margin-left: 175px;">Study Number:</label>
-                            <label for="op_study_no" class="form-label" style="margin-left: -150px;"><?php echo $row_form_3['study_no']; ?></label>
+                            <label for="patient_name" class="form-label" style="margin-left: 200px;">Patient Name:</label>
+                            <label for="op_patient_name" class="form-label" style="margin-left: -140px;"><?php echo $row_form_3['patient_name']; ?></label>
+                            <label for="clinic_id" class="form-label" style="margin-left: 215px;">Clinic ID:</label>
+                            <label for="op_clinic_id" class="form-label" style="margin-left: -175px;"><?php echo $row_form_3['clinic_id']; ?></label>
                 </div>
             <?php } ?>
             <hr>
 				<h3>
-                    <span class="title_text"><center><b>3. Pre-randomisation 3 monthly routine follow up sheet(while no ENL treatment)</b></center></span>
+                    <span class="title_text"><center><b>3. Pre-Randomisation 3 Monthly Routine Follow-Up Sheet (while no ENL Treatment)</b></center></span>
                 </h3>
             <hr>
                 
@@ -168,7 +159,7 @@ if(!isset($_SESSION['id'])){
                  
                         </div>
 							<div class="form-radio"style="padding-left:40px;" >
-                                <label for="new_nfi_3" class="form-label">new NFI</label>
+                                <label for="new_nfi_3" class="form-label">New NFI</label>
                                 <div class="form-radio-item">
                                     <input type="radio" name="new_nfi_3" value="yes" id="nfiyes" />
                                     <label for="nfiyes" style="width:80px;">Yes</label>
@@ -177,7 +168,7 @@ if(!isset($_SESSION['id'])){
                                     <label for="nfino" style="width:80px;">No</label>
 									
                                 </div>
-								<div style="padding-left:30px;"><textarea rows="4" cols="50" name="Add1" id="Add1" placeholder="within past 6m,not yet treated with steroids" ></textarea></div>
+								<div style="padding-left:30px;"><textarea rows="4" cols="50" name="Add1" id="Add1" placeholder="Within Past 6 months, Not Yet Treated with Steroids?" ></textarea></div>
                             </div>
 							
 <div class="form-group" style="padding-left:60px">
@@ -227,14 +218,19 @@ if(!isset($_SESSION['id'])){
 							  
                           
 					<div class="form-group" style="padding-left:20px"><label style="color:blue;"><u><b>Patient Experience Assessment :</u></b></label></div>
-                    
-                        <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                              <label for="qol_3" class="form-label">QOL(SF36) score</label>
-                              <input style="width: 180px;"type="text" name="qol_3" id="qol_3" placeholder="QOL score"/>
-                          </div>
+                        
+                        <div class="form-radio" style="padding-left: 34px">
+                              <label for="qol_3" class="form-label">QOL (SF36) Score</label>
+                              <div class="form-radio-item">
+                                    <input type="radio" name="qol_3" value="done" id="done" />
+                                    <label for="done" style="width:75px;">Done</label>
+                                    <input type="radio" name="qol_3" value="not done" id="not done" />
+                                    <label for="not done" style="width:85px;">Not Done</label>
+                                </div>
+                        </div>
 
                           <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                              <label for="vas_for_pig_3" class="form-label">VAS for pigmentation</label>
+                              <label for="vas_for_pig_3" class="form-label">VAS for Pigmentation</label>
                               <input style="width: 180px;" type="text" name="vas_for_pig_3" id="vas_for_pig_3" placeholder="VAS between 0-100"/ >
                           </div>
 					
@@ -246,7 +242,7 @@ if(!isset($_SESSION['id'])){
                             </div>
                             
                         </div>
-						 <label style="color:blue;"><u><b>Treatment prescribed:</u></b></label>
+						 <label style="color:blue;"><u><b>Treatment Prescribed:</u></b></label>
 						 
 						 
 						 
@@ -278,7 +274,7 @@ if(!isset($_SESSION['id'])){
                    
 						 
                        <div class="form-group" style="padding-left: 34px">
-                          <label for="dp" class="form-label">Chlofazimine</label>
+                          <label for="dp" class="form-label">Clofazimine</label>
                              <table style="padding-left: 34px ;margin-top: 9px;" id="tb5" class="tab orlist">
                                 
                                     <tbody>
@@ -322,7 +318,7 @@ if(!isset($_SESSION['id'])){
                             </div>
 						 <div class="form-group" style="padding-left:34px;">
 						<div class="form-radio" >
-                                <label for="advise_ad" class="form-label">Adviced admission </label>
+                                <label for="advise_ad" class="form-label">Adviced Admission </label>
                                 <div class="form-radio-item">
                                     <input type="radio" name="advise_ad" value="yes" id="advyes" />
                                     <label for="advyes" style="width:80px;">Yes</label>
@@ -336,20 +332,20 @@ if(!isset($_SESSION['id'])){
                         </div>
 						 <div class="form-row" style="padding-left:60px;">
                             <div class="form-group" >
-                                <label for="assessment_date" class="form-label">Date of next Routine<br> Assessment </label>
+                                <label for="assessment_date" class="form-label">Date of Next Routine<br> Assessment </label>
                                 <input style="margin-left: 13px; width:180px;" type="date" name="assessment_date" id="assessment_date"/>
                             </div>
                             
                         </div>
 						 <div class="form-row" style="padding-left:12px;">
                             <div class="form-group" >
-                                <label for="prednisolone_review" class="form-label">Date of prednisolone review </label>
+                                <label for="prednisolone_review" class="form-label">Date of Prednisolone Review </label>
                                 <input style="margin-left: 13px; width:180px;" type="date" name="prednisolone_review" id="prednisolone_review"/>
                             </div>
                             
                         </div>
 						
- <input type="submit" value="submit" name="submit" id="submit">
+ <input type="submit" value="Submit" name="submit" id="submit">
 				<br>
                     <div class="fieldset-footer">
                         <span>Form 3 of 6</span>
@@ -471,15 +467,11 @@ $(function(){
 			 var dt3 = thisform.date.value;
 			 var asstd3 = thisform.assessment_date.value;
 			 var presr3  = thisform.prednisolone_review.value;
-			 var qol   = thisform.qol_3.value;
 			 var vas   = thisform.vas_for_pig_3.value;
-
-			
 
 			 var p = new Date(dt3);
 		     var q = new Date(asstd3);
 		     var r = new Date(presr3);
-
 
 		     var oneJanp =  new Date(new Date(dt3).getFullYear(), 0, 1); 
 			 var oneJanq =  new Date(new Date(asstd3).getFullYear(), 0, 1);
@@ -508,12 +500,6 @@ $(function(){
 		     	return false;
 		     }
 
-		     if(isNaN(qol))
-		     {
-		     	alert("enter a valid nunber QOL number");
-		     	thisform.qol_3.focus();
-		     	return false;
-		     }
 		     if(isNaN(vas))
 		     {
 		     	alert("enter a valid VAS number");

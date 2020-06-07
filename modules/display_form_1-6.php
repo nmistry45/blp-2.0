@@ -1,6 +1,10 @@
 <?php
+
 session_start();
+
 include ('logout.php');
+include ('../assets/php/connection.php');
+
 if(!isset($_SESSION['id'])){
   echo"<script>
   alert('Please Login');
@@ -8,18 +12,7 @@ if(!isset($_SESSION['id'])){
   </script>
   ";
 }
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
     
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-	if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    
-
 $id = $_GET['pid'];
 
 $result_form_1_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
@@ -101,9 +94,9 @@ td{
       
       <tr>
         <th colspan="1" id="">Clinic ID:</th>
-        <?php while( $row_form1_clinic_id_date = mysqli_fetch_assoc($result_form_1_clinic_id_date)){ ?>
-        <td colspan="5"><?php echo $row_form1_clinic_id_date['clinic_id']; ?></td>
-        <td colspan="1" style="text-align:left"><strong>Date:</strong><?php echo "  ".$row_form1_clinic_id_date['date']; ?></td>
+        <?php while( $row_form_1_clinic_id_date = mysqli_fetch_assoc($result_form_1_clinic_id_date)){ ?>
+        <td colspan="4"><?php echo $row_form_1_clinic_id_date['clinic_id']; ?></td>
+        <td colspan="3" style="text-align:left"><strong>Date:</strong><?php echo date( "d-m-Y", strtotime( $row_form_1_clinic_id_date['date'] )); ?></td>
       </tr>
         <?php } ?>
 
@@ -146,10 +139,10 @@ td{
       </tr>
 
       <tr>
-      <th colspan="1" id="">Date of starting MDT</th>
+      <th colspan="1" id="">Date of Starting MDT</th>
             <?php while( $row_form_1_dateMDT_dateRFT = mysqli_fetch_assoc($result_form_1_dateMDT_dateRFT)){ ?>
-        <td colspan="5"><?php echo $row_form_1_dateMDT_dateRFT['dateMDT']; ?></td>
-        <td colspan="1" style="text-align:left"><strong>Date of starting RFT:</strong><?php echo "  ".$row_form_1_dateMDT_dateRFT['dateRFT']; ?></td>
+        <td colspan="5"><?php echo date( "d-m-Y", strtotime( $row_form_1_dateMDT_dateRFT['dateMDT'] )); ?></td>
+        <td colspan="1" style="text-align:left"><strong>Date of Starting RFT:</strong><?php echo date( "d-m-Y", strtotime( $row_form_1_dateMDT_dateRFT['dateRFT'] )); ?></td>
       </tr>
       <?php } ?>
 
@@ -157,7 +150,7 @@ td{
       <th colspan="1" id="">Smear at Diagnosis</th>
             <?php while( $row_form_1_SmearDiagnosis_SmearDate = mysqli_fetch_assoc($result_form_1_SmearDiagnosis_SmearDate)){ ?>
         <td colspan="5"><?php echo $row_form_1_SmearDiagnosis_SmearDate['SmearDiagnosis']; ?></td>
-        <td colspan="1" style="text-align:left"><strong>Smear Date:</strong><?php echo "  ".$row_form_1_SmearDiagnosis_SmearDate['SmearDate']; ?></td>
+        <td colspan="1" style="text-align:left"><strong>Smear Date:</strong><?php echo date( "d-m-Y", strtotime( $row_form_1_SmearDiagnosis_SmearDate['SmearDate'] )); ?></td>
       </tr>
       <?php } ?>
 
@@ -191,7 +184,7 @@ td{
       </tr>
 
       <tr>
-        <th colspan="" id="">No contra-indications to steroids / to clofa</th>
+        <th colspan="" id="">Any contra-indications to steroids / to clofa?</th>
         <td colspan="6"><?php echo $row_form_1_mdiag_Age_Weight_Height_BMI_no_contra_indication_steroids_able_to_attend_regularly_pregnant_tuberculosis_diabetes_other_serious_illness_other_illness_desc_inform_consent['no_contra_indication_steroids']; ?></td>
       </tr>
 
@@ -227,7 +220,7 @@ td{
       </tr>
 <?php } ?>
       <tr>
-        <th colspan="" id="">Does patient give informed consent?</th>
+        <th colspan="" id="">Does Patient Give Informed Consent?</th>
         <td colspan="6"><?php echo $row_form_1_mdiag_Age_Weight_Height_BMI_no_contra_indication_steroids_able_to_attend_regularly_pregnant_tuberculosis_diabetes_other_serious_illness_other_illness_desc_inform_consent['inform_consent']; ?></td>
       </tr>
       <?php } ?>
@@ -265,7 +258,7 @@ td{
 
 	      <tr>
 	      	<th colspan="1" id="">Date</th>
-	      	<td colspan="7"><?php echo $row_form2_date['date']; ?></td>
+	      	<td colspan="7"><?php echo date( "d-m-Y", strtotime( $row_form2_date['date'] )); ?></td>
 	      </tr>
 
       <?php } ?>
@@ -278,23 +271,23 @@ td{
 	      </tr>
 
 	      <tr>
-	        <th colspan="1" id="">When first had ENL?</th>
-	        <td colspan="6"><?php echo $row_form2_currentReactionStatus_firstHadEnl_firstPDate['first_had_enl']; ?></td>
+	        <th colspan="1" id="">When First had ENL?</th>
+	        <td colspan="6"><?php echo date( "d-m-Y", strtotime( $row_form2_currentReactionStatus_firstHadEnl_firstPDate['first_had_enl'] )); ?></td>
 	      </tr>
 
 	      <tr>
-	        <th colspan="1" id="">When first had prednisolone for ENL?</th>
-	        <td colspan="6"><?php echo $row_form2_currentReactionStatus_firstHadEnl_firstPDate['firstPDate']; ?></td>
+	        <th colspan="1" id="">When First had Prednisolone for ENL?</th>
+	        <td colspan="6"><?php echo date( "d-m-Y", strtotime( $row_form2_currentReactionStatus_firstHadEnl_firstPDate['firstPDate'] )); ?></td>
 	      </tr>
 
       <?php } ?>
 
        <tr>
-        <th colspan="7" id="" style="color: blue"><u>(if applicable)This episode of ENL:</u></th>
+        <th colspan="7" id="" style="color: blue"><u>(if applicable)This Episode of ENL:</u></th>
       </tr>
 
       <tr>
-        <th colspan="1" id="">When first symptoms(number of days ago)</th>
+        <th colspan="1" id="">When First Symptoms(Number of Days Ago)</th>
         <td colspan="6">
         <?php while($row_form2_firstSym = mysqli_fetch_assoc($result_form2__firstSym)){
          echo $row_form2_firstSym['first_sym']."<br>"; } 
@@ -316,22 +309,22 @@ td{
        <?php while( $row_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal = mysqli_fetch_assoc($result_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal)){ ?>
 
       <tr>
-        <th colspan="1" id="">Date started prednisolone(for this episode of ENL)</th>
-        <td colspan="6"><?php echo $row_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal['date_started_predni']; ?></td>
+        <th colspan="1" id="">Date Started Prednisolone(For this Episode of ENL)</th>
+        <td colspan="6"><?php echo date( "d-m-Y", strtotime( $row_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal['date_started_predni'] )); ?></td>
       </tr>
 
       <tr>
-        <th colspan="1" id="">Current daily dose of prednislone</th>
+        <th colspan="1" id="">Current Daily Dose of Prednislone</th>
         <td colspan="6"><?php echo $row_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal['current_dose_predni']; ?></td>
       </tr>
 
       <tr>
-        <th colspan="1" id="">Current daily dose of clofazmine</th>
+        <th colspan="1" id="">Current Daily Dose of Clofazmine</th>
         <td colspan="6"><?php echo $row_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal['current_dose_clofa']; ?></td>
       </tr>
 
       <tr>
-        <th colspan="1" id="">Current daily dose of Thalidamide</th>
+        <th colspan="1" id="">Current Daily Dose of Thalidamide</th>
         <td colspan="6"><?php echo $row_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal['current_dose_thal']; ?></td>
       </tr>
 
@@ -349,12 +342,12 @@ td{
 	      </tr>
 
 	      <tr>
-	        <th colspan="1" id="">New NFI(i.e within past 6m,not yet treated with steroids)?</th>
+	        <th colspan="1" id="">New NFI (i.e. Within Past 6 months, Not Yet Treated with Steroids)?</th>
 	        <td colspan="6"><?php echo $row_form2_nfa_changeInNfi_changeInNfiDesc_eess2['change_in_nfi']; ?></td>
 	      </tr>
 
 	      <tr>
-	        <th colspan="1" id="">If yes?</th>
+	        <th colspan="1" id="">If Yes?</th>
 	        <td colspan="6"><?php echo $row_form2_nfa_changeInNfi_changeInNfiDesc_eess2['change_in_nfi_desc']; ?></td>
 	      </tr>
 
@@ -372,12 +365,12 @@ td{
       <?php while( $row_form2_qol2Score_vasForPig2 = mysqli_fetch_assoc($result_form2_qol2Score_vasForPig2)){ ?>
 
 	       <tr>
-	        <th colspan="1" id="">QOL(SF36) score</th>
+	        <th colspan="1" id="">QOL (SF36) Score</th>
 	        <td colspan="6"><?php echo $row_form2_qol2Score_vasForPig2['qol_2_score']; ?></td>
 	      </tr>
 
 	      <tr>
-	        <th colspan="1" id="">VAS for pigmentation</th>
+	        <th colspan="1" id="">VAS for Pigmentation</th>
 	        <td colspan="6"><?php echo $row_form2_qol2Score_vasForPig2['vas_for_pig_2']; ?></td>
 	      </tr>
 
@@ -411,7 +404,7 @@ td{
   </tr>
   <tr>
         
-        <td colspan="2" style="text-align:left"><strong>Gastrointestinal bleeding :</strong><?php echo $row_form2_checkBox['Gastrointestinal_bleeding']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Gastrointestinal Bleeding :</strong><?php echo $row_form2_checkBox['Gastrointestinal_bleeding']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Haematemesis:</strong><?php echo "  ".$row_form2_checkBox['Haematemesis']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Extensive Ringworm:</strong><?php echo "  ".$row_form2_checkBox['Extensive_Ringworm']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Acne:</strong><?php echo "  ".$row_form2_checkBox['Acne']; ?></td>
@@ -434,13 +427,13 @@ td{
       	  </tr>
 
 	      <tr>
-	      	<th colspan="1" id="">Prednisolone dosage</th>
+	      	<th colspan="1" id="">Prednisolone Dosage</th>
 	      	<td colspan="5"><?php echo $row_form2_obs_drugDosePredni_drugDurPredni_drugDoseClofa_drugDurClofa['drug_dose_predni']; ?></td>
 	      	<td colspan="1" style="text-align:left"><strong>Duration:</strong><?php echo "  ".$row_form2_obs_drugDosePredni_drugDurPredni_drugDoseClofa_drugDurClofa['drug_dur_predni']; ?></td>
 	      </tr>
 
 	       <tr>
-	      	<th colspan="1" id="">Chlofazimine dosage</th>
+	      	<th colspan="1" id="">Chlofazimine Dosage</th>
 	      	<td colspan="5"><?php echo $row_form2_obs_drugDosePredni_drugDurPredni_drugDoseClofa_drugDurClofa['drug_dose_clofa']; ?></td>
 	      	<td colspan="1" style="text-align:left"><strong>Duration:</strong><?php echo "  ".$row_form2_obs_drugDosePredni_drugDurPredni_drugDoseClofa_drugDurClofa['drug_dur_clofa']; ?></td>
 	      </tr>
@@ -450,7 +443,7 @@ td{
 	 <?php while( $row_form2_others = mysqli_fetch_assoc($result_form2_others)){ ?>
 
 	 	 <tr>
-	      	<th colspan="1" id="">Other drug name</th>
+	      	<th colspan="1" id="">Other Drug Name</th>
 	      	<td colspan="4"><?php echo $row_form2_others['others_drug_name']; ?></td>
 	      	<td colspan="1" style="text-align:left"><strong>Dosage:</strong><?php echo "  ".$row_form2_others['others_drug_dosage']; ?></td>
 	      	<td colspan="1" style="text-align:left"><strong>Duration:</strong><?php echo "  ".$row_form2_others['others_drug_duration']; ?></td>
@@ -462,7 +455,7 @@ td{
 
 	       <tr>
 	        <th colspan="1" id="">Next Assessment Date:</th>
-	        <td colspan="6"><?php echo $row_form2_next_asse_date['next_asse_date']; ?></td>
+	        <td colspan="6"><?php echo date( "d-m-Y", strtotime( $row_form2_next_asse_date['next_asse_date'] )); ?></td>
 	      </tr>
 
 	  <?php } ?>
@@ -478,16 +471,7 @@ td{
 
 <?php
 
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
-
-	if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+include ('../assets/php/connection.php');
 
 $id = $_GET['pid'];
 
@@ -510,25 +494,24 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
    <?php
    $result_form_3_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
    $result_form_3_clinic_id = mysqli_query($conn, "SELECT clinic_id from form1 where pid = $id");
-   $result_form_3_study_no = mysqli_query($conn, "SELECT study_no from form1 where pid = $id");
    $f3id = $row_form3['f3id'];
    $result_form_3_others_drug_name_others_drug_dosage_others_drug_duration = mysqli_query($conn, "SELECT * from form3_others where f3id = $f3id");
    ?>
 
     <tbody>
       <tr>
-        <th colspan="7" id="" style="vertical-align:middle; text-align:center;"><h4><strong>3. Pre-randomisation 3 monthly routine follow up sheet</strong></h4></th>
+        <th colspan="7" id="" style="vertical-align:middle; text-align:center;"><h4><strong>3. Pre-Randomisation 3 Monthly Routine Follow-Up Sheet</strong></h4></th>
         <!-- <td colspan="1" >No Profile Image</td> -->
         <?php ?>
       </tr>
 
       <tr>
-        <th colspan="1" id="">Clinic Id</th>
+        <th colspan="1" id="">Clinic ID:</th>
         <?php while( $row_form3_clinic_id = mysqli_fetch_assoc($result_form_3_clinic_id)){ ?>
-        <td colspan="5"><?php echo $row_form3_clinic_id['clinic_id']; ?></td>
+        <td colspan="4"><?php echo $row_form3_clinic_id['clinic_id']; ?></td>
         <?php } ?>
         <?php  ?>
-        <td colspan="1" style="text-align:left"><strong>Date:</strong><?php echo "  ".$row_form3['date']; ?></td>
+        <td colspan="3" style="text-align:left"><strong>Date:</strong><?php echo date( "d-m-Y", strtotime( $row_form3['date'] )); ?></td>
       </tr>
         <?php  ?>
 
@@ -550,13 +533,6 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
         <td colspan="6"><?php echo $row_form_3_patient_name['patient_name']; ?></td>
       </tr>
     <?php } ?>
-    
-    <?php while ( $row_form_3_study_no = mysqli_fetch_assoc($result_form_3_study_no)){ ?>
-      <tr>
-        <th colspan="1" id="">Study Number</th>
-        <td colspan="6"><?php echo $row_form_3_study_no['study_no']; ?></td>
-      </tr>
-      <?php } ?>
 		
 	<?php  ?>	
       <tr>
@@ -587,12 +563,12 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       </tr>
 
       <tr>
-        <th colspan="" id="">QOL</th>
+        <th colspan="" id="">QOL (SF36) Score</th>
         <td colspan="6"><?php echo $row_form3['qol_3']; ?></td>
       </tr>
 	  
 	  <tr>
-        <th colspan="" id="">VAS</th>
+        <th colspan="" id="">VAS for Pigmentation</th>
         <td colspan="6"><?php echo $row_form3['vas_for_pig_3']; ?></td>
       </tr>
       <?php  ?>
@@ -600,7 +576,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 	<?php  ?>
       <tr>
         <th colspan="1" id="">Randomisation Date</th>
-        <td colspan="6"><?php echo $row_form3['rand_date']; ?></td>
+        <td colspan="6"><?php echo date( "d-m-Y", strtotime( $row_form3['rand_date'] )); ?></td>
       </tr>
 		<?php  ?>
 		
@@ -618,7 +594,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 	  
 	  <?php  ?>
       <tr>
-        <th colspan="">Drug Dosage Clofa</th>
+        <th colspan="">Drug Dosage Clofazimine</th>
             <td colspan="5"><?php echo $row_form3['drug_dose_clofa']; ?></td>
             <td colspan="1" style="text-align:left"><strong>Drug Duration:</strong><?php echo "  ".$row_form3['drug_dura_clofa']; ?></td>
       </tr>
@@ -643,8 +619,8 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 	 <?php  ?>
       <tr>
         <th colspan="">Assessment Date</th>
-            <td colspan="5"><?php echo $row_form3['assessment_date']; ?></td>
-            <td colspan="1" style="text-align:left"><strong>Prednisolone Review:</strong><?php echo "  ".$row_form3['prednisolone_review']; ?></td>
+            <td colspan="5"><?php echo date( "d-m-Y", strtotime( $row_form3['assessment_date'] )); ?></td>
+            <td colspan="1" style="text-align:left"><strong>Prednisolone Review:</strong><?php echo date( "d-m-Y", strtotime( $row_form3['prednisolone_review'] )); ?></td>
       </tr>
       <?php  ?>
 
@@ -668,7 +644,6 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
   <?php 
     $result_form_4_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
     $result_form_4_clinic_id = mysqli_query($conn, "SELECT clinic_id from form1 where pid = $id");
-    $result_form_4_study_no = mysqli_query($conn, "SELECT study_no from form1 where pid = $id");
     $f4id = $row_form4['f4id'];
     $result_form_4_checklist_predni = mysqli_query($conn, "SELECT * from form4_checkbox where f4id = $f4id");
     $result_form_4_checklist_clofa = mysqli_query($conn, "SELECT * from form4_checkbox2 where f4id = $f4id");
@@ -676,18 +651,18 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 
     <tbody>
       <tr>
-        <th colspan="7" id="" style="vertical-align:middle; text-align:center;"><h4><strong>4. Post-randomisation 3 monthly routine follow up sheet (while no ENL treatment)</strong></h4></th>
+        <th colspan="7" id="" style="vertical-align:middle; text-align:center;"><h4><strong>4. Post-Randomisation 3 Monthly Routine Follow-Up Sheet</strong></h4></th>
         <!-- <td colspan="1" >No Profile Image</td> -->
         <?php ?>
       </tr>
 
       <tr>
-        <th colspan="1" id="">Clinic Id</th>
+        <th colspan="1" id="">Clinic ID:</th>
         <?php while( $row_form_4_clinic_id = mysqli_fetch_assoc($result_form_4_clinic_id)){ ?>
-        <td colspan="5"><?php echo $row_form_4_clinic_id['clinic_id']; ?></td>
+        <td colspan="4"><?php echo $row_form_4_clinic_id['clinic_id']; ?></td>
         <?php } ?>
         <?php  ?>
-        <td colspan="1" style="text-align:left"><strong>Date:</strong><?php echo "  ".$row_form4['formDate']; ?></td>
+        <td colspan="3" style="text-align:left"><strong>Date:</strong><?php echo date( "d-m-Y", strtotime( $row_form4['formDate'] )); ?></td>
       </tr>
         <?php  ?>
 
@@ -700,13 +675,6 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       <tr>
         <th colspan="1" id="">Patient Name</th>
         <td colspan="6"><?php echo $row_form_4_patient_name['patient_name']; ?></td>
-      </tr>
-      <?php } ?>
-
-         <?php while ( $row_form_4_study_no = mysqli_fetch_assoc($result_form_4_study_no)){ ?>
-      <tr>
-        <th colspan="1" id="">Study Number</th>
-        <td colspan="6"><?php echo $row_form_4_study_no['study_no']; ?></td>
       </tr>
       <?php } ?>
 	  
@@ -723,7 +691,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       <?php  ?>
 
 	   <tr>
-        <th colspan="7" id="" style="color:blue;"><u>Physical Examination</u></th>
+        <th colspan="7" id="" style="color:blue;"><u>Physical Examination:</u></th>
         <?php ?>
       </tr>
 
@@ -740,13 +708,13 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 
       <?php  ?>
 	   <tr>
-        <th colspan="7" id="" style="color:blue;"><u>Patient experience assessment</u></th>
+        <th colspan="7" id="" style="color:blue;"><u>Patient Experience Assessment:</u></th>
         <?php ?>
 	  </tr>
       
 	  <?php  ?>
       <tr>
-        <th colspan="1" id="">QOL Score</th>
+        <th colspan="1" id="">QOL (SF36) Score</th>
         <td colspan="6"><?php echo $row_form4['qol_4']; ?></td>
       </tr>
 
@@ -757,7 +725,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       <?php  ?>
 	  
       <tr>
-        <th colspan="7" id="" style="color: blue"><u>Checklist for adverse effects of prednisolone :</u></th>
+        <th colspan="7" id="" style="color: blue"><u>Checklist for Adverse Effects of Prednisolone :</u></th>
       </tr>
 	  
       <?php while ($row_form_4_checklist_predni = mysqli_fetch_assoc($result_form_4_checklist_predni)){ ?>
@@ -784,7 +752,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
   </tr>
   <tr>
         
-        <td colspan="2" style="text-align:left"><strong>Gastrointestinal bleeding :</strong><?php echo $row_form_4_checklist_predni['Gastrointestinal_bleeding']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Gastrointestinal Bleeding :</strong><?php echo $row_form_4_checklist_predni['Gastrointestinal_bleeding']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Haematemesis:</strong><?php echo "  ".$row_form_4_checklist_predni['Haematemesis']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Extensive Ringworm:</strong><?php echo "  ".$row_form_4_checklist_predni['Extensive_Ringworm']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Acne:</strong><?php echo "  ".$row_form_4_checklist_predni['Acne']; ?></td>
@@ -792,7 +760,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
     <?php } ?>
 
     <tr>
-        <th colspan="7" id="" style="color: blue"><u>Checklist for adverse effects of Clofazimine :</u></th>
+        <th colspan="7" id="" style="color: blue"><u>Checklist for Adverse Effects of Clofazimine :</u></th>
       </tr>
 
     <?php while ($row_form_4_checklist_clofa = mysqli_fetch_assoc($result_form_4_checklist_clofa)){ ?>
@@ -805,15 +773,15 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       </tr>
       <tr>
         
-        <td colspan="2" style="text-align:left"><strong>Diarrhoea,Acute: </strong><?php echo $row_form_4_checklist_clofa['Diarrhoea,Acute']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Diarrhoea, Acute: </strong><?php echo $row_form_4_checklist_clofa['Diarrhoea,Acute']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Ichthyosis: </strong><?php echo "  ".$row_form_4_checklist_clofa['Ichthyosis']; ?></td>
-        <td colspan="2" style="text-align:left"><strong>Weight loss: </strong><?php echo "  ".$row_form_4_checklist_clofa['Weight_loss']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Weight Loss: </strong><?php echo "  ".$row_form_4_checklist_clofa['Weight_loss']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Conjuctiva: </strong><?php echo "  ".$row_form_4_checklist_clofa['Conjuctiva']; ?></td>
       </tr>
       <tr>
         
         <td colspan="2" style="text-align:left"><strong>Persistent Indigestion: </strong><?php echo $row_form_4_checklist_clofa['Persistent_Indigestion']; ?></td>
-        <td colspan="2" style="text-align:left"><strong>Diarrhoea,Chronic: </strong><?php echo "  ".$row_form_4_checklist_clofa['Diarrhoea,Chronic']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Diarrhoea, Chronic: </strong><?php echo "  ".$row_form_4_checklist_clofa['Diarrhoea,Chronic']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Chronic Dysentery: </strong><?php echo "  ".$row_form_4_checklist_clofa['Chronic_Dysentery']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Skin Discolouration: </strong><?php echo "  ".$row_form_4_checklist_clofa['Skin_Discolouration']; ?></td>
   </tr>
@@ -822,39 +790,39 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 		
 	  <?php  ?>
       <tr>
-        <th colspan="1" id="">Time since onset of this episode</th>
+        <th colspan="1" id="">Time Since Onset of this Episode</th>
         <td colspan="6"><?php echo $row_form4['enl_present_time_since']; ?></td>
       </tr>
       <?php  ?>
       
 	  <?php  ?>
       <tr>
-        <th colspan="1" id="">Time since last received prednisolone</th>
+        <th colspan="1" id="">Time Since Last Received Prednisolone</th>
         <td colspan="6"><?php echo $row_form4['time_since_last_received_prednisolone']; ?></td>
       </tr>
       <?php  ?>
 	  
 	  <?php  ?>
       <tr>
-        <th colspan="1" id="">If recurrent ENL ,start prednisolone</th>
+        <th colspan="1" id="">If Recurrent ENL, Start Prednisolone</th>
         <td colspan="6"><?php echo $row_form4['recurrent_enl_start_predni']; ?></td>
       </tr>
       <?php  ?>
 	  
 	  <?php  ?>
       <tr>
-        <th colspan="1" id="">Advised admission</th>
+        <th colspan="1" id="">Advised Admission</th>
         <td colspan="6"><?php echo $row_form4['advised_admission']; ?></td>
       </tr>
 
       <tr>
-        <th colspan="" id="">Date for next routine assessment</th>
-        <td colspan="6"><?php echo $row_form4['nextDate']; ?></td>
+        <th colspan="" id="">Date for Next Routine Assessment</th>
+        <td colspan="6"><?php echo date( "d-m-Y", strtotime( $row_form4['nextDate'] )); ?></td>
       </tr>
 	      
 		  <tr>
-        <th colspan="" id="">Date of Prednisolone review</th>
-        <td colspan="6"><?php echo $row_form4['nextPDate']; ?></td>
+        <th colspan="" id="">Date of Prednisolone Review</th>
+        <td colspan="6"><?php echo date( "d-m-Y", strtotime( $row_form4['nextPDate'] )); ?></td>
       </tr>
       <?php  ?>
      
@@ -878,7 +846,6 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
   <?php 
     $result_form5_cid = mysqli_query($conn, "SELECT clinic_id from form1 where pid = $id");
     $result_form5_ptn = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
-    $result_form5_sn = mysqli_query($conn, "SELECT study_no from form1 where pid = $id");
     $f5id = $row_form5['f5id'];
     $result_form5_ad_pred  = mysqli_query($conn, "SELECT * from form5_checkbox where f5id = $f5id");
     $result_form5_ad_clofa  = mysqli_query($conn, "SELECT * from form5_checkbox2 where f5id = $f5id");
@@ -892,12 +859,12 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       </tr>
 
       <tr>
-        <th colspan="1" id="">Clinic Id</th>
+        <th colspan="1" id="">Clinic ID:</th>
         <?php while( $row_form5_cid = mysqli_fetch_assoc($result_form5_cid)){ ?>
-        <td colspan="5"><?php echo $row_form5_cid['clinic_id']; ?></td>
+        <td colspan="4"><?php echo $row_form5_cid['clinic_id']; ?></td>
         <?php } ?>
         <?php  ?>
-        <td colspan="1" style="text-align:left"><strong>Date:</strong><?php echo "  ".$row_form5['date']; ?></td>
+        <td colspan="3" style="text-align:left"><strong>Date:</strong><?php echo date( "d-m-Y", strtotime( $row_form5['date'] )); ?></td>
       </tr>
         <?php  ?>
 
@@ -909,15 +876,13 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       <?php while ( $row_form5_ptn = mysqli_fetch_assoc($result_form5_ptn)){ ?>
       <tr>
         <th colspan="">Patient Name</th>
-            <td colspan="2"><?php echo $row_form5_ptn['patient_name']; ?></td>
+            <td colspan="4"><?php echo $row_form5_ptn['patient_name']; ?></td>
             <?php } ?>
             <?php  ?>
-            <td colspan="2" style="text-align:left"><strong>Staff Name:</strong><?php echo "  ".$row_form5['staff_name']; ?></td>
+            <td colspan="3" style="text-align:left"><strong>Staff Name:</strong><?php echo "  ".$row_form5['staff_name']; ?></td>
             <?php  ?>
-            <?php while ( $row_form5_sn = mysqli_fetch_assoc($result_form5_sn)){ ?>
-            <td colspan="2" style="text-align:left"><strong>Study No:</strong><?php echo "  ".$row_form5_sn['study_no']; ?></td>
       </tr>
-      <?php } ?>
+      <?php  ?>
 
       <?php  ?>
       <tr>
@@ -937,7 +902,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
         <?php  ?>
 
       <tr>
-      <th colspan="7" id="" style="color:blue;"><u>Physical assessment:</u></th>
+      <th colspan="7" id="" style="color:blue;"><u>Physical Assessment:</u></th>
       </tr>
         <tr>
             <?php  ?>
@@ -955,7 +920,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       <?php  ?>
 
       <tr>
-        <th colspan="7" id="" style="color: blue"><u>Checklist for adverse effects of prednisolone :</u></th>
+        <th colspan="7" id="" style="color: blue"><u>Checklist for Adverse Effects of Prednisolone :</u></th>
       </tr>
 	  
       <?php while ($row_form5_ad_pred = mysqli_fetch_assoc($result_form5_ad_pred)){ ?>
@@ -982,7 +947,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
   </tr>
   <tr>
         
-        <td colspan="2" style="text-align:left"><strong>Gastrointestinal bleeding :</strong><?php echo $row_form5_ad_pred['Gastrointestinal_bleeding']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Gastrointestinal Bleeding :</strong><?php echo $row_form5_ad_pred['Gastrointestinal_bleeding']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Haematemesis:</strong><?php echo "  ".$row_form5_ad_pred['Haematemesis']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Extensive Ringworm:</strong><?php echo "  ".$row_form5_ad_pred['Extensive_Ringworm']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Acne:</strong><?php echo "  ".$row_form5_ad_pred['Acne']; ?></td>
@@ -990,7 +955,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
     <?php } ?>
 
     <tr>
-        <th colspan="7" id="" style="color: blue"><u>Checklist for adverse effects of Clofazimine :</u></th>
+        <th colspan="7" id="" style="color: blue"><u>Checklist for Adverse Effects of Clofazimine :</u></th>
       </tr>
 
     <?php while ($row_form5_ad_clofa = mysqli_fetch_assoc($result_form5_ad_clofa)){ ?>
@@ -1003,15 +968,15 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       </tr>
       <tr>
         
-        <td colspan="2" style="text-align:left"><strong>Diarrhoea,Acute: </strong><?php echo $row_form5_ad_clofa['Diarrhoea,Acute']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Diarrhoea, Acute: </strong><?php echo $row_form5_ad_clofa['Diarrhoea,Acute']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Ichthyosis: </strong><?php echo "  ".$row_form5_ad_clofa['Ichthyosis']; ?></td>
-        <td colspan="2" style="text-align:left"><strong>Weight loss: </strong><?php echo "  ".$row_form5_ad_clofa['Weight_loss']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Weight Loss: </strong><?php echo "  ".$row_form5_ad_clofa['Weight_loss']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Conjuctiva: </strong><?php echo "  ".$row_form5_ad_clofa['Conjuctiva']; ?></td>
       </tr>
       <tr>
         
         <td colspan="2" style="text-align:left"><strong>Persistent Indigestion: </strong><?php echo $row_form5_ad_clofa['Persistent_Indigestion']; ?></td>
-        <td colspan="2" style="text-align:left"><strong>Diarrhoea,Chronic: </strong><?php echo "  ".$row_form5_ad_clofa['Diarrhoea,Chronic']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Diarrhoea, Chronic: </strong><?php echo "  ".$row_form5_ad_clofa['Diarrhoea,Chronic']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Chronic Dysentery: </strong><?php echo "  ".$row_form5_ad_clofa['Chronic_Dysentery']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Skin Discolouration: </strong><?php echo "  ".$row_form5_ad_clofa['Skin_Discolouration']; ?></td>
   </tr>
@@ -1019,10 +984,10 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
     <?php } ?>
 
       <tr>
-      <th colspan="" id="">Is Patient Worst and Time to began Flare</th>
+      <th colspan="" id="">Is Patient Worst and Time to Began Flare</th>
             <?php  ?>
         <td colspan="3"><strong>If Patient Worst:</strong><?php echo " ".$row_form5['patient_worse']; ?></td>
-        <td colspan="3"><strong>Time since flare began:</strong><?php echo " ".$row_form5['time_since_flare_began']; ?></td>
+        <td colspan="3"><strong>Time Since Flare Began:</strong><?php echo " ".$row_form5['time_since_flare_began']; ?></td>
       </tr>
       <?php  ?>
 
@@ -1030,7 +995,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       <th colspan="7" id="" style="color:blue;"><u>Treatment Prescribed:</u></th>
       </tr>
       <tr>
-      <th colspan="" id="">Continue standard steroid course</th>
+      <th colspan="" id="">Continue Standard Steroid Course</th>
             <?php  ?>
         <td colspan="3"><strong>Dose:</strong><?php echo " ".$row_form5['dose_std_course']; ?></td>
         <td colspan="3"><strong>Duration:</strong><?php echo " ".$row_form5['dura_std_course']; ?></td>
@@ -1046,10 +1011,10 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       <?php  ?>
 
       <tr>
-      <th colspan="" id="">Advised admission</th>
+      <th colspan="" id="">Advised Admission</th>
             <?php  ?>
-        <td colspan="3"><strong>Advised Admission:</strong><?php echo " ".$row_form5['advised_admission']; ?></td>
-        <td colspan="3"><strong>Date of Next Assessment:</strong><?php echo " ".$row_form5['date_of_next_assessment_5']; ?></td>
+        <td colspan="3"><strong>Advised Admission Description:</strong><?php echo " ".$row_form5['advised_admission']; ?></td>
+        <td colspan="3"><strong>Date of Next Assessment:</strong><?php echo date( "d-m-Y", strtotime( $row_form5['date_of_next_assessment_5'] )); ?></td>
       </tr>
       <?php  ?>
       
@@ -1073,7 +1038,6 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
   <?php 
     $result_form_6_clinic_id = mysqli_query($conn, "SELECT clinic_id from form1 where pid = $id");
     $result_form_6_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
-    $result_form_6_study_no = mysqli_query($conn, "SELECT study_no from form1 where pid = $id");
     $f6id = $row_form6['f6id'];
     $result_form6_ad_pred  = mysqli_query($conn, "SELECT * from form6_checkbox where f6id = $f6id");
     $result_form6_ad_clofa  = mysqli_query($conn, "SELECT * from form6_checkbox2 where f6id = $f6id");
@@ -1082,18 +1046,18 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 
     <tbody>
       <tr>
-        <th colspan="7" id="" style="vertical-align:middle; text-align:center;"><h4><strong>6. Final follow up sheet at end of 24m from randomization (or at withdrawal)</strong></h4></th>
+        <th colspan="7" id="" style="vertical-align:middle; text-align:center;"><h4><strong>6. Final Follow-Up Sheet at End of 24 months from Randomization (or at Withdrawal)</strong></h4></th>
         <!-- <td colspan="1" >No Profile Image</td> -->
         <?php ?>
       </tr>
       
       <tr>
-        <th colspan="1" id="">Clinic Id</th>
+        <th colspan="1" id="">Clinic ID:</th>
         <?php while( $row_form_6_clinic_id = mysqli_fetch_assoc($result_form_6_clinic_id)){ ?>
-        <td colspan="5"><?php echo $row_form_6_clinic_id['clinic_id']; ?></td>
+        <td colspan="4"><?php echo $row_form_6_clinic_id['clinic_id']; ?></td>
         <?php } ?>
         <?php  ?>
-        <td colspan="1" style="text-align:left"><strong>Date:</strong><?php echo "  ".$row_form6['date']; ?></td>
+        <td colspan="3" style="text-align:left"><strong>Date:</strong><?php echo date( "d-m-Y", strtotime( $row_form6['date'] )); ?></td>
       </tr>
         <?php  ?>
 
@@ -1111,11 +1075,9 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 	 
 		<tr>
         <?php  ?>
-        <td colspan=""><strong>Staff Name:</strong><?php echo " " .$row_form6['staff_name']; ?></td>
+        <th colspan="1" id="">Staff Name</th>
+        <td colspan="6"><?php echo $row_form6['staff_name']; ?></td>
         <?php  ?>
-        <?php while( $row_form_6_study_no = mysqli_fetch_assoc($result_form_6_study_no)){ ?>
-        <td colspan="7" style="text-align:left"><strong>Study No:</strong><?php echo "  ".$row_form_6_study_no['study_no']; ?></td>
-      <?php } ?>
     </tr>
 
 		<?php  ?>
@@ -1140,7 +1102,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       </tr>
 
       <tr>
-        <th colspan="" id="">QOL Score</th>
+        <th colspan="" id="">QOL (SF36) Score</th>
         <td colspan="6"><?php echo $row_form6['qol']; ?></td>
       </tr>
 	  
@@ -1158,7 +1120,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       <?php  ?>
 		
 		<tr>
-        <th colspan="7" id="" style="color: blue"><u>Checklist for adverse effects of prednisolone :</u></th>
+        <th colspan="7" id="" style="color: blue"><u>Checklist for Adverse Effects of Prednisolone :</u></th>
       </tr>
 	  
       <?php while ($row_form6_ad_pred = mysqli_fetch_assoc($result_form6_ad_pred)){ ?>
@@ -1185,7 +1147,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
   </tr>
   <tr>
         
-        <td colspan="2" style="text-align:left"><strong>Gastrointestinal bleeding :</strong><?php echo $row_form6_ad_pred['Gastrointestinal_bleeding']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Gastrointestinal Bleeding :</strong><?php echo $row_form6_ad_pred['Gastrointestinal_bleeding']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Haematemesis:</strong><?php echo "  ".$row_form6_ad_pred['Haematemesis']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Extensive Ringworm:</strong><?php echo "  ".$row_form6_ad_pred['Extensive_Ringworm']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Acne:</strong><?php echo "  ".$row_form6_ad_pred['Acne']; ?></td>
@@ -1193,7 +1155,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
     <?php } ?>
 
     <tr>
-        <th colspan="7" id="" style="color: blue"><u>Checklist for adverse effects of Clofazimine :</u></th>
+        <th colspan="7" id="" style="color: blue"><u>Checklist for Adverse Effects of Clofazimine :</u></th>
       </tr>
 
     <?php while ($row_form6_ad_clofa = mysqli_fetch_assoc($result_form6_ad_clofa)){ ?>
@@ -1206,15 +1168,15 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       </tr>
       <tr>
         
-        <td colspan="2" style="text-align:left"><strong>Diarrhoea,Acute: </strong><?php echo $row_form6_ad_clofa['Diarrhoea,Acute']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Diarrhoea, Acute: </strong><?php echo $row_form6_ad_clofa['Diarrhoea,Acute']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Ichthyosis: </strong><?php echo "  ".$row_form6_ad_clofa['Ichthyosis']; ?></td>
-        <td colspan="2" style="text-align:left"><strong>Weight loss: </strong><?php echo "  ".$row_form6_ad_clofa['Weight_loss']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Weight Loss: </strong><?php echo "  ".$row_form6_ad_clofa['Weight_loss']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Conjuctiva: </strong><?php echo "  ".$row_form6_ad_clofa['Conjuctiva']; ?></td>
       </tr>
       <tr>
         
         <td colspan="2" style="text-align:left"><strong>Persistent Indigestion: </strong><?php echo $row_form6_ad_clofa['Persistent_Indigestion']; ?></td>
-        <td colspan="2" style="text-align:left"><strong>Diarrhoea,Chronic: </strong><?php echo "  ".$row_form6_ad_clofa['Diarrhoea,Chronic']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Diarrhoea, Chronic: </strong><?php echo "  ".$row_form6_ad_clofa['Diarrhoea,Chronic']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Chronic Dysentery: </strong><?php echo "  ".$row_form6_ad_clofa['Chronic_Dysentery']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Skin Discolouration: </strong><?php echo "  ".$row_form6_ad_clofa['Skin_Discolouration']; ?></td>
   </tr>
@@ -1226,7 +1188,7 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
         <th colspan="7" id="" style="color: blue;"><u>Summary of Observations:</u></th>
       </tr>
 	  <tr>
-        <th colspan="1" id="">Number of weeks extra vitamins received</th>
+        <th colspan="1" id="">Number of Weeks Extra Vitamins Received</th>
         <td colspan="6"><?php echo $row_form6['no_weeks_extra_clofazimine']; ?></td>
       </tr>
 
@@ -1241,52 +1203,52 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
       </tr>
 	  
 	  <tr>
-        <th colspan="" id="">Flare of ENL while on steroid</th>
+        <th colspan="" id="">Flare of ENL while on Steroid</th>
         <td colspan="6"><?php echo $row_form6['flare_of_enl']; ?></td>
       </tr>
       <?php  ?>
 
 	<tr>
         <?php  ?>
-        <td colspan=""><strong>First flare after how long: </strong><?php echo $row_form6['if_flare_how_long']; ?></td>
-        <td colspan="7" style="text-align:left"><strong>EESS at flare:</strong><?php echo "  ".$row_form6['eess_at_flare']; ?></td>
+        <td colspan=""><strong>First Flare after how Long: </strong><?php echo $row_form6['if_flare_how_long']; ?></td>
+        <td colspan="7" style="text-align:left"><strong>EESS at Flare:</strong><?php echo "  ".$row_form6['eess_at_flare']; ?></td>
       </tr>
       <?php  ?>
 	<tr>
       
         <?php  ?>
-        <td colspan=""><strong>Recurrent ENL more than 27 days after end of steroid course:</strong><?php echo"        ".$row_form6['recurrent_enl_steroids']; ?></td>
-        <td colspan="7" style="text-align:left"><strong>Chronic ENL continued after randomization:</strong><?php echo "  ".$row_form6['recurrent_enl_steroids']; ?></td>
+        <td colspan=""><strong>Recurrent ENL More than 27 days after End of Steroid Course:</strong><?php echo"        ".$row_form6['recurrent_enl_steroids']; ?></td>
+        <td colspan="7" style="text-align:left"><strong>Chronic ENL Continued after Randomization:</strong><?php echo "  ".$row_form6['recurrent_enl_steroids']; ?></td>
       
       <?php  ?></tr>
 		
 		<?php  ?>
       <tr>
         <th colspan="1" id="">Total Steriod Consumed</th>
-        <td colspan="6"><?php echo $row_form6['total_steroids_consumed']; ?></td>
+        <td colspan="6"><?php echo $row_form6['total_steroids_consumed']; ?> grams</td>
       </tr>
       <?php  ?>
 
 		<?php  ?>
       <tr>
-        <th colspan="1" id="">Change in NFA Baseline to end</th>
+        <th colspan="1" id="">Change in NFA Baseline to End</th>
         <td colspan="6"><?php echo $row_form6['change_in_nfa']; ?></td>
       </tr>
 
       <tr>
-        <th colspan="" id="">If yes?</th>
+        <th colspan="" id="">If Yes?</th>
         <td colspan="6"><?php echo $row_form6['change_in_nfa_desc']; ?></td>
       </tr>
 
       <tr>
-        <th colspan="" id="">Change in QOL Score baseline to end</th>
+        <th colspan="" id="">Change in QOL Score Baseline to End</th>
         <td colspan="6"><?php echo $row_form6['change_in_qol']; ?></td>
       </tr>
 	  
       <?php  ?>
 
 		<tr>
-        <th colspan="1" id="">Adverse Effects of drugs</th>
+        <th colspan="1" id="">Adverse Effects of Drugs</th>
         <?php  ?>
         <td colspan="5"><?php echo $row_form6['adverse_effect_of_drug']; ?></td>
         <td colspan="1" style="text-align:left"><strong>Adverse Effect:</strong><?php echo "  ".$row_form6['drug_desc']; ?></td>
@@ -1294,27 +1256,27 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
         <?php  ?>
 
 		<tr>
-        <th colspan="7" id="" style="color: blue"><u>Reason of withdrawal before 24months observation:</u></th>
+        <th colspan="7" id="" style="color: blue"><u>Reason of Withdrawal Before 24 months Observation:</u></th>
       </tr>
 
     <?php while ($row_form6_with = mysqli_fetch_assoc($result_form6_with)){ ?>
       <tr>
         
             <td colspan="2" style="text-align:left"><strong>Protocol Violation: </strong><?php echo $row_form6_with['Protocol_Violation']; ?></td>
-            <td colspan="3" style="text-align:left"><strong>Patient refused followup: </strong><?php echo "  ".$row_form6_with['Patient_refused_followup']; ?></td>
-            <td colspan="3" style="text-align:left"><strong>Uncontrolled reaction: </strong><?php echo "  ".$row_form6_with['Uncontrolled_reaction']; ?></td>
+            <td colspan="3" style="text-align:left"><strong>Patient Refused Followup: </strong><?php echo "  ".$row_form6_with['Patient_refused_followup']; ?></td>
+            <td colspan="3" style="text-align:left"><strong>Uncontrolled Reaction: </strong><?php echo "  ".$row_form6_with['Uncontrolled_reaction']; ?></td>
             
       </tr>
       <tr>
         
-        <td colspan="2" style="text-align:left"><strong>Severe adverse effects: </strong><?php echo $row_form6_with['Severe_adverse_effects']; ?></td>
+        <td colspan="2" style="text-align:left"><strong>Severe Adverse Effects: </strong><?php echo $row_form6_with['Severe_adverse_effects']; ?></td>
         <td colspan="3" style="text-align:left"><strong>Died: </strong><?php echo "  ".$row_form6_with['Died']; ?></td>
         <td colspan="2" style="text-align:left"><strong>Others: </strong><?php echo "  ".$row_form6_with['Others']; ?></td>
         
     <?php } ?>
 		
 		<tr>
-      <th colspan="" id="">Other Description</th>
+      <th colspan="" id="">Others Description</th>
             <?php  ?>
         <td colspan="6"><?php echo $row_form6['others']; ?></td>
       </tr>
@@ -1333,10 +1295,10 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
 
 <div class="btn btn-light-blue" style="display: flex; justify-content:space-around; padding-left:115px;">
   <a href="form_3.php?pid=<?php echo $id; ?>" target="_blank" class="">
-    <button type="button" class="btn btn-primary btn-lg btn-block">3. Pre-randomisation 3 monthly routine follow up sheet</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block">3. Pre-Randomisation 3 Monthly Routine Follow-Up Sheet</button>
   </a><br>
   <a href="form_4.php?pid=<?php echo $id; ?>" target="_blank" class="">
-    <button type="button" class="btn btn-primary btn-lg btn-block">4. Post-randomisation 3 monthly routine follow up sheet</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block">4. Post-Randomisation 3 Monthly Routine Follow-Up Sheet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
   </a><br>
 </div>
 
@@ -1344,10 +1306,10 @@ $form_6 = mysqli_query($conn, "Select * from form6 where pid=$id");
   <a href="form_5.php?pid=<?php echo $id; ?>" target="_blank" class="">
     <button type="button" class="btn btn-primary btn-lg btn-block">5. Clinical Record Sheet&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
   </a><br>
   <a href="form_6.php?pid=<?php echo $id; ?>" target="_blank" class="">
-    <button type="button" class="btn btn-primary btn-lg btn-block" >6. Final follow up sheet at end of 24m of randomization&nbsp;&nbsp;&nbsp;</button>
+    <button type="button" class="btn btn-primary btn-lg btn-block" >6. Final Follow-Up Sheet at End of 24 months of Randomization&nbsp;&nbsp;&nbsp;</button>
   </a><br>
 </div>
 

@@ -1,6 +1,9 @@
 <?php
+
 session_start();
+
 include ('logout.php');
+
 if(!isset($_SESSION['id'])){
     echo"<script>
     alert('Please Login');
@@ -8,6 +11,7 @@ if(!isset($_SESSION['id'])){
     </script>
     ";
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -75,10 +79,10 @@ if(!isset($_SESSION['id'])){
                             <label for="patient_name" class="form-label">Patient Name</label>
                             <input type="text" style="width: 259px" name="patient_name" id="patient_name" placeholder="" />
 							
-							<label for="clinic_id" class="form-label">Clinic id</label>
+							<label for="clinic_id" class="form-label">Clinic ID:</label>
                             <input type="text" style="width: 259px" name="clinic_id" id="clinic_id" placeholder="" />
                             
-							<label for="study_no" class="form-label">Study number</label>
+							<label for="study_no" class="form-label">Study Number</label>
                             <input type="text" style="width: 259px" name="study_no" id="study_no" placeholder="" />
 		   </div>
 			
@@ -117,18 +121,18 @@ if(!isset($_SESSION['id'])){
                         </div>
 
                         <div class="form-group">
-                            <label for="clinic_regno" class="form-label">Clinic Registration No</label>
+                            <label for="clinic_regno" class="form-label">Clinic Registration No:</label>
                                 <input type="text" name="clinic_regno" id="clinic_regno" placeholder="Registration No"/>
                         </div>
 
                         <div class="form-textarea">
                             <label for="address" class="form-label">Address</label>
-                            <textarea name="address" id="address" placeholder="address" ></textarea>
+                            <textarea name="address" id="address" placeholder="Address" ></textarea>
                         </div>
 
                         <div class="form-row">
                            <div class="form-group">
-                                <label for="contact_no" class="form-label">Contact No.</label>
+                                <label for="contact_no" class="form-label">Contact No:</label>
                                 <table style="padding-left: 41px ;" id="tb7" class="form-label">
                                     <tbody>
                                         <tr class="tr-header">
@@ -144,11 +148,9 @@ if(!isset($_SESSION['id'])){
                   
                         <div class="form-row" style="padding-left: 25px;">
                             <div class="form-group" style="padding-left: 25px;">
-                                <label for="dateMDT" class="form-label">Date of starting MDT</label>
+                                <label for="dateMDT" class="form-label" style="padding-left: 55px">Date of Starting MDT</label>
                                 <input style="margin-left: 0px;" type="date" name="dateMDT" id="dateMDT"/>
-                            </div>
-                            <div class="form-group" style="padding-left: 275px;">
-                                <label for="dateRFT" class="form-label">Date of RFT</label>
+                                <label for="dateRFT" class="form-label" style="padding-left: 110px">Date of RFT</label>
                                 <input style="margin-left: 0px;" type="date" name="dateRFT" id="dateRFT"/>
                             </div>
                         </div>
@@ -228,7 +230,7 @@ if(!isset($_SESSION['id'])){
 
                             <div class="form-group">
                                 <label for="Height" class="form-label">Height?</label>
-                                <input type="text" name="Height" id="Height" onchange="calculateBMI()" placeholder="Height in meters square" />
+                                <input type="text" name="Height" id="Height" onchange="calculateBMI()" placeholder="Height in meters" />
                             </div>
 
                             <div class="form-group">
@@ -237,7 +239,7 @@ if(!isset($_SESSION['id'])){
                             </div>
 							
                             <div class="form-radio">
-                                <label for="no_contra_indication_steroids" class="form-label">No contra-indications to steroids / to clofa</label>
+                                <label for="no_contra_indication_steroids" class="form-label">Any contra-indications to steroids / to clofa?</label>
                                 <div class="form-radio-item">
                                     <input type="radio" name="no_contra_indication_steroids" value="yes" id="contrayes" />
                                     <label for="contrayes" style="width:80px;">Yes</label>
@@ -248,7 +250,7 @@ if(!isset($_SESSION['id'])){
                             </div>
 
                             <div class="form-radio">
-                                <label for="able_to_attend_regularly" class="form-label">Able to attend regularly?</label>
+                                <label for="able_to_attend_regularly" class="form-label">Able to Attend Regularly?</label>
                                 <div class="form-radio-item">
                                     <input type="radio" name="able_to_attend_regularly" value="yes" id="attendyes" />
                                     <label for="attendyes" style="width:80px;">Yes</label>
@@ -307,7 +309,7 @@ if(!isset($_SESSION['id'])){
                                  </div>
 				
                             <div class="form-radio">
-                                <label for="inform_consent" class="form-label">Does patient give informed consent?</label>
+                                <label for="inform_consent" class="form-label">Does Patient Give Informed Consent?</label>
                                 <div class="form-radio-item">
                                     <input type="radio" name="inform_consent" value="yes" id="consyes" />
                                     <label for="consyes" style="width:80px;">Yes</label>
@@ -554,46 +556,57 @@ $("#other_serious_illness").trigger("change");
     <script type="text/javascript">
    function MdtStartDate(thisform)
    {   
+        var dateForm = thisform.date.value;
         var dateMDT = thisform.dateMDT.value;
         var dateRFT = thisform.dateRFT.value;
         var Age     = thisform.Age.value;
         var Weight  = thisform.Weight.value;
         var Height  = thisform.Height.value;
-        var md = new Date();
-        var tdate = new Date();
-        var rftd =  new Date();
-        md  = new Date(dateMDT).getFullYear();
-        td  = new Date(tdate).getFullYear();
-        rftm = new Date(dateRFT).getMonth();
-        rfty = new Date(dateRFT).getFullYear();
 
-        if(td-md == 0 || td-md < 0)
+        var q = new Date(dateForm);
+        var z = new Date(dateMDT);
+        var x = new Date(dateRFT);
+
+        var dtm = q.getTime() - z.getTime();
+        var ddm = dtm/(1000*3600*24);
+        if(ddm<731)
         {
-            alert("date should be 24 months less than today");
+            alert("Date Should Be Less than 24 months");
             thisform.dateMDT.focus();
             return false;
         }
-        if(rfty-md <= 0 || rftm > 7)
+
+        var dtr = x.getTime() - z.getTime();
+        var ddr = dtr/(1000*3600*24);
+        if(ddr<365)
         {
-            alert("date should be 12-18 months after starting date of MDT");
+            alert("Date Should Be Greater than 12 months");
             thisform.dateRFT.focus();
             return false;
         }
+                
+        if(ddr>548)
+        {
+            alert("Date Should Be Less than 18 months");
+            thisform.dateRFT.focus();
+            return false;
+        }
+
         if(Age < 18)
         {
-            alert("Age should be greater than 18 years");
+            alert("Age Should Be Greater than 18 years");
             thisform.Age.focus();
             return false;
         }
         if(isNaN(Age))
         {
-            alert("enter a valid age");
+            alert("Enter a Valid Age");
             thisform.Age.focus();
             return false;
         }
         if(Weight < 40)
         {
-            alert("Weight should be greater than 40 kilograms");
+            alert("Weight Should Be Greater than 40 kilograms");
             thisform.Weight.focus();
             return false;
         }
@@ -605,7 +618,7 @@ $("#other_serious_illness").trigger("change");
         }
         if(isNaN(Height))
         {
-            alert("Enter a valid height");
+            alert("Enter a Valid Height");
             thisform.Weight.focus();
             return false;
         }

@@ -1,23 +1,14 @@
- <?php
-//  include 'predni.php';
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  
-    $dbname='bombaoim_blp_db';
-    $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
-    
-    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+<?php
 
-		if ($conn->connect_error) {
-			die("Connection failed: " . $conn->connect_error);
-	}
+include('connection.php');
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	function query ( $query, $message = '' ) {
 		global $conn;
 		$insert = mysqli_query($conn, $query);
 		if($insert){
-		  echo"Successful Insertion ".$message."<br>";
+		  //echo"Successful Insertion ".$message."<br>";
 		  return 1;
 		}
 		else{
@@ -30,8 +21,6 @@
 		global $conn;
 		return mysqli_real_escape_string($conn, $string);
 	}
-		
-		//mysqli_select_db($con , 'blp_db');
 
 		if(isset($_POST['patient_name'])){
 			$patient_name = $_POST['patient_name'];
@@ -95,13 +84,6 @@
 		else{
 			$first_sym = "NAN";
 		}
-		
-		// if(isset($_POST['current_anti_reaction'])){
-		// 	$current_anti_reaction = $_POST['current_anti_reaction'];
-		// }
-		// else{
-		// 	$current_anti_reaction = "NAN";
-		// }
 
 		if(isset($_POST['date_started_predni'])){
 			$date_started_predni = $_POST['date_started_predni'];
@@ -222,38 +204,37 @@
 		$q1 = "insert into form2 (patient_name,clinic_id,study_no,date,staff_name,current_reaction_status,first_had_enl,firstPDate,first_sym,date_started_predni,current_dose_predni,current_dose_clofa,current_dose_thal,nfa,change_in_nfi,change_in_nfi_desc,eess_2,qol_2_score,vas_for_pig_2,obs,drug_dose_predni,drug_dur_predni,drug_dose_clofa,drug_dur_clofa,next_asse_date) 
 		values ('$patient_name','$clinic_id','$study_no','$date','$staff_name','$current_reaction_status','$first_had_enl','$firstPDate','$first_sym','$date_started_predni','$current_dose_predni','$current_dose_clofa','$current_dose_thal','$nfa','$change_in_nfi','$change_in_nfi_desc','$eess_2','$qol_2_score','$vas_for_pig_2','$obs','$drug_dose_predni','$drug_dur_predni','$drug_dose_clofa','$drug_dur_clofa','$next_asse_date');";
 // 		echo $q1;
-
-		// $qu1 = "insert into form2_checkBox2 values $current_anti_reaction";
-
-		$check_0 = isset($_POST['current_anti_reaction'][0]) ? 'yes' : 'no';
-		$check_1 = isset($_POST['current_anti_reaction'][1]) ? 'yes' : 'no';
-		$check_2 = isset($_POST['current_anti_reaction'][2]) ? 'yes' : 'no';
-		$query = "INSERT INTO form2_checkbox2 VALUES ('$check_0','$check_1','$check_2')";
-		mysqli_query($conn, $query);
-
-		$check_0a = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
-		$check_1a = isset($_POST['adverse_predni'][1]) ? 'yes' : 'no';
-		$check_2a = isset($_POST['adverse_predni'][2]) ? 'yes' : 'no';
-		$check_3a = isset($_POST['adverse_predni'][3]) ? 'yes' : 'no';
-		$check_4a = isset($_POST['adverse_predni'][4]) ? 'yes' : 'no';
-		$check_5a = isset($_POST['adverse_predni'][5]) ? 'yes' : 'no';
-		$check_6a = isset($_POST['adverse_predni'][6]) ? 'yes' : 'no';
-		$check_7a = isset($_POST['adverse_predni'][7]) ? 'yes' : 'no';
-		$check_8a = isset($_POST['adverse_predni'][8]) ? 'yes' : 'no';
-		$check_9a = isset($_POST['adverse_predni'][9]) ? 'yes' : 'no';
-		$check_10a = isset($_POST['adverse_predni'][10]) ? 'yes' : 'no';
-		$check_11a = isset($_POST['adverse_predni'][11]) ? 'yes' : 'no';
-		$check_12a = isset($_POST['adverse_predni'][12]) ? 'yes' : 'no';
-		$check_13a = isset($_POST['adverse_predni'][13]) ? 'yes' : 'no';
-		$check_14a = isset($_POST['adverse_predni'][14]) ? 'yes' : 'no';
-		$check_15a = isset($_POST['adverse_predni'][15]) ? 'yes' : 'no';
-		$query1 = "INSERT INTO form2_checkbox VALUES ('$check_0a','$check_1a','$check_2a', '$check_3a','$check_4a','$check_5a', '$check_6a','$check_7a','$check_8a', '$check_9a','$check_10a','$check_11a', '$check_12a','$check_13a','$check_14a','$check_15a')";
-		mysqli_query($conn, $query1);
 		
 		if(query($q1, 'Others_Details') ) {
-
-			$Pid = $conn->insert_id;
+		    
+            $Pid = $conn->insert_id;
 			// echo "Pid is " . $Pid . "<br>";
+			
+			$check_0 = isset($_POST['current_anti_reaction'][0]) ? 'yes' : 'no';
+    		$check_1 = isset($_POST['current_anti_reaction'][1]) ? 'yes' : 'no';
+    		$check_2 = isset($_POST['current_anti_reaction'][2]) ? 'yes' : 'no';
+    		$query = "INSERT INTO form2_checkbox2 VALUES ('$Pid','$check_0','$check_1','$check_2')";
+    		mysqli_query($conn, $query);
+    
+    		$check_0a = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
+    		$check_1a = isset($_POST['adverse_predni'][1]) ? 'yes' : 'no';
+    		$check_2a = isset($_POST['adverse_predni'][2]) ? 'yes' : 'no';
+    		$check_3a = isset($_POST['adverse_predni'][3]) ? 'yes' : 'no';
+    		$check_4a = isset($_POST['adverse_predni'][4]) ? 'yes' : 'no';
+    		$check_5a = isset($_POST['adverse_predni'][5]) ? 'yes' : 'no';
+    		$check_6a = isset($_POST['adverse_predni'][6]) ? 'yes' : 'no';
+    		$check_7a = isset($_POST['adverse_predni'][7]) ? 'yes' : 'no';
+    		$check_8a = isset($_POST['adverse_predni'][8]) ? 'yes' : 'no';
+    		$check_9a = isset($_POST['adverse_predni'][9]) ? 'yes' : 'no';
+    		$check_10a = isset($_POST['adverse_predni'][10]) ? 'yes' : 'no';
+    		$check_11a = isset($_POST['adverse_predni'][11]) ? 'yes' : 'no';
+    		$check_12a = isset($_POST['adverse_predni'][12]) ? 'yes' : 'no';
+    		$check_13a = isset($_POST['adverse_predni'][13]) ? 'yes' : 'no';
+    		$check_14a = isset($_POST['adverse_predni'][14]) ? 'yes' : 'no';
+    		$check_15a = isset($_POST['adverse_predni'][15]) ? 'yes' : 'no';
+    		$query1 = "INSERT INTO form2_checkbox VALUES ('$Pid','$check_0a','$check_1a','$check_2a', '$check_3a','$check_4a','$check_5a', '$check_6a','$check_7a','$check_8a', '$check_9a','$check_10a','$check_11a', '$check_12a','$check_13a','$check_14a','$check_15a')";
+    		mysqli_query($conn, $query1);
+			
 				
 			foreach ($others_drug_name as $key => $value) {
 
@@ -269,23 +250,17 @@
 			) VALUES ('$Pid', '$others_drug_name[$key]', '$others_drug_dosage[$key]', '$others_drug_duration[$key]');";
 			query($q2, 'form2_others');
 
-			}header("location:../../modules/display_form_1-6.php?pid=".$Pid);
+			}
+// 			header("location:../../modules/display_form_1-6.php?pid=".$Pid);
+			echo("<script>location.href = '../../modules/display_form_1-6.php?pid=$Pid'</script>");
 		}else {
 			echo "<br>Person could not be made.";
 		}
 		
-		// if ($conn->query($q1) === TRUE) {
-		// 	echo "New record created successfully";
-		// } else {
-		// 	echo "Error: " . $q1 . "<br>" . $conn->error;
-		// }
 		$conn->close();
 } else  {
 		// do get
 		echo "not a post request";
 	}
 
-	
-
- ?>
-
+?>
