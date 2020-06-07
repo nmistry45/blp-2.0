@@ -2,8 +2,8 @@
 	
     $dbname='bombaoim_blp_db_';
     $dbhost='localhost';
-    $dbpass='asdf1234';
-    $dbuser='bombaoim_sakec';
+    $dbpass='';
+    $dbuser='root';
     
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 

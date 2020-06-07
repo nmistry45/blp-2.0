@@ -34,6 +34,7 @@ if(mysqli_num_rows($result) > 0)
           <td><a href="display_form_1-6.php?pid='.$row["pid"].'">'.$row["clinic_id"].'</a></td>
           <td><a href="display_form_1-6.php?pid='.$row["pid"].'">'.$row["study_no"].'</a></td>
           <td><a href="display_form_1-6.php?pid='.$row["pid"].'">'.$row["staff_name"].'</a></td>
+          <td><a href="../assets/php/delete2.php?pid='.$row["pid"].'"><button class="btn btn-danger">Delete</button></a></td>
          </tr>
         ';
      }
