@@ -29,6 +29,13 @@ include('connection.php');
 		else{
 			$date = "NAN";
 		}
+		
+		if(isset($_POST['time_point'])){
+			$time_point = $_POST['time_point'];
+		}
+		else{
+			$time_point = "NAN";
+		}
 
 		if(isset($_POST['staff_name'])){
 			$staff_name = $_POST['staff_name'];
@@ -42,6 +49,13 @@ include('connection.php');
 		}
 		else{
 			$current_reaction_status = "NULL";
+		}
+		
+		if(isset($_POST['weight'])){
+			$weight = $_POST['weight'];
+		}
+		else{
+			$weight = "NAN";
 		}
 
 		if(isset($_POST['nfa_3'])){
@@ -121,13 +135,6 @@ include('connection.php');
 			$drug_dura_clofa = "NAN";
 		}
 
-		if(isset($_POST['advise_ad'])){
-			$advise_ad = $_POST['advise_ad'];
-		}
-		else{
-			$advise_ad = "NAN";
-		}
-
 		if(isset($_POST['assessment_date'])){
 			$assessment_date = $_POST['assessment_date'];
 		}
@@ -135,19 +142,13 @@ include('connection.php');
 			$assessment_date = "NAN";
 		}
 		
-		if(isset($_POST['prednisolone_review'])){
-			$prednisolone_review = $_POST['prednisolone_review'];
-		}
-		else{
-			$prednisolone_review = "NAN";
-		}
 
 		$others_drug_name = empty($_POST['others_drug_name']) ? 'Unknown' : $_POST['others_drug_name'];
 		$others_drug_dosage = empty($_POST['others_drug_dosage']) ? 'Unknown' : $_POST['others_drug_dosage'];
 		$others_drug_duration = empty($_POST['others_drug_duration']) ? 'Unknown' : $_POST['others_drug_duration'];
 
-		$q1 = "insert into form3 (pid,date,staff_name,current_reaction_status,nfa_3,new_nfi_3,Add1,eess_3,qol_3,vas_for_pig_3,rand_date,drug_dose_predni,drug_dura_predni,drug_dose_clofa,drug_dura_clofa,advise_ad,assessment_date,prednisolone_review) 
-		values ('$pid','$date','$staff_name','$current_reaction_status','$nfa_3','$new_nfi_3','$Add1','$eess_3','$qol_3','$vas_for_pig_3','$rand_date','$drug_dose_predni','$drug_dura_predni','$drug_dose_clofa','$drug_dura_clofa','$advise_ad','$assessment_date','$prednisolone_review');";
+		$q1 = "insert into form3 (pid,date,time_point,staff_name,current_reaction_status,weight,nfa_3,new_nfi_3,Add1,eess_3,qol_3,vas_for_pig_3,rand_date,drug_dose_predni,drug_dura_predni,drug_dose_clofa,drug_dura_clofa,assessment_date) 
+		values ('$pid','$date','$time_point','$staff_name','$current_reaction_status','$weight','$nfa_3','$new_nfi_3','$Add1','$eess_3','$qol_3','$vas_for_pig_3','$rand_date','$drug_dose_predni','$drug_dura_predni','$drug_dose_clofa','$drug_dura_clofa','$assessment_date');";
 		// echo $q1;
 
 		if(query($q1, 'Others_Details3') ) {
@@ -183,5 +184,3 @@ $conn->close();
 		// do get
 		echo "not a post request";
 	}
-
-?>

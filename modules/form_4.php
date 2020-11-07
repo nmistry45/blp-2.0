@@ -2,11 +2,11 @@
 
 session_start();
 
-include ('logout.php');
-include ('../assets/php/connection.php');
+include('logout.php');
+include('../assets/php/connection.php');
 
-if(!isset($_SESSION['id'])){
-    echo"<script>
+if (!isset($_SESSION['id'])) {
+    echo "<script>
     alert('Please Login');
     document.location.href = 'login.php';
     </script>
@@ -28,7 +28,7 @@ if(!isset($_SESSION['id'])){
     <link rel="apple-touch-icon" sizes="144x144" href="../assets/images/faviconsBLP/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="../assets/images/faviconsBLP/apple-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/faviconsBLP/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="../assets/images/faviconsBLP/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../assets/images/faviconsBLP/android-icon-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/faviconsBLP/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="../assets/images/faviconsBLP/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/faviconsBLP/favicon-16x16.png">
@@ -44,7 +44,8 @@ if(!isset($_SESSION['id'])){
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
-    <!-- Main css --><!--
+    <!-- Main css -->
+    <!--
     <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -52,31 +53,32 @@ if(!isset($_SESSION['id'])){
       <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
       
       <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  --><script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="http://localhost/BLP/assets/blp/jquery-1.11.1.min.js.download"></script>
-<!-- stylesheet -->
+  -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://localhost/BLP/assets/blp/jquery-1.11.1.min.js.download"></script>
+    <!-- stylesheet -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-<link href="http://localhost/BLP/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link href="http://localhost/BLP/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
 
-  <!-- header -->   
-  <!-- Latest compiled and minified CSS -->
-
-
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-<!-- Popper JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <!-- header -->
+    <!-- Latest compiled and minified CSS -->
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
     <link rel="stylesheet" href="../assets/css/form_style.css">
 </head>
 
@@ -85,356 +87,380 @@ if(!isset($_SESSION['id'])){
     <div class="main">
 
         <div class="container">
-            <h2>Bombay Leprosy Project </h2>
+            <h2>Database Form For Extra Clofa Study </h2>
             <?php $pid = $_GET['pid'];
-            $result_form_4 = mysqli_query($conn, "SELECT patient_name, clinic_id from form1 where pid = $pid");
-            while ($row_form_4 = mysqli_fetch_assoc($result_form_4)){
+            $result_form_4 = mysqli_query($conn, "SELECT patient_name, study_no from form1 where pid = $pid");
+            while ($row_form_4 = mysqli_fetch_assoc($result_form_4)) {
             ?>
-            <form method="POST" id="signup-form" class="signup-form" action="../assets/php/form-44.php?pid=<?php echo $pid; ?>" enctype="multipart/form-data">
-                <div class="form-group" style="margin-top: 20px">
-                            <label for="patient_name" class="form-label" style="margin-left: 200px;">Patient Name:</label>
-                            <label for="op_patient_name" class="form-label" style="margin-left: -140px;"><?php echo $row_form_4['patient_name']; ?></label>
-                            <label for="clinic_id" class="form-label" style="margin-left: 215px;">Clinic ID:</label>
-                            <label for="op_clinic_id" class="form-label" style="margin-left: -175px;"><?php echo $row_form_4['clinic_id']; ?></label>
-            <?php } ?>
-				  
-				  </div>
-	  <hr>
-      <h3><span class="title_text"><center><b>4. Post-Randomisation 3 Monthly Routine Follow-Up Sheet<b></center></span></h3>
-                
+                <form method="POST" id="signup-form" class="signup-form" action="../assets/php/form-44.php?pid=<?php echo $pid; ?>" enctype="multipart/form-data">
+                    <div class="form-group" style="margin-top: 20px">
+                        <label for="patient_name" class="form-label" style="margin-left: 130px; font-size: 20px; color:blue;"><u><b>Patient Name:</b></u></label>
+                        <label for="op_patient_name" class="form-label" style="margin-left: -20px; font-size: 20px; color:blue;"><u><b><?php echo $row_form_4['patient_name']; ?></b></u></label>
+                        <label for="study_no" class="form-label" style="margin-left: 215px; font-size: 20px; color:blue;"><u><b>Study Number:</b></u></label>
+                        <label for="op_study_no" class="form-label" style="margin-left: -100px; font-size: 20px; color:blue;"><u><b><?php echo $row_form_4['study_no']; ?></b></u></label>
+                    </div>
+                <?php } ?>
+                <hr>
+                <h3><span class="title_text">
+                        <center><b>4. Post-Randomisation 3 Monthly Routine Follow-Up Sheet<b></center>
+                    </span></h3>
+
                 <hr>
                 <!--<fieldset>-->
-                    <div class="form-row" style="padding-left: 34px ;margin-top: 9px;">
-                            <div class="form-group" style="padding-left: 34px ;margin-top: 9px;">
-                                <label for="formDate" class="form-label">Date</label>&ensp;&ensp;
-                                <input style="margin-left: 13px;" type="date" name="formDate" id="formDate" > 
-                            </div>
-							<div class="staff" style="padding-left:310px">
-							<div class="form-group">
-                            <label for="staff_name" class="form-label">Staff Name</label>
-                            <input type="text" name="staff_name" id="staff_name" placeholder="Staff Name"/>
-							</div>
-                        </div>
-							
-							
-                </div>
-				
-				<div class="form-radio" style="padding-right:-30px">
-                                <label for="current_status" class="form-label">Current Status</label>
-                                <div class="form-radio-item">
-                                    <input type="radio" name="current_status" value="no reaction" id="no_reaction" />
-                                    <label for="no_reaction" style="width:120px;">No Reaction</label>
-    
-                                    <input type="radio" name="current_status" value="RR" id="RR" />
-                                    <label for="RR" style="width:120px;">RR</label>
-									
-									<input type="radio" name="current_status" value="acute enl" id="acute_enl" />
-                                    <label for="acute_enl" style="width:120px;">Acute ENL</label>
-									
-									<input type="radio" name="current_status" value="recurrent enl" id="recurrent_enl" />
-                                    <label for="recurrent_enl" style="width:120px;">Recurrent ENL</label>
-									
-									<input type="radio" name="current_status" value="chronic enl" id="chronic_enl" />
-                                    <label for="chronic_enl" style="width:120px;">Chronic ENL</label>
-
-                                    
-                                </div>
-                            </div>
-							
-						 <fieldset>
-					 <div class="form-group" style="padding-right: -30px ;margin-top: 9px; text-align:left;"> 
-                            <label  class="form-label" style="color:blue;" ><u><b>Physical Examination :</u></b></label>
-                            </div>
-							</fieldset>
-							
-				<div class="fieldset-content">
-				
-                    <div class="form-radio" style="padding-right:-30px">
-                                <label for="nfa_4" class="form-label">NFA</label>
-                                <div class="form-radio-item">
-                                    <input type="radio" name="nfa_4" value="yes" id="yes" />
-                                    <label for="yes" style="width:75px;">Yes</label>
-    
-                                    <input type="radio" name="nfa_4" value="no" id="no" />
-                                    <label for="no" style="width:75px;">No</label>
-									
-									
-                                    
-                                </div>
-                            </div>
-							
-							
-				<div class="form-group" style="padding-right:-30px">
-                                <label for="eess" >EESS</label>
-                    
-								<input type="range" style="border:1px solid;background-color: lightblue;" name="eess_4" id="eess_4" min="0" max="30" value="0" onchange="show_value2(this.value)"/>
-								 <span id="slider_value2" style="color:black;font-weight:bold;"></span><br>
-								 <span id="slider_value2" style="color:black;font-weight:bold;"></span>
-								
-								<style type="text/css">
-                                #eess_4{
-                                    height:0px ;
-                                    -webkit-appearance:none;
-                                    border-radius: 5px;
-                                    background-color: black;
-                                    box-shadow: inset 0 3px 18px rgba(0,0,0,0.6);
-                                }
-
-                                #eess_4::-webkit-slider-thumb{
-                                    -webkit-appearance:none;
-                                    width: 40px;
-                                    height: 40px;
-                                    background-color: white;
-                                    border-radius: 50%;
-                                    cursor: pointer;
-                                    outline: none;
-                                }
-
-                                #eess_4::-webkit-slider-thumb:hover{
-                                    box-shadow: 0 0 0 3px black,
-                                                0 0 0 6px white;
-                                 }
-
-                                #eess_4:active::-webkit-slider-thumb{
-                                    box-shadow: 0 0 0 3px black,
-                                                0 0 0 6px white;
-                                }
-                            </style>
-								
-								<script type="text/javascript">
-								function show_value2(x)
-								{
-									document.getElementById("slider_value2").innerHTML=x;
-								} 
-								</script>
-                            </div>			
-							  
-
-					<fieldset>
-					 <div class="form-group" style="margin-top: 9px; text-align:left;"> 
-                            <label  class="form-label" style="color:blue;" ><u><b>Patient Experience Assessment:</u></b></label>
-                            </div>
-              </fieldset>
-                          
-                            <div class="form-radio" style="padding-left: 34px">
-                              <label for="qol_4" class="form-label">QOL (SF36) Score</label>
-                              <div class="form-radio-item">
-                                    <input type="radio" name="qol_4" value="done" id="done" />
-                                    <label for="done" style="width:75px;">Done</label>
-                                    <input type="radio" name="qol_4" value="not done" id="not done" />
-                                    <label for="not done" style="width:85px;">Not Done</label>
-                                </div>
-                            </div>
-
-                          <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                              <label for="vas_4" class="form-label">VAS for Pigmentation</label>
-                              <input style="width: 180px;" type="text" name="vas_4" id="vas_4" placeholder="VAS between 0-100"/ >
-                          </div>
-
-                          <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                <label for="adverse_effect_prednisolone">Checklist for Adverse Effects of Prednisolone</label>&ensp;&ensp;&ensp;&ensp;
-                  <div class="container" style="margin-top: 9px" >
-  
-                 <!-- <form>-->
-                      <div class="row">
-
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox" name="adverse_predni[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion 
-                        </label>
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox" name="adverse_predni[1]" value="yes" style="padding-left:4px;margin-top:9px">Peptic Ulcer
-                        </label>
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox" name="adverse_predni[2]"  value="yes" style="padding-left:4px;margin-top:9px">Striae
-                        </label>
-                        <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox" name="adverse_predni[3]" value="yes" style="padding-left:4px;margin-top:9px">Herpes Zoster
-                        </label>
-                      </div>
-
-                      <div class="row">
-
-                        <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox"  name="adverse_predni[4]"  value="yes" style="padding-left:4px;margin-top:9px">Hyperglycaemia 
-                        </label>
-                        <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox" name="adverse_predni[5]"  value="yes" style="padding-left:4px;margin-top:9px">Hypertension
-                        </label>
-                        <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox"  name="adverse_predni[6]"  value="yes" style="padding-left:4px;margin-top:9px">Malaena
-                        </label>
-                        <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox"  name="adverse_predni[7]"  value="yes" style="padding-left:4px;margin-top:9px">Glaucoma
-                        </label>
-
-                      </div>
-
-                      <div class="row">
-
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox"  name="adverse_predni[8]"  value="yes" style="padding-left:4px;margin-top:9px">Truncal Obesity  
-                        </label>
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox"  name="adverse_predni[9]"  value="yes" style="padding-left:4px;margin-top:9px">Osteoporosis
-                        </label>
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox"  name="adverse_predni[10]"  value="yes" style="padding-left:4px;margin-top:9px">Moon Face
-                        </label>
-                        <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox"  name="adverse_predni[11]"  value="yes" style="padding-left:4px;margin-top:9px">Psychosis
-                        </label>
-
-                      </div>
-                      <div class="row">
-
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                          <input type="checkbox"  name="adverse_predni[12]"  value="yes" style="padding-left:4px;margin-top:9px">Gastrointestinal Bleeding
-                        </label>
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox" name="adverse_predni[13]"  value="yes" style="padding-left:4px;margin-top:9px">Haematemesis
-                        </label>
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox"  name="adverse_predni[14]"  value="yes" style="padding-left:3px;margin-top:9px">&nbsp;&nbsp;&nbsp;&nbsp;Extensive Ringworm
-                        </label>
-                        <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                            <input type="checkbox"  name="adverse_predni[15]"  value="yes" style="padding-left:4px;margin-top:9px">Acne
-                        </label>
-
-                      </div>
-                      <!--</form>-->
-
-</div>
-</div>
-            <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                <label for="adverse_effect_clofazimine">Checklist for Adverse Effects of Clofazimine</label>&ensp;&ensp;&ensp;&ensp;
-						      <div class="container" >
-									
-                      <!-- <form>-->
-                    <div class="row">
-
-                                    <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox" name="adverse_clofa[0]"  value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion 
-                                    </label>
-                                    <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox" name="adverse_clofa[1]" value="yes" style="padding-left:4px;margin-top:9px">Vomiting
-                                    </label>
-                                    <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox" name="adverse_clofa[2]"  value="yes" style="padding-left:4px;margin-top:9px">Nausea
-                                    </label>
-                                    <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox" name="adverse_clofa[3]" value="yes" style="padding-left:4px;margin-top:9px">Abdominal Pain
-                                    </label>
+                <div class="form-row" style="padding-left: 34px ;margin-top: 9px;">
+                    <div class="form-group" style="padding-left: 34px ;margin-top: 9px;">
+                        <label for="formDate" class="form-label">Date</label>&ensp;&ensp;
+                        <input style="margin-left: 13px;" type="date" name="formDate" id="formDate">
                     </div>
 
-                    <div class="row">
-
-                                    <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[4]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea, Acute 
-                                    </label>
-                                    <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox" name="adverse_clofa[5]"  value="yes" style="padding-left:4px;margin-top:9px">Ichthyosis
-                                    </label>
-                                    <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[6]"  value="yes" style="padding-left:4px;margin-top:9px">Weight Loss
-                                    </label>
-                                    <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[7]"  value="yes" style="padding-left:4px;margin-top:9px">Conjuctiva
-                                    </label>
-
-                    </div>
-
-                    <div class="row">
-
-                                    <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[8]"  value="yes" style="padding-left:4px;margin-top:9px">Persistent<br> Indigestion 
-                                    </label>
-                                    <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[9]"  value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea,<br> Chronic
-                                    </label>
-                                    <label class="checkbox-inline"style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[10]"  value="yes" style="padding-left:4px;margin-top:9px">Chronic<br> Dysentery
-                                    </label>
-                                    <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
-                                        <input type="checkbox"  name="adverse_clofa[11]"  value="yes" style="padding-left:4px;margin-top:9px">Skin<br> Discolouration
-                                    </label>
-
-                    </div>
-
-                <!--</form>-->
-
-						</div>
-						</div>
-
+                    <div class="staff" style="padding-left: 34px ;margin-top: 9px;">
                         <div class="form-group">
-                            <label for="enl_present_time_since" class="form-label">If ENL present, Time Since Onset of this Episode?</label>
-                            <input type="text" name="enl_present_time_since" id="enl_present_time_since" placeholder="Number of weeks" />
+                            <label for="time_point" class="form-label">Time Point</label>
+                            <input type="text" name="time_point" id="time_point" placeholder="" />
+                            <label for="time_point" class="form-label">(numbers of week since randomisation)</label>
                         </div>
-						
+                    </div>
+                    <div class="staff" style="padding-left:20px">
+                        <div class="form-group">
+                            <label for="staff_name" class="form-label">Staff Name</label>
+                            <input type="text" name="staff_name" id="staff_name" placeholder="Staff Name" />
+                        </div>
+                    </div>
 
-							<div class="form-group">
-								<label for="time_since_last_received_prednisolone" class="form-label">Time Since Last Received Prednisolone?</label>
-								<input type="text" name="time_since_last_received_prednisolone" id="time_since_last_received_prednisolone" placeholder="Days/Weeks" />
-							</div>
-							 
-						 
-							<div class="form-group">
-										<label for="recurrent_enl_start_predni" class="form-label">If Flare of ENL, Start or Add Prednisolone and Move to Fornightly Observations</label>
-										<input type="text" name="recurrent_enl_start_predni" id="recurrent_enl_start_predni" placeholder="" />
-									</div>
-									 
-						 						 
-						<div class="form-group" style="margin-top: 9px; text-align:left;"> 
-                            <label  class="form-label" style="color:blue;" ><u><b>Treatment Prescribed:</u></b></label>
-                            </div>
-							
- 
-				<div class="form-radio" style="padding-right:-30px">
-                                <label for="advised_admission" class="form-label">Advised Admission</label>
-                                <div class="form-radio-item">
-                                    <input type="radio" name="advised_admission" value="yes" id="yes1" />
-                                    <label for="yes1" style="width:75px;">Yes</label>
-    
-                                    <input type="radio" name="advised_admission" value="no" id="no1" />
-                                    <label for="no1" style="width:75px;">No</label>
-									
-									
-                                    
-                                </div>
-                            </div>
-						
-				
 
-						<div class="form-group">
-                            <label for="nextDate" class="form-label">Date for Next Routine Assessment</label>
-                            <input style="width:200px"type="date" name="nextDate" id="nextDate" > 
+                </div>
+
+                <div class="form-radio" style="padding-left: 5px">
+                    <label for="current_status" class="form-label">Current Status</label>
+                    <div class="form-radio-item">
+                        <input type="radio" name="current_status" value="no reaction" id="no_reaction" />
+                        <label for="no_reaction" style="width:120px;">No Reaction</label>
+
+                        <input type="radio" name="current_status" value="RR" id="RR" />
+                        <label for="RR" style="width:120px;">RR</label>
+
+                        <input type="radio" name="current_status" value="acute enl" id="acute_enl" />
+                        <label for="acute_enl" style="width:120px;">Acute ENL</label>
+
+                        <input type="radio" name="current_status" value="recurrent enl" id="recurrent_enl" />
+                        <label for="recurrent_enl" style="width:120px;">Recurrent ENL</label>
+
+                        <input type="radio" name="current_status" value="chronic enl" id="chronic_enl" />
+                        <label for="chronic_enl" style="width:120px;">Chronic ENL</label>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="weight" class="form-label" style="padding-left: 50px;">Weight</label>
+                        <input type="text" name="weight" id="weight" placeholder="" /> kg
+                    </div>
+
+                </div>
+
+
+                <fieldset>
+                    <div class="form-group" style="padding-right: -30px ;margin-top: 9px; text-align:left;">
+                        <label class="form-label" style="color:blue;"><u><b>Physical Examination :</u></b></label>
+                    </div>
+                </fieldset>
+
+                <div class="fieldset-content">
+
+                    <div class="form-radio" style="padding-right:-30px">
+                        <label for="nfa_4" class="form-label">NFA</label>
+                        <div class="form-radio-item">
+                            <input type="radio" name="nfa_4" value="yes" id="yes" />
+                            <label for="yes" style="width:75px;">Yes</label>
+
+                            <input type="radio" name="nfa_4" value="no" id="no" />
+                            <label for="no" style="width:75px;">No</label>
+
                         </div>
-							
-							
-							<div class="form-group">
-                            <label for="nextPDate" class="form-label">Date of Prednisolone Review</label>
-                            <input style="width:200px"type="date" name="nextPDate" id="nextPDate"> 
+                    </div>
+
+                    <div class="form-radio" style="padding-left:-5px;">
+                        <label for="new_nfi_4" class="form-label">New NFI</label>
+                        <div class="form-radio-item">
+                            <input type="radio" name="new_nfi_4" value="yes" id="nfiyes" />
+                            <label for="nfiyes" style="width:80px;">Yes</label>
+
+                            <input type="radio" name="new_nfi_4" value="no" id="nfino" />
+                            <label for="nfino" style="width:80px;">No</label>
+
                         </div>
-							
-							<input type="submit" value="Submit" name="submit" id="submit">                       
+                        <div style="padding-left:30px;"><textarea rows="4" cols="50" name="Add1" id="Add1" placeholder="Within Past 6 months, Not Yet Treated with Steroids?"></textarea></div>
+                    </div>
+
+
+                    <div class="form-group" style="padding-right:-30px">
+                        <label for="eess">EESS</label>
+
+                        <input type="range" style="border:1px solid;background-color: lightblue;" name="eess_4" id="eess_4" min="0" max="30" value="0" onchange="show_value2(this.value)" />
+                        <span id="slider_value2" style="color:black;font-weight:bold;"></span><br>
+                        <span id="slider_value2" style="color:black;font-weight:bold;"></span>
+
+                        <style type="text/css">
+                            #eess_4 {
+                                height: 0px;
+                                -webkit-appearance: none;
+                                border-radius: 5px;
+                                background-color: black;
+                                box-shadow: inset 0 3px 18px rgba(0, 0, 0, 0.6);
+                            }
+
+                            #eess_4::-webkit-slider-thumb {
+                                -webkit-appearance: none;
+                                width: 40px;
+                                height: 40px;
+                                background-color: white;
+                                border-radius: 50%;
+                                cursor: pointer;
+                                outline: none;
+                            }
+
+                            #eess_4::-webkit-slider-thumb:hover {
+                                box-shadow: 0 0 0 3px black,
+                                    0 0 0 6px white;
+                            }
+
+                            #eess_4:active::-webkit-slider-thumb {
+                                box-shadow: 0 0 0 3px black,
+                                    0 0 0 6px white;
+                            }
+                        </style>
+
+                        <script type="text/javascript">
+                            function show_value2(x) {
+                                document.getElementById("slider_value2").innerHTML = x;
+                            }
+                        </script>
+                    </div>
+
+
+                    <fieldset>
+                        <div class="form-group" style="margin-top: 9px; text-align:left;">
+                            <label class="form-label" style="color:blue;"><u><b>Patient Experience Assessment:</u></b></label>
+                        </div>
+                    </fieldset>
+
+                    <div class="form-radio" style="padding-left: 34px">
+                        <label for="qol_4" class="form-label">QOL (SF36) Score</label>
+                        <div class="form-radio-item">
+                            <input type="radio" name="qol_4" value="done" id="done" />
+                            <label for="done" style="width:75px;">Done</label>
+                            <input type="radio" name="qol_4" value="not done" id="not done" />
+                            <label for="not done" style="width:85px;">Not Done</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 9px;padding-left: 34px">
+                        <label for="vas_4" class="form-label">VAS for Pigmentation</label>
+                        <input style="width: 180px;" type="text" name="vas_4" id="vas_4" placeholder="VAS between 0-100" />
+                    </div>
+
+                    <div class="form-group" style="margin-top: 9px;padding-left: 34px">
+                        <label for="adverse_effect_prednisolone">Checklist for Adverse Effects of Prednisolone</label>&ensp;&ensp;&ensp;&ensp;
+                        <div class="container" style="margin-top: 9px">
+
+                            <!-- <form>-->
+                            <div class="row">
+
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[0]" value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[1]" value="yes" style="padding-left:4px;margin-top:9px">Peptic Ulcer
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[2]" value="yes" style="padding-left:4px;margin-top:9px">Striae
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[3]" value="yes" style="padding-left:4px;margin-top:9px">Herpes Zoster
+                                </label>
+                            </div>
+
+                            <div class="row">
+
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[4]" value="yes" style="padding-left:4px;margin-top:9px">Hyperglycaemia
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[5]" value="yes" style="padding-left:4px;margin-top:9px">Hypertension
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[6]" value="yes" style="padding-left:4px;margin-top:9px">Malaena
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[7]" value="yes" style="padding-left:4px;margin-top:9px">Glaucoma
+                                </label>
+
+                            </div>
+
+                            <div class="row">
+
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[8]" value="yes" style="padding-left:4px;margin-top:9px">Truncal Obesity
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[9]" value="yes" style="padding-left:4px;margin-top:9px">Osteoporosis
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[10]" value="yes" style="padding-left:4px;margin-top:9px">Moon Face
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[11]" value="yes" style="padding-left:4px;margin-top:9px">Psychosis
+                                </label>
+
+                            </div>
+                            <div class="row">
+
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[12]" value="yes" style="padding-left:4px;margin-top:9px">Gastrointestinal Bleeding
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[13]" value="yes" style="padding-left:4px;margin-top:9px">Haematemesis
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[14]" value="yes" style="padding-left:3px;margin-top:9px">&nbsp;&nbsp;&nbsp;&nbsp;Extensive Ringworm
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_predni[15]" value="yes" style="padding-left:4px;margin-top:9px">Acne
+                                </label>
+
+                            </div>
+                            <!--</form>-->
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 9px;padding-left: 34px">
+                        <label for="adverse_effect_clofazimine">Checklist for Adverse Effects of Clofazimine</label>&ensp;&ensp;&ensp;&ensp;
+                        <div class="container">
+
+                            <!-- <form>-->
+                            <div class="row">
+
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[0]" value="yes" style="padding-left:4px;margin-top:9px">Mild Indigestion
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[1]" value="yes" style="padding-left:4px;margin-top:9px">Vomiting
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[2]" value="yes" style="padding-left:4px;margin-top:9px">Nausea
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[3]" value="yes" style="padding-left:4px;margin-top:9px">Abdominal Pain
+                                </label>
+                            </div>
+
+                            <div class="row">
+
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[4]" value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea, Acute
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[5]" value="yes" style="padding-left:4px;margin-top:9px">Ichthyosis
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[6]" value="yes" style="padding-left:4px;margin-top:9px">Weight Loss
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[7]" value="yes" style="padding-left:4px;margin-top:9px">Conjuctiva
+                                </label>
+
+                            </div>
+
+                            <div class="row">
+
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[8]" value="yes" style="padding-left:4px;margin-top:9px">Persistent<br> Indigestion
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[9]" value="yes" style="padding-left:4px;margin-top:9px">Diarrhoea,<br> Chronic
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[10]" value="yes" style="padding-left:4px;margin-top:9px">Chronic<br> Dysentery
+                                </label>
+                                <label class="checkbox-inline" style="padding-left:4px;margin-top:9px">
+                                    <input type="checkbox" name="adverse_clofa[11]" value="yes" style="padding-left:4px;margin-top:9px">Skin<br> Discolouration
+                                </label>
+
+                            </div>
+
+                            <!--</form>-->
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="enl_present_time_since" class="form-label">If ENL present, Time Since Onset of this Episode?</label>
+                        <input type="text" name="enl_present_time_since" id="enl_present_time_since" placeholder="Number of weeks" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="time_since_last_received_prednisolone" class="form-label">Time Since Last Received Prednisolone?</label>
+                        <input type="text" name="time_since_last_received_prednisolone" id="time_since_last_received_prednisolone" placeholder="Days/Weeks" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="recurrent_enl_start_predni" class="form-label">If Flare of ENL, Start or Add Prednisolone and Move to Fornightly Observations</label>
+                        <input type="text" name="recurrent_enl_start_predni" id="recurrent_enl_start_predni" placeholder="" />
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="form-label" style="color:blue;"><u><b>Reminders:</u></b></label>
+
+                        <p> 1. At 6m assess patient's toleration of clofazimine adverse effects. If tolerated well, continue at lower dose. If not, stop extra clofa.<br>2. At 12m, stop extra clofa or vitamins(placebo)</p>
+                    </div>
+
+
+                    <div class="form-group" style="margin-top: 9px; text-align:left;">
+                        <label class="form-label" style="color:blue;"><u><b>Treatment Prescribed:</u></b></label>
+                    </div>
+
+
+                    <div class="form-radio" style="padding-right:-30px">
+                        <label for="advised_admission" class="form-label">Advised Admission</label>
+                        <div class="form-radio-item">
+                            <input type="radio" name="advised_admission" value="yes" id="yes1" />
+                            <label for="yes1" style="width:75px;">Yes</label>
+
+                            <input type="radio" name="advised_admission" value="no" id="no1" />
+                            <label for="no1" style="width:75px;">No</label>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nextDate" class="form-label">Date for Next Routine Assessment</label>
+                        <input style="width:200px" type="date" name="nextDate" id="nextDate">
+                    </div>
+
+
+                    <input type="submit" value="Save" name="submit" id="submit">
                     <br>
-                     <h4 id="result"></h4> 
-					<h4 id="result1"></h4> 			
-					<div class="fieldset-footer">
-                        <span>Form 4 of 6</span>
+                    <h4 id="result"></h4>
+                    <h4 id="result1"></h4>
+                    <div class="fieldset-footer">
+                        <span>Form 4 of 8</span>
                     </div>
-                    </div>
-                
+                </div>
+
                 <!--</fieldset>-->
 
-                                
-             
 
-            </form>
+
+
+                </form>
         </div>
         <div class="copy w3ls">
-               <p>&copy; 2019  Bombay Leprosy Project  </p>
-            </div>
-     </div>
+            <p>&copy; 2019 Bombay Leprosy Project </p>
+        </div>
+    </div>
 
 
     <!-- JS -->
@@ -445,172 +471,168 @@ if(!isset($_SESSION['id'])){
     <script src="../assets/js/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
- 
-<script type="text/javascript">
-    
-$(function(){
-    $('#addMore').on('click', function() {
-              var data = $("#tb tr:eq(0)").clone(true).appendTo("#tb");
-              var data1 = $("#tb tr:eq(1)").clone(true).appendTo("#tb");
-              var data2 = $("#tb tr:eq(2)").clone(true).appendTo("#tb");
-              var data3 = $("#tb tr:eq(3)").clone(true).appendTo("#tb");
-              var data4 = $("#tb tr:eq(4)").clone(true).appendTo("#tb");
-              var data5 = $("#tb tr:eq(5)").clone(true).appendTo("#tb");
-              data5.find("input").val('');
-              data4.find("input").val('');
-              data3.find("input").val('');
-              data2.find("input").val('');
-              data1.find("input").val('');
-              data.find("input").val('');
-     });
-     $(document).on('click', '.remove', function() {
-         var trIndex1 = $(this).closest("tr").index();
-            if(trIndex1>1) {
-             $(this).closest("tr").remove();
-             document.getElementById("tb").deleteRow(trIndex1);
-             document.getElementById("tb").deleteRow(trIndex1);
-             document.getElementById("tb").deleteRow(trIndex1-1);
-             document.getElementById("tb").deleteRow(trIndex1-2);
-             document.getElementById("tb").deleteRow(trIndex1-3);
-             
-           } else {
-             alert("Sorry!! Can't remove first row!");
-           }
-      });
-});      
-</script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#addMore').on('click', function() {
+                var data = $("#tb tr:eq(0)").clone(true).appendTo("#tb");
+                var data1 = $("#tb tr:eq(1)").clone(true).appendTo("#tb");
+                var data2 = $("#tb tr:eq(2)").clone(true).appendTo("#tb");
+                var data3 = $("#tb tr:eq(3)").clone(true).appendTo("#tb");
+                var data4 = $("#tb tr:eq(4)").clone(true).appendTo("#tb");
+                var data5 = $("#tb tr:eq(5)").clone(true).appendTo("#tb");
+                data5.find("input").val('');
+                data4.find("input").val('');
+                data3.find("input").val('');
+                data2.find("input").val('');
+                data1.find("input").val('');
+                data.find("input").val('');
+            });
+            $(document).on('click', '.remove', function() {
+                var trIndex1 = $(this).closest("tr").index();
+                if (trIndex1 > 1) {
+                    $(this).closest("tr").remove();
+                    document.getElementById("tb").deleteRow(trIndex1);
+                    document.getElementById("tb").deleteRow(trIndex1);
+                    document.getElementById("tb").deleteRow(trIndex1 - 1);
+                    document.getElementById("tb").deleteRow(trIndex1 - 2);
+                    document.getElementById("tb").deleteRow(trIndex1 - 3);
+
+                } else {
+                    alert("Sorry!! Can't remove first row!");
+                }
+            });
+        });
+    </script>
 
 
-<script type="text/javascript">
-    
-$(function(){
-    $('#addMore1').on('click', function() {
-              var data = $("#tb1 tr:eq(0)").clone(true).appendTo("#tb1");
-              var data1 = $("#tb1 tr:eq(1)").clone(true).appendTo("#tb1");
-              var data2 = $("#tb1 tr:eq(2)").clone(true).appendTo("#tb1");
-              var data3 = $("#tb1 tr:eq(3)").clone(true).appendTo("#tb1");
-              var data4 = $("#tb1 tr:eq(4)").clone(true).appendTo("#tb1");
-              var data5 = $("#tb1 tr:eq(5)").clone(true).appendTo("#tb1");
-              data5.find("input").val('');
-              data4.find("input").val('');
-              data3.find("input").val('');
-              data2.find("input").val('');
-              data1.find("input").val('');
-              data.find("input").val('');
-     });
-     $(document).on('click', '.remove1', function() {
-         var trIndex1 = $(this).closest("tr").index();
-            if(trIndex1>1) {
-             $(this).closest("tr").remove();
-             document.getElementById("tb1").deleteRow(trIndex1);
-             document.getElementById("tb1").deleteRow(trIndex1);
-             document.getElementById("tb1").deleteRow(trIndex1-1);
-             document.getElementById("tb1").deleteRow(trIndex1-2);
-             document.getElementById("tb1").deleteRow(trIndex1-3);
-             
-           } else {
-             alert("Sorry!! Can't remove first row!");
-           }
-      });
-});      
-</script>
+    <script type="text/javascript">
+        $(function() {
+            $('#addMore1').on('click', function() {
+                var data = $("#tb1 tr:eq(0)").clone(true).appendTo("#tb1");
+                var data1 = $("#tb1 tr:eq(1)").clone(true).appendTo("#tb1");
+                var data2 = $("#tb1 tr:eq(2)").clone(true).appendTo("#tb1");
+                var data3 = $("#tb1 tr:eq(3)").clone(true).appendTo("#tb1");
+                var data4 = $("#tb1 tr:eq(4)").clone(true).appendTo("#tb1");
+                var data5 = $("#tb1 tr:eq(5)").clone(true).appendTo("#tb1");
+                data5.find("input").val('');
+                data4.find("input").val('');
+                data3.find("input").val('');
+                data2.find("input").val('');
+                data1.find("input").val('');
+                data.find("input").val('');
+            });
+            $(document).on('click', '.remove1', function() {
+                var trIndex1 = $(this).closest("tr").index();
+                if (trIndex1 > 1) {
+                    $(this).closest("tr").remove();
+                    document.getElementById("tb1").deleteRow(trIndex1);
+                    document.getElementById("tb1").deleteRow(trIndex1);
+                    document.getElementById("tb1").deleteRow(trIndex1 - 1);
+                    document.getElementById("tb1").deleteRow(trIndex1 - 2);
+                    document.getElementById("tb1").deleteRow(trIndex1 - 3);
+
+                } else {
+                    alert("Sorry!! Can't remove first row!");
+                }
+            });
+        });
+    </script>
 
 
-<script type="text/javascript">
-$("#Sex").change(function() {
-  if ($(this).val() == "female") {
-    $('#ObstetricHDiv').show();
-   
-  } else {
-    $('#ObstetricHDiv').hide();
-    
-  }
-});
-$("#Sex").trigger("change");
-    
-    
-$(function(){
-    $('#addMore6').on('click', function() {
-              var data = $("#tb6 tr:eq(0)").clone(true).appendTo("#tb6");
-              var data1 = $("#tb6 tr:eq(1)").clone(true).appendTo("#tb6");
-              var data2 = $("#tb6 tr:eq(2)").clone(true).appendTo("#tb6");
-              var data3 = $("#tb6 tr:eq(3)").clone(true).appendTo("#tb6");
-              var data4 = $("#tb6 tr:eq(4)").clone(true).appendTo("#tb6");
-              var data5 = $("#tb6 tr:eq(5)").clone(true).appendTo("#tb6");
-              var data6 = $("#tb6 tr:eq(6)").clone(true).appendTo("#tb6");
-              var data7 = $("#tb6 tr:eq(7)").clone(true).appendTo("#tb6");
-              data7.find("input").val('');
-              data6.find("input").val('');
-              data5.find("input").val('');
-              data4.find("input").val('');
-              data3.find("input").val('');
-              data2.find("input").val('');
-              data1.find("input").val('');
-              data.find("input").val('');
-     });
-     $(document).on('click', '.remove6', function() {
-         var trIndex1 = $(this).closest("tr").index();
-            if(trIndex1>1) {
-             $(this).closest("tr").remove();
-             document.getElementById("tb6").deleteRow(trIndex1);
-             document.getElementById("tb6").deleteRow(trIndex1);
-             document.getElementById("tb6").deleteRow(trIndex1-1);
-             document.getElementById("tb6").deleteRow(trIndex1-2);
-             document.getElementById("tb6").deleteRow(trIndex1-3);
-             document.getElementById("tb6").deleteRow(trIndex1-4);
-             document.getElementById("tb6").deleteRow(trIndex1-5);
-           } else {
-             alert("Sorry!! Can't remove first row!");
-          } 
-      });
-});      
-</script>
+    <script type="text/javascript">
+        $("#Sex").change(function() {
+            if ($(this).val() == "female") {
+                $('#ObstetricHDiv').show();
 
-    
-<script type="text/javascript">
-    
-$(function(){
-    $('#addMore5').on('click', function() {
-              var data = $("#tb5 tr:eq(0)").clone(true).appendTo("#tb5");
-              var data1 = $("#tb5 tr:eq(1)").clone(true).appendTo("#tb5");
-              var data2 = $("#tb5 tr:eq(2)").clone(true).appendTo("#tb5");
-              var data3 = $("#tb5 tr:eq(3)").clone(true).appendTo("#tb5");
-              data3.find("input").val('');
-              data2.find("input").val('');
-              data1.find("input").val('');
-              data.find("input").val('');
-     });
-     $(document).on('click', '.remove5', function() {
-         var trIndex1 = $(this).closest("tr").index();
-            if(trIndex1>1) {
-             $(this).closest("tr").remove();
-             document.getElementById("tb5").deleteRow(trIndex1);
-             document.getElementById("tb5").deleteRow(trIndex1);
-             document.getElementById("tb5").deleteRow(trIndex1-1);
-           } else {
-             alert("Sorry!! Can't remove first row!");
-           }
-      });
-});      
-</script>
-<script type="text/javascript">
-    
-$(function(){
-    $('#addMore7').on('click', function() {
-              var data = $("#tb7 tr:eq(0)").clone(true).appendTo("#tb7");
-              data.find("input").val('');
-     });
-     $(document).on('click', '.remove7', function() {
-         var trIndex1 = $(this).closest("tr").index();
-            if(trIndex1>0) {
-             $(this).closest("tr").remove();
-             document.getElementById("tb7").deleteRow(trIndex1);
-           } else {
-             alert("Sorry!! Can't remove first row!");
-           }
-      });
-});      
-</script>
+            } else {
+                $('#ObstetricHDiv').hide();
+
+            }
+        });
+        $("#Sex").trigger("change");
+
+
+        $(function() {
+            $('#addMore6').on('click', function() {
+                var data = $("#tb6 tr:eq(0)").clone(true).appendTo("#tb6");
+                var data1 = $("#tb6 tr:eq(1)").clone(true).appendTo("#tb6");
+                var data2 = $("#tb6 tr:eq(2)").clone(true).appendTo("#tb6");
+                var data3 = $("#tb6 tr:eq(3)").clone(true).appendTo("#tb6");
+                var data4 = $("#tb6 tr:eq(4)").clone(true).appendTo("#tb6");
+                var data5 = $("#tb6 tr:eq(5)").clone(true).appendTo("#tb6");
+                var data6 = $("#tb6 tr:eq(6)").clone(true).appendTo("#tb6");
+                var data7 = $("#tb6 tr:eq(7)").clone(true).appendTo("#tb6");
+                data7.find("input").val('');
+                data6.find("input").val('');
+                data5.find("input").val('');
+                data4.find("input").val('');
+                data3.find("input").val('');
+                data2.find("input").val('');
+                data1.find("input").val('');
+                data.find("input").val('');
+            });
+            $(document).on('click', '.remove6', function() {
+                var trIndex1 = $(this).closest("tr").index();
+                if (trIndex1 > 1) {
+                    $(this).closest("tr").remove();
+                    document.getElementById("tb6").deleteRow(trIndex1);
+                    document.getElementById("tb6").deleteRow(trIndex1);
+                    document.getElementById("tb6").deleteRow(trIndex1 - 1);
+                    document.getElementById("tb6").deleteRow(trIndex1 - 2);
+                    document.getElementById("tb6").deleteRow(trIndex1 - 3);
+                    document.getElementById("tb6").deleteRow(trIndex1 - 4);
+                    document.getElementById("tb6").deleteRow(trIndex1 - 5);
+                } else {
+                    alert("Sorry!! Can't remove first row!");
+                }
+            });
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        $(function() {
+            $('#addMore5').on('click', function() {
+                var data = $("#tb5 tr:eq(0)").clone(true).appendTo("#tb5");
+                var data1 = $("#tb5 tr:eq(1)").clone(true).appendTo("#tb5");
+                var data2 = $("#tb5 tr:eq(2)").clone(true).appendTo("#tb5");
+                var data3 = $("#tb5 tr:eq(3)").clone(true).appendTo("#tb5");
+                data3.find("input").val('');
+                data2.find("input").val('');
+                data1.find("input").val('');
+                data.find("input").val('');
+            });
+            $(document).on('click', '.remove5', function() {
+                var trIndex1 = $(this).closest("tr").index();
+                if (trIndex1 > 1) {
+                    $(this).closest("tr").remove();
+                    document.getElementById("tb5").deleteRow(trIndex1);
+                    document.getElementById("tb5").deleteRow(trIndex1);
+                    document.getElementById("tb5").deleteRow(trIndex1 - 1);
+                } else {
+                    alert("Sorry!! Can't remove first row!");
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function() {
+            $('#addMore7').on('click', function() {
+                var data = $("#tb7 tr:eq(0)").clone(true).appendTo("#tb7");
+                data.find("input").val('');
+            });
+            $(document).on('click', '.remove7', function() {
+                var trIndex1 = $(this).closest("tr").index();
+                if (trIndex1 > 0) {
+                    $(this).closest("tr").remove();
+                    document.getElementById("tb7").deleteRow(trIndex1);
+                } else {
+                    alert("Sorry!! Can't remove first row!");
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -1,124 +1,130 @@
 <?php
 
-include('connection.php');	
+include('connection.php');
 
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // do post
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	// do post
 
 	$pid = $_GET['pid'];
-	function query ( $query, $message = '' ) {
+	function query($query, $message = '')
+	{
 		global $conn;
 		$insert = mysqli_query($conn, $query);
-		if($insert){
-		  //echo"Successful Insertion ".$message."<br>";
-		  return 1;
-		}
-		else{
-		  echo"<br>Query error ".$message." : " . mysqli_error($conn)."<br>";
-		  return 0;
+		if ($insert) {
+			//echo"Successful Insertion ".$message."<br>";
+			return 1;
+		} else {
+			echo "<br>Query error " . $message . " : " . mysqli_error($conn) . "<br>";
+			return 0;
 		}
 	}
 
-		if(isset($_POST['formDate'])){
-			$formDate = $_POST['formDate'];
-		}
-		else{
-			
-			$formDate = "";
-		}
-		if(isset($_POST['staff_name'])){
-			$staff_name = $_POST['staff_name'];
-		}
-		else{
-			
-			$staff_name = "";
-		}
-		if(isset($_POST['current_status'])){
-			$current_status = $_POST['current_status'];
-		}
-		else{
-			
-			$current_status = "";
-		}		
-		if(isset($_POST['nfa_4'])){
-			$nfa_4 = $_POST['nfa_4'];
-		}
-		else{
-			
-			$nfa_4 = "";
-		}
-		if(isset($_POST['eess_4'])){
-			$eess_4 = $_POST['eess_4'];
-		}
-		else{
-			
-			$eess_4 = "";
-		}
-		if(isset($_POST['qol_4'])){
-			$qol_4 = $_POST['qol_4'];
-		}
-		else{
-			
-			$qol_4 = "";
-		}
-		if(isset($_POST['vas_4'])){
-			$vas_4 = $_POST['vas_4'];
-		}
-		else{
-			
-			$vas_4 = "";
-		}
-		if(isset($_POST['enl_present_time_since'])){
-			$enl_present_time_since = $_POST['enl_present_time_since'];
-		}
-		else{
-			
-			$enl_present_time_since = "";
-		}
-		if(isset($_POST['time_since_last_received_prednisolone'])){
-			$time_since_last_received_prednisolone = $_POST['time_since_last_received_prednisolone'];
-		}
-		else{
-			
-			$time_since_last_received_prednisolone = "";
-		}
-		if(isset($_POST['recurrent_enl_start_predni'])){
-			$recurrent_enl_start_predni = $_POST['recurrent_enl_start_predni'];
-		}
-		else{
-			
-			$recurrent_enl_start_predni = "";
-		}
-		if(isset($_POST['advised_admission'])){
-			$advised_admission = $_POST['advised_admission'];
-		}
-		else{
-			
-			$advised_admission = "";
-		}
-		if(isset($_POST['nextDate'])){
-			$nextDate = $_POST['nextDate'];
-		}
-		else{
-			
-			$nextDate = "";
-		}
-		if(isset($_POST['nextPDate'])){
-			$nextPDate = $_POST['nextPDate'];
-		}
-		else{
-			
-			$nextPDate = "";
-		}
-		
-		$q = "insert into form4 (pid,formDate,staff_name,current_status,nfa_4,eess_4,qol_4,vas_4,
-		enl_present_time_since,time_since_last_received_prednisolone,recurrent_enl_start_predni,advised_admission,nextDate,nextPDate) 
-		values ('$pid','$formDate','$staff_name','$current_status','$nfa_4','$eess_4','$qol_4','$vas_4','$enl_present_time_since',
-		'$time_since_last_received_prednisolone','$recurrent_enl_start_predni','$advised_admission','$nextDate','$nextPDate');";
-		// echo $q;
+	if (isset($_POST['formDate'])) {
+		$formDate = $_POST['formDate'];
+	} else {
 
-		if(query($q, 'form4') ) {
-        $f4id = $conn->insert_id;
+		$formDate = "";
+	}
+	if (isset($_POST['time_point'])) {
+		$time_point = $_POST['time_point'];
+	} else {
+
+		$time_point = "";
+	}
+	if (isset($_POST['staff_name'])) {
+		$staff_name = $_POST['staff_name'];
+	} else {
+
+		$staff_name = "";
+	}
+	if (isset($_POST['current_status'])) {
+		$current_status = $_POST['current_status'];
+	} else {
+
+		$current_status = "";
+	}
+	if (isset($_POST['weight'])) {
+		$weight = $_POST['weight'];
+	} else {
+
+		$weight = "";
+	}
+	if (isset($_POST['nfa_4'])) {
+		$nfa_4 = $_POST['nfa_4'];
+	} else {
+
+		$nfa_4 = "";
+	}
+
+	if (isset($_POST['new_nfi_4'])) {
+		$new_nfi_4 = $_POST['new_nfi_4'];
+	} else {
+		$new_nfi_4 = "NAN";
+	}
+
+	if (isset($_POST['Add1'])) {
+		$Add1 = $_POST['Add1'];
+	} else {
+		$Add1 = "NAN";
+	}
+
+	if (isset($_POST['eess_4'])) {
+		$eess_4 = $_POST['eess_4'];
+	} else {
+
+		$eess_4 = "";
+	}
+	if (isset($_POST['qol_4'])) {
+		$qol_4 = $_POST['qol_4'];
+	} else {
+
+		$qol_4 = "";
+	}
+	if (isset($_POST['vas_4'])) {
+		$vas_4 = $_POST['vas_4'];
+	} else {
+
+		$vas_4 = "";
+	}
+	if (isset($_POST['enl_present_time_since'])) {
+		$enl_present_time_since = $_POST['enl_present_time_since'];
+	} else {
+
+		$enl_present_time_since = "";
+	}
+	if (isset($_POST['time_since_last_received_prednisolone'])) {
+		$time_since_last_received_prednisolone = $_POST['time_since_last_received_prednisolone'];
+	} else {
+
+		$time_since_last_received_prednisolone = "";
+	}
+	if (isset($_POST['recurrent_enl_start_predni'])) {
+		$recurrent_enl_start_predni = $_POST['recurrent_enl_start_predni'];
+	} else {
+
+		$recurrent_enl_start_predni = "";
+	}
+	if (isset($_POST['advised_admission'])) {
+		$advised_admission = $_POST['advised_admission'];
+	} else {
+
+		$advised_admission = "";
+	}
+	if (isset($_POST['nextDate'])) {
+		$nextDate = $_POST['nextDate'];
+	} else {
+
+		$nextDate = "";
+	}
+
+	$q = "insert into form4 (pid,formDate,time_point,staff_name,current_status,weight,nfa_4,new_nfi_4,Add1,eess_4,qol_4,vas_4,
+		enl_present_time_since,time_since_last_received_prednisolone,recurrent_enl_start_predni,advised_admission,nextDate) 
+		values ('$pid','$formDate','$time_point','$staff_name','$current_status','$weight','$nfa_4','$new_nfi_4','$Add1','$eess_4','$qol_4','$vas_4','$enl_present_time_since',
+		'$time_since_last_received_prednisolone','$recurrent_enl_start_predni','$advised_admission','$nextDate');";
+	// echo $q;
+
+	if (query($q, 'form4')) {
+		$f4id = $conn->insert_id;
 		$check_0b = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
 		$check_1b = isset($_POST['adverse_predni'][1]) ? 'yes' : 'no';
 		$check_2b = isset($_POST['adverse_predni'][2]) ? 'yes' : 'no';
@@ -153,18 +159,14 @@ include('connection.php');
 		$query2 = "INSERT INTO form4_checkbox2 VALUES ('$f4id','$pid', '$check_0c','$check_1c','$check_2c', '$check_3c','$check_4c','$check_5c', '$check_6c','$check_7c','$check_8c', '$check_9c','$check_10c','$check_11c')";
 		mysqli_query($conn, $query2);
 
-// 		header("location:../../modules/display_form_1-6.php?pid=".$pid);
-        echo("<script>location.href = '../../modules/display_form_1-6.php?pid=$pid'</script>");
-		
-		} else {
-			echo "<br>Person could not be made.";
-		}
-
-		$conn->close();
-
-	} else  {
-		// do get
-		echo "not a post request";
+		// 		header("location:../../modules/display_form_1-6.php?pid=".$pid);
+		echo ("<script>location.href = '../../modules/display_form_1-6.php?pid=$pid'</script>");
+	} else {
+		echo "<br>Person could not be made.";
 	}
 
-?>
+	$conn->close();
+} else {
+	// do get
+	echo "not a post request";
+}

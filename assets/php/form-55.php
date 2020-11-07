@@ -26,6 +26,13 @@ include('connection.php');
 			
 			$date = "NAN";
 		}
+		if(isset($_POST['time_point'])){
+			$time_point = $_POST['time_point'];
+		}
+		else{
+			
+			$time_point = "NAN";
+		}
 		if(isset($_POST['staff_name'])){
 			$staff_name = $_POST['staff_name'];
 		}
@@ -39,6 +46,22 @@ include('connection.php');
 		else{
 			
 			$patient_since_last_visit = "NAN";
+		}
+
+		if(isset($_POST['current_medication'])){
+			$current_medication = $_POST['current_medication'];
+		}
+		else{
+			
+			$current_medication = "NAN";
+		}
+
+		if(isset($_POST['weight_5'])){
+			$weight_5 = $_POST['weight_5'];
+		}
+		else{
+			
+			$weight_5 = "NAN";
 		}
 		if(isset($_POST['prednisolone_5'])){
 			$prednisolone_5 = $_POST['prednisolone_5'];
@@ -81,6 +104,20 @@ include('connection.php');
 		else{
 			
 			$eess_score_5 = "NAN";
+		}
+		if(isset($_POST['bp'])){
+			$bp = $_POST['bp'];
+		}
+		else{
+			
+			$bp = "NAN";
+		}
+		if(isset($_POST['bsl'])){
+			$bsl = $_POST['bsl'];
+		}
+		else{
+			
+			$bsl = "NAN";
 		}
 		
 		if(isset($_POST['patient_worse'])){
@@ -144,11 +181,11 @@ include('connection.php');
 			$date_of_next_assessment_5 = "NAN";
 		}
 
-		$q1 = "insert into form5 (pid,date,staff_name,patient_since_last_visit,prednisolone_5,clofazimine_vitamins,nfa_5,new_nfi_5,if_yes,
-		eess_score_5,patient_worse,time_since_flare_began,dose_std_course,dura_std_course,dose_add_predni,dura_add_predni,advised_admission,
+		$q1 = "insert into form5 (pid,date,time_point,staff_name,patient_since_last_visit,current_medication,weight_5,prednisolone_5,clofazimine_vitamins,nfa_5,new_nfi_5,if_yes,
+		eess_score_5,bp,bsl,patient_worse,time_since_flare_began,dose_std_course,dura_std_course,dose_add_predni,dura_add_predni,advised_admission,
 		date_of_next_assessment_5) 
-		values ('$pid','$date','$staff_name','$patient_since_last_visit','$prednisolone_5','$clofazimine_vitamins','$nfa_5','$new_nfi_5','$if_yes',
-		'$eess_score_5','$patient_worse','$time_since_flare_began','$dose_std_course','$dura_std_course','$dose_add_predni','$dura_add_predni','$advised_admission',
+		values ('$pid','$date','$time_point','$staff_name','$patient_since_last_visit','$current_medication','$weight_5','$prednisolone_5','$clofazimine_vitamins','$nfa_5','$new_nfi_5','$if_yes',
+		'$eess_score_5','$bp','$bsl','$patient_worse','$time_since_flare_began','$dose_std_course','$dura_std_course','$dose_add_predni','$dura_add_predni','$advised_admission',
 		'$date_of_next_assessment_5');";
 
 		if(query($q1, 'form5') ) {
@@ -201,5 +238,3 @@ $conn->close();
 		// do get
 		echo "not a post request";
 	}
-
-?>

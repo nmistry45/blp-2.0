@@ -2,243 +2,212 @@
 
 include('connection.php');
 
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // do post
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	// do post
 
-		$pid = $_GET['pid'];
-		function query ( $query, $message = '' ) {
+	$pid = $_GET['pid'];
+	function query($query, $message = '')
+	{
 		global $conn;
 		$insert = mysqli_query($conn, $query);
-		if($insert){
-		  //echo"Successful Insertion ".$message."<br>";
-		  return 1;
-		}
-		else{
-		  echo"<br>Query error ".$message." : " . mysqli_error($conn)."<br>";
-		  return 0;
+		if ($insert) {
+			//echo"Successful Insertion ".$message."<br>";
+			return 1;
+		} else {
+			echo "<br>Query error " . $message . " : " . mysqli_error($conn) . "<br>";
+			return 0;
 		}
 	}
-		
-		if(isset($_POST['date'])){
-			$date = $_POST['date'];
-		}
 
-		else{
-			
-			$date = "NAN";
-		}
+	if (isset($_POST['date'])) {
+		$date = $_POST['date'];
+	} else {
 
-		if(isset($_POST['staff_name'])){
-			$staff_name = $_POST['staff_name'];
-		}
+		$date = "NAN";
+	}
 
-		else{
-			
-			$staff_name = "NAN";
-		}
-		if(isset($_POST['current_status'])){
-			$current_status = $_POST['current_status'];
-		}
+	if (isset($_POST['staff_name'])) {
+		$staff_name = $_POST['staff_name'];
+	} else {
 
-		else{
-			
-			$current_status = "NAN";
-		}
+		$staff_name = "NAN";
+	}
+	if (isset($_POST['current_status'])) {
+		$current_status = $_POST['current_status'];
+	} else {
 
-		if(isset($_POST['nfa'])){
-			$nfa = $_POST['nfa'];
-		}
+		$current_status = "NAN";
+	}
 
-		else{
-			
-			$nfa = "NAN";
-		}
+	if (isset($_POST['Weight'])) {
+		$Weight = $_POST['Weight'];
+	} else {
 
-		if(isset($_POST['eess'])){
-			$eess = $_POST['eess'];
-		}
+		$Weight = "Weight";
+	}
 
-		else{
-			
-			$eess = "NAN";
-		}	
+	if (isset($_POST['BMI'])) {
+		$BMI = $_POST['BMI'];
+	} else {
 
-		if(isset($_POST['qol'])){
-			$qol = $_POST['qol'];
-		}
+		$BMI = "BMI";
+	}
 
-		else{
-			
-			$qol = "NAN";
-		}
+	if (isset($_POST['nfa'])) {
+		$nfa = $_POST['nfa'];
+	} else {
 
-		if(isset($_POST['vas'])){
-			$vas = $_POST['vas'];
-		}
+		$nfa = "NAN";
+	}
 
-		else{
-			
-			$vas = "NAN";
-		}
+	if (isset($_POST['eess'])) {
+		$eess = $_POST['eess'];
+	} else {
 
-		if(isset($_POST['current_antireaction_therapy'])){
-			$current_antireaction_therapy = $_POST['current_antireaction_therapy'];
-		}
+		$eess = "NAN";
+	}
 
-		else{
-			
-			$current_antireaction_therapy = "NAN";
-		}
+	if (isset($_POST['qol'])) {
+		$qol = $_POST['qol'];
+	} else {
 
-		
+		$qol = "NAN";
+	}
 
-		if(isset($_POST['no_weeks_extra_clofazimine'])){
-			$no_weeks_extra_clofazimine = $_POST['no_weeks_extra_clofazimine'];
-		}
+	if (isset($_POST['vas'])) {
+		$vas = $_POST['vas'];
+	} else {
 
-		else{
-			
-			$no_weeks_extra_clofazimine = "NAN";
-		}
+		$vas = "NAN";
+	}
 
-		if(isset($_POST['enl_at_randomisation'])){
-			$enl_at_randomisation = $_POST['enl_at_randomisation'];
-		}
+	if (isset($_POST['current_antireaction_therapy'])) {
+		$current_antireaction_therapy = $_POST['current_antireaction_therapy'];
+	} else {
 
-		else{
-			
-			$enl_at_randomisation = "NAN";
-		}
+		$current_antireaction_therapy = "NAN";
+	}
 
-		if(isset($_POST['duration_first_episode'])){
-			$duration_first_episode = $_POST['duration_first_episode'];
-		}
 
-		else{
-			
-			$duration_first_episode = "NAN";
-		}
 
-		if(isset($_POST['flare_of_enl'])){
-			$flare_of_enl = $_POST['flare_of_enl'];
-		}
+	if (isset($_POST['no_weeks_extra_clofazimine'])) {
+		$no_weeks_extra_clofazimine = $_POST['no_weeks_extra_clofazimine'];
+	} else {
 
-		else{
-			
-			$flare_of_enl = "NAN";
-		}
+		$no_weeks_extra_clofazimine = "NAN";
+	}
 
-		if(isset($_POST['if_flare_how_long'])){
-			$if_flare_how_long = $_POST['if_flare_how_long'];
-		}
+	if (isset($_POST['enl_at_randomisation'])) {
+		$enl_at_randomisation = $_POST['enl_at_randomisation'];
+	} else {
 
-		else{
-			
-			$if_flare_how_long = "NAN";
-		}
+		$enl_at_randomisation = "NAN";
+	}
 
-		if(isset($_POST['eess_at_flare'])){
-			$eess_at_flare = $_POST['eess_at_flare'];
-		}
+	if (isset($_POST['duration_first_episode'])) {
+		$duration_first_episode = $_POST['duration_first_episode'];
+	} else {
 
-		else{
-			
-			$eess_at_flare = "NAN";
-		}
+		$duration_first_episode = "NAN";
+	}
 
-		if(isset($_POST['recurrent_enl_steroids'])){
-			$recurrent_enl_steroids = $_POST['recurrent_enl_steroids'];
-		}
+	if (isset($_POST['flare_of_enl'])) {
+		$flare_of_enl = $_POST['flare_of_enl'];
+	} else {
 
-		else{
-			
-			$recurrent_enl_steroids = "NAN";
-		}
+		$flare_of_enl = "NAN";
+	}
 
-		if(isset($_POST['chronic_enl_randomisation'])){
-			$chronic_enl_randomisation = $_POST['chronic_enl_randomisation'];
-		}
+	if (isset($_POST['if_flare_how_long'])) {
+		$if_flare_how_long = $_POST['if_flare_how_long'];
+	} else {
 
-		else{
-			
-			$chronic_enl_randomisation = "NAN";
-		}
+		$if_flare_how_long = "NAN";
+	}
 
-		if(isset($_POST['total_steroids_consumed'])){
-			$total_steroids_consumed = $_POST['total_steroids_consumed'];
-		}
+	if (isset($_POST['eess_at_flare'])) {
+		$eess_at_flare = $_POST['eess_at_flare'];
+	} else {
 
-		else{
-			
-			$total_steroids_consumed = "NAN";
-		}
-		
-		if(isset($_POST['change_in_nfa'])){
-			$change_in_nfa = $_POST['change_in_nfa'];
-		}
+		$eess_at_flare = "NAN";
+	}
 
-		else{
-			
-			$change_in_nfa = "NAN";
-		}
+	if (isset($_POST['recurrent_enl_steroids'])) {
+		$recurrent_enl_steroids = $_POST['recurrent_enl_steroids'];
+	} else {
 
-		if(isset($_POST['change_in_nfa_desc'])){
-			$change_in_nfa_desc = $_POST['change_in_nfa_desc'];
-		}
+		$recurrent_enl_steroids = "NAN";
+	}
 
-		else{
-			
-			$change_in_nfa_desc = "NAN";
-		}
+	if (isset($_POST['chronic_enl_randomisation'])) {
+		$chronic_enl_randomisation = $_POST['chronic_enl_randomisation'];
+	} else {
 
-		if(isset($_POST['change_in_qol'])){
-			$change_in_qol = $_POST['change_in_qol'];
-		}
+		$chronic_enl_randomisation = "NAN";
+	}
 
-		else{
-			
-			$change_in_qol = "NAN";
-		}
-		
-		if(isset($_POST['adverse_effect_of_drug'])){
-			$adverse_effect_of_drug = $_POST['adverse_effect_of_drug'];
-		}
+	if (isset($_POST['total_steroids_consumed'])) {
+		$total_steroids_consumed = $_POST['total_steroids_consumed'];
+	} else {
 
-		else{
-			
-			$adverse_effect_of_drug = "NAN";
-		}
+		$total_steroids_consumed = "NAN";
+	}
 
-		if(isset($_POST['drug_desc'])){
-			$drug_desc = $_POST['drug_desc'];
-		}
+	if (isset($_POST['change_in_nfa'])) {
+		$change_in_nfa = $_POST['change_in_nfa'];
+	} else {
 
-		else{
-			
-			$drug_desc = "NAN";
-		}
+		$change_in_nfa = "NAN";
+	}
 
-	
 
-		if(isset($_POST['others'])){
-			$others = $_POST['others'];
-		}
+	if (isset($_POST['change_in_qol'])) {
+		$change_in_qol = $_POST['change_in_qol'];
+	} else {
 
-		else{
-			
-			$others = "NAN";
-		}
-		
-		$q1 = "insert into form6 (pid,date,staff_name,current_status,nfa,eess,qol,vas,
+		$change_in_qol = "NAN";
+	}
+
+	if (isset($_POST['adverse_effect_of_drug'])) {
+		$adverse_effect_of_drug = $_POST['adverse_effect_of_drug'];
+	} else {
+
+		$adverse_effect_of_drug = "NAN";
+	}
+
+	if (isset($_POST['drug_desc'])) {
+		$drug_desc = $_POST['drug_desc'];
+	} else {
+
+		$drug_desc = "NAN";
+	}
+
+
+
+	if (isset($_POST['others'])) {
+		$others = $_POST['others'];
+	} else {
+
+		$others = "NAN";
+	}
+
+	if (isset($_POST['death'])) {
+		$death = $_POST['death'];
+	} else {
+
+		$death = "NAN";
+	}
+
+	$q1 = "insert into form6 (pid,date,staff_name,current_status,Weight,BMI,nfa,eess,qol,vas,
 		current_antireaction_therapy,no_weeks_extra_clofazimine,enl_at_randomisation,duration_first_episode,flare_of_enl,if_flare_how_long,eess_at_flare,recurrent_enl_steroids,chronic_enl_randomisation,total_steroids_consumed,
-		change_in_nfa,change_in_nfa_desc,change_in_qol,adverse_effect_of_drug,drug_desc,others) 
-		values ('$pid','$date','$staff_name','$current_status','$nfa','$eess','$qol','$vas','$current_antireaction_therapy',
+		change_in_nfa,change_in_qol,adverse_effect_of_drug,drug_desc,others,death) 
+		values ('$pid','$date','$staff_name','$current_status','$Weight','$BMI','$nfa','$eess','$qol','$vas','$current_antireaction_therapy',
 		'$no_weeks_extra_clofazimine','$enl_at_randomisation','$duration_first_episode','$flare_of_enl','$if_flare_how_long','$eess_at_flare','$recurrent_enl_steroids','$chronic_enl_randomisation','$total_steroids_consumed',
-		'$change_in_nfa','$change_in_nfa_desc','$change_in_qol','$adverse_effect_of_drug','$drug_desc','$others');";
+		'$change_in_nfa','$change_in_qol','$adverse_effect_of_drug','$drug_desc','$others','$death');";
 
-		if(query($q1, 'form6') ) {
+	if (query($q1, 'form6')) {
 		$f6id = $conn->insert_id;
-        $check_0f = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
+		$check_0f = isset($_POST['adverse_predni'][0]) ? 'yes' : 'no';
 		$check_1f = isset($_POST['adverse_predni'][1]) ? 'yes' : 'no';
 		$check_2f = isset($_POST['adverse_predni'][2]) ? 'yes' : 'no';
 		$check_3f = isset($_POST['adverse_predni'][3]) ? 'yes' : 'no';
@@ -258,42 +227,38 @@ include('connection.php');
 		mysqli_query($conn, $query1);
 
 		$check_0g = isset($_POST['adverse_clofa'][0]) ? 'yes' : 'no';
-        $check_1g = isset($_POST['adverse_clofa'][1]) ? 'yes' : 'no';
-        $check_2g = isset($_POST['adverse_clofa'][2]) ? 'yes' : 'no';
-        $check_3g = isset($_POST['adverse_clofa'][3]) ? 'yes' : 'no';
-        $check_4g = isset($_POST['adverse_clofa'][4]) ? 'yes' : 'no';
-        $check_5g = isset($_POST['adverse_clofa'][5]) ? 'yes' : 'no';
-        $check_6g = isset($_POST['adverse_clofa'][6]) ? 'yes' : 'no';
-        $check_7g = isset($_POST['adverse_clofa'][7]) ? 'yes' : 'no';
-        $check_8g = isset($_POST['adverse_clofa'][8]) ? 'yes' : 'no';
-        $check_9g = isset($_POST['adverse_clofa'][9]) ? 'yes' : 'no';
-        $check_10g = isset($_POST['adverse_clofa'][10]) ? 'yes' : 'no';
-        $check_11g = isset($_POST['adverse_clofa'][11]) ? 'yes' : 'no';
+		$check_1g = isset($_POST['adverse_clofa'][1]) ? 'yes' : 'no';
+		$check_2g = isset($_POST['adverse_clofa'][2]) ? 'yes' : 'no';
+		$check_3g = isset($_POST['adverse_clofa'][3]) ? 'yes' : 'no';
+		$check_4g = isset($_POST['adverse_clofa'][4]) ? 'yes' : 'no';
+		$check_5g = isset($_POST['adverse_clofa'][5]) ? 'yes' : 'no';
+		$check_6g = isset($_POST['adverse_clofa'][6]) ? 'yes' : 'no';
+		$check_7g = isset($_POST['adverse_clofa'][7]) ? 'yes' : 'no';
+		$check_8g = isset($_POST['adverse_clofa'][8]) ? 'yes' : 'no';
+		$check_9g = isset($_POST['adverse_clofa'][9]) ? 'yes' : 'no';
+		$check_10g = isset($_POST['adverse_clofa'][10]) ? 'yes' : 'no';
+		$check_11g = isset($_POST['adverse_clofa'][11]) ? 'yes' : 'no';
 		$query2 = "INSERT INTO form6_checkbox2 VALUES ('$f6id','$pid', '$check_0g','$check_1g','$check_2g', '$check_3g','$check_4g','$check_5g', '$check_6g','$check_7g','$check_8g', '$check_9g','$check_10g','$check_11g')";
 		mysqli_query($conn, $query2);
 
 		$check_0h = isset($_POST['withdraw'][0]) ? 'yes' : 'no';
-        $check_1h = isset($_POST['withdraw'][1]) ? 'yes' : 'no';
-        $check_2h = isset($_POST['withdraw'][2]) ? 'yes' : 'no';
-        $check_3h = isset($_POST['withdraw'][3]) ? 'yes' : 'no';
-        $check_4h = isset($_POST['withdraw'][4]) ? 'yes' : 'no';
+		$check_1h = isset($_POST['withdraw'][1]) ? 'yes' : 'no';
+		$check_2h = isset($_POST['withdraw'][2]) ? 'yes' : 'no';
+		$check_3h = isset($_POST['withdraw'][3]) ? 'yes' : 'no';
+		$check_4h = isset($_POST['withdraw'][4]) ? 'yes' : 'no';
 		$check_5h = isset($_POST['withdraw'][5]) ? 'yes' : 'no';
-		$query3 = "INSERT INTO form6_checkbox3 VALUES ('$f6id','$pid', '$check_0h','$check_1h','$check_2h', '$check_3h','$check_4h','$check_5h')";
+		$check_6h = isset($_POST['withdraw'][6]) ? 'yes' : 'no';
+		$query3 = "INSERT INTO form6_checkbox3 VALUES ('$f6id','$pid', '$check_0h','$check_1h','$check_2h', '$check_3h','$check_4h','$check_5h','$check_6h')";
 		mysqli_query($conn, $query3);
-		
-// 		header("location:../../modules/display_form_1-6.php?pid=".$pid);
-        echo("<script>location.href = '../../modules/display_form_1-6.php?pid=$pid'</script>");
-		
-		} else {
-			echo "<br>Person could not be made.";
-		}
 
-$conn->close();
-
-	} 
-	else {
-		// do get
-		echo "not a post request";
+		// 		header("location:../../modules/display_form_1-6.php?pid=".$pid);
+		echo ("<script>location.href = '../../modules/display_form_1-6.php?pid=$pid'</script>");
+	} else {
+		echo "<br>Person could not be made.";
 	}
-	
-?>
+
+	$conn->close();
+} else {
+	// do get
+	echo "not a post request";
+}
