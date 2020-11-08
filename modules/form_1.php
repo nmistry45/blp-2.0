@@ -142,7 +142,7 @@ if (!isset($_SESSION['id'])) {
                             <table style="padding-left: 41px ;" id="tb7" class="form-label">
                                 <tbody>
                                     <tr class="tr-header">
-                                        <th><input type="number" name="Contact[]" id="contact_number" /></th>
+                                        <th><input type="tel" pattern="^\d{10}$" title="Enter a Valid 10-Digit Number" name="Contact[]" id="contact_number" /></th>
                                         <th><a href="javascript:void(0);" style="font-size:18px;" id="addMore7" title="Add More Person"><span class="fa fa-plus"></span></a></th>
                                         <th>&ensp; </th>
                                         <th><a href='javascript:void(0);' style="font-size:18px;" class='remove7' title="Remove"><span class='fa fa-minus'></span></a></th>
@@ -154,7 +154,7 @@ if (!isset($_SESSION['id'])) {
 
                     <div class="form-group">
                         <label for="email_id" class="form-label">E-Mail ID:</label>
-                        <input type="email" name="email_id" id="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="E-Mail ID" />
+                        <input type="email" name="email_id" id="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Enter a Valid Email-ID" placeholder="E-Mail ID" />
                     </div>
 
                     <div class="form-row" style="padding-left: 22px;">

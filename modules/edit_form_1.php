@@ -158,7 +158,7 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                                         <?php
                                         while ($row_form_1_contact_no = mysqli_fetch_assoc($result_form_1_contact_no)) { ?>
                                             <tr class="tr-header">
-                                                <th><input type="number" name="Contact[]" id="Contact[]" value=<?php echo $row_form_1_contact_no['contact_no'];  ?> /></th>
+                                                <th><input type="tel" pattern="^\d{10}$" title="Enter a Valid 10-Digit Number" name="Contact[]" id="Contact[]" value=<?php echo $row_form_1_contact_no['contact_no'];  ?> /></th>
                                                 <th><a href="javascript:void(0);" style="font-size:18px;" id="addMore7" title="Add More Person"><span class="fa fa-plus"></span></a></th>
                                                 <th>&ensp; </th>
                                                 <th><a href='javascript:void(0);' style="font-size:18px;" class='remove7' title="Remove"><span class='fa fa-minus'></span></a></th>
@@ -171,7 +171,7 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
 
                         <div class="form-group">
                             <label for="email_id" class="form-label">E-Mail ID:</label>
-                            <input type="email" name="email_id" id="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="E-Mail ID" value="<?php echo $row_form_1['email_id']; ?>" />
+                            <input type="email" name="email_id" id="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Enter a Valid Email-ID" placeholder="E-Mail ID" value="<?php echo $row_form_1['email_id']; ?>" />
                         </div>
 
                         <div class="form-row" style="padding-left: 22px;">
