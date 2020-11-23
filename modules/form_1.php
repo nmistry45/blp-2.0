@@ -142,7 +142,7 @@ if (!isset($_SESSION['id'])) {
                             <table style="padding-left: 41px ;" id="tb7" class="form-label">
                                 <tbody>
                                     <tr class="tr-header">
-                                        <th><input type="tel" pattern="^\d{10}$" title="Enter a Valid 10-Digit Number" name="Contact[]" id="contact_number" /></th>
+                                        <th><input type="tel" pattern="^\d{10,}$" title="Enter a Valid Mobile Number" name="Contact[]" id="contact_number" /></th>
                                         <th><a href="javascript:void(0);" style="font-size:18px;" id="addMore7" title="Add More Person"><span class="fa fa-plus"></span></a></th>
                                         <th>&ensp; </th>
                                         <th><a href='javascript:void(0);' style="font-size:18px;" class='remove7' title="Remove"><span class='fa fa-minus'></span></a></th>
@@ -268,17 +268,17 @@ if (!isset($_SESSION['id'])) {
                         <div class="form-row" style="padding-left: 20px;">
                             <div class="form-group" style="padding-left: 65px;">
                                 <label for="Weight" class="form-label">Weight:</label>
-                                <input type="text" name="Weight" id="Weight" onchange="calculateBMI()" placeholder="Weight in kilograms" />
+                                <input type="number" name="Weight" id="Weight" onchange="calculateBMI()" step=".01" placeholder="Weight in kilograms" />
                             </div>
 
                             <div class="form-group">
                                 <label for="Height" class="form-label">Height:</label>
-                                <input type="text" name="Height" id="Height" onchange="calculateBMI()" placeholder="Height in meters" />
+                                <input type="number" name="Height" id="Height" onchange="calculateBMI()" step=".01" placeholder="Height in meters" />
                             </div>
 
                             <div class="form-group">
                                 <label for="BMI" class="form-label">BMI:</label>
-                                <input type="text" name="BMI" id="BMI" onchange="calculateBMI()" placeholder="BMI Score" />
+                                <input type="number" name="BMI" id="BMI" onchange="calculateBMI()" step=".01" placeholder="BMI Score" />
                             </div>
                         </div>
 
@@ -599,7 +599,7 @@ if (!isset($_SESSION['id'])) {
             var Height = thisform.Height.value;
             var study_no = thisform.study_no.value;
             var allocate_study_no = thisform.allocate_study_no.value;
-            var phoneno = /^\d{10}$/;
+            var phoneno = /^\d{10,}$/;
             var staff_mobile_no = thisform.staff_mobile_no.value;
             var BMI = thisform.BMI.value;
 
@@ -647,7 +647,7 @@ if (!isset($_SESSION['id'])) {
             if (Weight < 40) {
                 alert("Weight Should Be Greater than 40 kilograms");
                 thisform.Weight.focus();
-                return false;
+                // return false;
             }
             if (isNaN(Weight)) {
                 alert("Enter a Valid Weight");
@@ -666,7 +666,7 @@ if (!isset($_SESSION['id'])) {
                 return false;
             }
             if (!staff_mobile_no.match(phoneno)) {
-                alert("Enter Valid 10-digit Staff Mobile Number");
+                alert("Enter a Valid Staff Mobile Number");
                 thisform.staff_mobile_no.focus();
                 return false;
             }
@@ -678,7 +678,7 @@ if (!isset($_SESSION['id'])) {
             if (document.getElementById('contrano').checked) {
                 alert("Cannot Have Contra-indications");
                 document.getElementById('contrano').focus();
-                return false;
+                // return false;
             }
             if (BMI < 18.5) {
                 alert("BMI Should be Greater Than 18.5");
@@ -686,9 +686,9 @@ if (!isset($_SESSION['id'])) {
                 return false;
             }
             if (document.getElementById('pregno').checked) {
-                alert("Not Eligible as The Patient is Pregnant");
+                alert("May Not Be Eligible as The Patient is Pregnant");
                 document.getElementById('pregno').focus();
-                return false;
+                // return false;
             }
             if (document.getElementById('attendno').checked) {
                 alert("Not Eligible as The Patient is Not Being Able To Attend Regularly");
@@ -696,9 +696,9 @@ if (!isset($_SESSION['id'])) {
                 return false;
             }
             if (document.getElementById('consno').checked) {
-                alert("Not Eligible as The Patient Does Not Provide Informed Consent");
+                alert("May Not Be Eligible as The Patient Does Not Provide Informed Consent");
                 document.getElementById('consno').focus();
-                return false;
+                // return false;
             }
 
             return true;
