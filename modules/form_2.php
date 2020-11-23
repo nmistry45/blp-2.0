@@ -1,16 +1,16 @@
 <?php
 
-// session_start();
+session_start();
 
-// include ('logout.php');
+include('logout.php');
 
-// if(!isset($_SESSION['id'])){
-//     echo"<script>
-//     alert('Please Login');
-//     document.location.href = 'login.php';
-//     </script>
-//     ";
-// }
+if (!isset($_SESSION['id'])) {
+    echo "<script>
+    alert('Please Login');
+    document.location.href = 'login.php';
+    </script>
+    ";
+}
 
 ?>
 
@@ -640,9 +640,9 @@
         function checkEESS(thisform) {
             var eess_val = thisform.eess_2.value;
             if (eess_val < 9) {
-                alert("Not Eligible for Randomisation as EESS Score Less Than 9");
+                alert("May Not Be Eligible for Randomisation as EESS Score Less Than 9");
                 thisform.eess_2.focus();
-                return false;
+                // return false;
             }
             return true;
         }

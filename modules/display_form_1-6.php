@@ -17,7 +17,7 @@ $id = $_GET['pid'];
 
 $result_form_1_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
 $result_form_1_date = mysqli_query($conn, "SELECT date from form1 where pid = $id");
-$result_form_1_study_no = mysqli_query($conn, "SELECT study_no from form1 where pid = $id");
+$result_form_1_study_no_allocate_study_no = mysqli_query($conn, "SELECT study_no, allocate_study_no from form1 where pid = $id");
 $result_form_1_patient_name1_sex_address = mysqli_query($conn, "SELECT patient_name1, sex, address from form1 where pid = $id");
 $result_form_1_email_id_local_staff_contact_staff_mobile_no = mysqli_query($conn, "SELECT email_id, local_staff_contact, staff_mobile_no from form1 where pid = $id");
 $result_form_1_clinic_regno_staff_name = mysqli_query($conn, "SELECT clinic_regno, staff_name from form1 where pid = $id");
@@ -27,7 +27,7 @@ $result_form_1_mdiag_type_Age_Weight_Height_BMI_any_contra_indication_steroids_a
   = mysqli_query($conn, "SELECT mdiag, type, Age, Weight, Height, BMI, any_contra_indication_steroids, able_to_attend_regularly, not_pregnant, long_term, inform_consent
 from form1 where pid = $id");
 $result_form_1_others = mysqli_query($conn, "SELECT others from form1 where pid = $id");
-$result_form_1_allocate_study_no_history_of_enl = mysqli_query($conn, "SELECT allocate_study_no, history_of_enl from form1 where pid = $id");
+$result_form_1_history_of_enl = mysqli_query($conn, "SELECT history_of_enl from form1 where pid = $id");
 $result_form_1_contact_no = mysqli_query($conn, "SELECT * from form1_contact where pid = $id");
 $result_form1_checkbox = mysqli_query($conn, "SELECT * from form1_checkbox where pid = $id");
 
@@ -107,15 +107,23 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
           <?php } ?>
 
           <tr>
-            <th colspan="" id="">ID Number</th>
+            <th colspan="" id="">Serial Number:</th>
             <td colspan="6"><?php echo $id ?></td>
           </tr>
 
           <?php while ($row_form_1_clinic_regno_staff_name = mysqli_fetch_assoc($result_form_1_clinic_regno_staff_name)) { ?>
             <tr>
-              <th colspan="">Patient Code</th>
+              <th colspan="">Clinic Registration Number:</th>
               <td colspan="5"><?php echo $row_form_1_clinic_regno_staff_name['clinic_regno']; ?></td>
               <td colspan="1" style="text-align:left"><strong>Staff Name:</strong><?php echo "  " . $row_form_1_clinic_regno_staff_name['staff_name']; ?></td>
+            </tr>
+          <?php } ?>
+
+          <?php while ($row_form_1_study_no_allocate_study_no = mysqli_fetch_assoc($result_form_1_study_no_allocate_study_no)) { ?>
+            <tr>
+              <th colspan="">Study Number:</th>
+              <td colspan="5"><?php echo $row_form_1_study_no_allocate_study_no['study_no']; ?></td>
+              <td colspan="1" style="text-align:left"><strong>Allocated Study Number:</strong><?php echo "  " . $row_form_1_study_no_allocate_study_no['allocate_study_no']; ?></td>
             </tr>
           <?php } ?>
 
@@ -265,19 +273,14 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
         </tr>
       <?php } ?>
 
-      <?php while ($row_form_1_allocate_study_no_history_of_enl = mysqli_fetch_assoc($result_form_1_allocate_study_no_history_of_enl)) { ?>
+      <?php while ($row_form_1_history_of_enl = mysqli_fetch_assoc($result_form_1_history_of_enl)) { ?>
         <tr>
           <th colspan="7" id="" style="color: blue"><u>Enrolment for Observations:</u></th>
         </tr>
 
         <tr>
-          <th colspan="1" id="">Allocated Study Number</th>
-          <td colspan="6"><?php echo $row_form_1_allocate_study_no_history_of_enl['allocate_study_no']; ?></td>
-        </tr>
-
-        <tr>
           <th colspan="" id="">History of ENL?</th>
-          <td colspan="6"><?php echo $row_form_1_allocate_study_no_history_of_enl['history_of_enl']; ?></td>
+          <td colspan="6"><?php echo $row_form_1_history_of_enl['history_of_enl']; ?></td>
         </tr>
       <?php } ?>
 
@@ -362,17 +365,17 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
             </tr>
 
             <tr>
-              <th colspan="1" id="">Current Daily Dose of Prednislone</th>
+              <th colspan="1" id="">Current Daily Dose of Prednislone (mg/day)</th>
               <td colspan="6"><?php echo $row_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal['current_dose_predni']; ?></td>
             </tr>
 
             <tr>
-              <th colspan="1" id="">Current Daily Dose of Clofazmine</th>
+              <th colspan="1" id="">Current Daily Dose of Clofazmine (mg/day)</th>
               <td colspan="6"><?php echo $row_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal['current_dose_clofa']; ?></td>
             </tr>
 
             <tr>
-              <th colspan="1" id="">Current Daily Dose of Thalidamide</th>
+              <th colspan="1" id="">Current Daily Dose of Thalidamide (mg/day)</th>
               <td colspan="6"><?php echo $row_form2_dateStartedPredni_currentDosePredni_currentDoseClofa_currentDoseThal['current_dose_thal']; ?></td>
             </tr>
 
@@ -527,7 +530,6 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
     <div class="d-flex justify-content-center">
       <a href="edit_form_1.php?pid=<?php echo $id; ?>" target="_blank" class=""><button type="button" class="btn btn-danger ">Edit Form1 Details</button></a><br><br>
       <a href="edit_form_2.php?pid=<?php echo $id; ?>" target="_blank" style="padding-left:30px;" class=""><button type="button" class="btn btn-danger ">Edit Form2 Details</button></a><br><br>
-      <br><br>
     </div>
 
     <?php
@@ -577,7 +579,7 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
             </tr>
 
             <tr>
-              <th colspan="" id="">ID Number</th>
+              <th colspan="" id="">Serial Number:</th>
               <td colspan="5"><?php echo $id ?></td>
               <td colspan="1" style="text-align:left"><strong>Time Point:</strong><?php echo "  " . $row_form3['time_point']; ?></td>
             </tr>
@@ -727,7 +729,7 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
             </tr>
 
             <tr>
-              <th colspan="" id="">ID Number</th>
+              <th colspan="" id="">Serial Number:</th>
               <td colspan="6"><?php echo $id ?></td>
             </tr>
 
@@ -942,7 +944,7 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
             </tr>
 
             <tr>
-              <th colspan="" id="">ID Number</th>
+              <th colspan="" id="">Serial Number:</th>
               <td colspan="6"><?php echo $id ?></td>
             </tr>
 
@@ -1134,6 +1136,7 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
 
           <?php
           $result_form_6_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
+          $result_form_1_Height = mysqli_query($conn, "SELECT Height from form1 where pid = $id");
           $f6id = $row_form6['f6id'];
           $result_form6_ad_pred  = mysqli_query($conn, "SELECT * from form6_checkbox where f6id = $f6id");
           $result_form6_ad_clofa  = mysqli_query($conn, "SELECT * from form6_checkbox2 where f6id = $f6id");
@@ -1155,7 +1158,7 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
             </tr>
 
             <tr>
-              <th colspan="" id="">ID Number</th>
+              <th colspan="" id="">Serial Number:</th>
               <td colspan="6"><?php echo $id ?></td>
             </tr>
 
@@ -1189,6 +1192,13 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
               <th colspan="1" id="">Weight</th>
               <td colspan="6"><?php echo $row_form6['Weight']; ?></td>
             </tr>
+
+            <?php while ($row_form_1_Height = mysqli_fetch_assoc($result_form_1_Height)) { ?>
+              <tr>
+                <th colspan="1" id="">Height</th>
+                <td colspan="6"><?php echo $row_form_1_Height['Height']; ?></td>
+              </tr>
+            <?php } ?>
 
             <tr>
               <th colspan="1" id="">BMI</th>
@@ -1401,50 +1411,48 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
     </div>
 
     <div class="container">
-
-      <table class="table table-bordered">
-
-        <?php
-        $result_form_7_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
-        ?>
-
-        <tbody>
-          <tr>
-            <th colspan="7" id="" style="vertical-align:middle; text-align:center;">
-              <h4><strong>7. Miscellaneous Notes by Research Staff</strong></h4>
-            </th>
-            <!-- <td colspan="1" >No Profile Image</td> -->
-            <?php ?>
-          </tr>
-
-          <?php while ($row_form_7_patient_name = mysqli_fetch_assoc($result_form_7_patient_name)) { ?>
-            <tr>
-              <th colspan="1" id="">Patient Name</th>
-              <td colspan="6"><?php echo $row_form_7_patient_name['patient_name']; ?></td>
-            </tr>
-          <?php } ?>
+      <?php if (mysqli_num_rows($form_7) > 0) { ?>
+        <table class="table table-bordered">
 
           <?php
-          while ($row_form7 = mysqli_fetch_assoc($form_7)) {
-            $misid = $row_form7['misid'];
+          $result_form_7_patient_name = mysqli_query($conn, "SELECT patient_name from form1 where pid = $id");
           ?>
+
+          <tbody>
             <tr>
-              <th colspan="1" id="">Date</th>
-              <td colspan="4"><?php echo $row_form7['date_form_7']; ?></td>
-              <td colspan="1" style="text-align:left"><strong>Staff Name:</strong><?php echo "  " . $row_form7['staff_name_7']; ?></td>
-              <td colspan="1" style="text-align:left"><strong>Comments:</strong><?php echo "  " . $row_form7['comments_7']; ?></td>
+              <th colspan="7" id="" style="vertical-align:middle; text-align:center;">
+                <h4><strong>7. Miscellaneous Notes by Research Staff</strong></h4>
+              </th>
             </tr>
-          <?php } ?>
-        </tbody>
-      </table>
 
-      <div class="d-flex justify-content-center">
-        <a href="edit_form_7.php?pid=<?php echo $id; ?>&misid=<?php echo $misid; ?>" target="_blank" class="">
-          <button type="button" class="btn btn-danger ">Edit Form7 Details</button>
-        </a>
-      </div>
-      <br>
+            <?php while ($row_form_7_patient_name = mysqli_fetch_assoc($result_form_7_patient_name)) { ?>
+              <tr>
+                <th colspan="1" id="">Patient Name</th>
+                <td colspan="6"><?php echo $row_form_7_patient_name['patient_name']; ?></td>
+              </tr>
+            <?php } ?>
 
+            <?php
+            while ($row_form7 = mysqli_fetch_assoc($form_7)) {
+              $misid = $row_form7['misid'];
+            ?>
+              <tr>
+                <th colspan="1" id="">Date</th>
+                <td colspan="4"><?php echo $row_form7['date_form_7']; ?></td>
+                <td colspan="1" style="text-align:left"><strong>Staff Name:</strong><?php echo "  " . $row_form7['staff_name_7']; ?></td>
+                <td colspan="1" style="text-align:left"><strong>Comments:</strong><?php echo "  " . $row_form7['comments_7']; ?></td>
+              </tr>
+            <?php } ?>
+          </tbody>
+        </table>
+
+        <div class="d-flex justify-content-center">
+          <a href="edit_form_7.php?pid=<?php echo $id; ?>&misid=<?php echo $misid; ?>" target="_blank" class="">
+            <button type="button" class="btn btn-danger ">Edit Form7 Details</button>
+          </a>
+        </div>
+        <br>
+      <?php } ?>
     </div>
 
     <div class="container">
@@ -1615,7 +1623,6 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
       <?php } ?>
     </div>
 
-
     <div class="btn btn-light-blue" style="display: flex; justify-content:space-around; padding-left:115px;">
       <a href="form_3.php?pid=<?php echo $id; ?>" target="_blank" class="">
         <button type="button" class="btn btn-primary btn-lg btn-block">3. Pre-Randomisation 3 Monthly Routine Follow-Up Sheet</button>
@@ -1647,6 +1654,8 @@ $result_form2_next_asse_date = mysqli_query($conn, "SELECT next_asse_date from f
       </a><br>
     </div>
 
-
+    <div class="btn btn-light-blue" style="display: flex; justify-content:space-around; padding-left:145px;">
+      <button type="button" name="new_patient" id="new_patient" class="valid btn btn-warning btn-lg" onclick="location.href='form_1.php';" style="margin-right:auto;">Add New Patient&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+    </div>
 
   </body>

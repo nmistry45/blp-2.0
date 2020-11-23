@@ -158,7 +158,7 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                                         <?php
                                         while ($row_form_1_contact_no = mysqli_fetch_assoc($result_form_1_contact_no)) { ?>
                                             <tr class="tr-header">
-                                                <th><input type="tel" pattern="^\d{10}$" title="Enter a Valid 10-Digit Number" name="Contact[]" id="Contact[]" value=<?php echo $row_form_1_contact_no['contact_no'];  ?> /></th>
+                                                <th><input type="tel" pattern="^\d{10,}$" title="Enter a Valid Mobile Number" name="Contact[]" id="Contact[]" value=<?php echo $row_form_1_contact_no['contact_no'];  ?> /></th>
                                                 <th><a href="javascript:void(0);" style="font-size:18px;" id="addMore7" title="Add More Person"><span class="fa fa-plus"></span></a></th>
                                                 <th>&ensp; </th>
                                                 <th><a href='javascript:void(0);' style="font-size:18px;" class='remove7' title="Remove"><span class='fa fa-minus'></span></a></th>
@@ -179,7 +179,7 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                                 <label for="local_staff_contact" class="form-label" style="padding-left: 15px">Local Staff Contact for this Subject:</label>
                                 <input type="text" name="local_staff_contact" id="local_staff_contact" placeholder="Local Staff Contact" value="<?php echo $row_form_1['local_staff_contact']; ?>" />
                                 <label for="staff_mobile_no" class="form-label" style="padding-left: 18px">Staff Mobile Number:</label>
-                                <input type="text" name="staff_mobile_no" id="staff_mobile_no" placeholder="Staff Mobile Number" value="<?php echo $row_form_1['staff_mobile_no']; ?>" />
+                                <input type="number" name="staff_mobile_no" id="staff_mobile_no" placeholder="Staff Mobile Number" value="<?php echo $row_form_1['staff_mobile_no']; ?>" />
                             </div>
                         </div>
 
@@ -326,17 +326,17 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                             <div class="form-row" style="padding-left: 20px;">
                                 <div class="form-group" style="padding-left: 65px;">
                                     <label for="Weight" class="form-label">Weight?</label>
-                                    <input type="text" name="Weight" id="Weight" onchange="calculateBMI()" placeholder="Weight in kilograms" value="<?php echo $row_form_1['Weight']; ?>" />
+                                    <input type="number" name="Weight" id="Weight" onchange="calculateBMI()" placeholder="Weight in kilograms" step=".01" value="<?php echo $row_form_1['Weight']; ?>" />
                                 </div>
 
                                 <div class="form-group">
                                     <label for="Height" class="form-label">Height?</label>
-                                    <input type="text" name="Height" id="Height" onchange="calculateBMI()" placeholder="Height in meters" value="<?php echo $row_form_1['Height']; ?>" />
+                                    <input type="number" name="Height" id="Height" onchange="calculateBMI()" placeholder="Height in meters" step=".01" value="<?php echo $row_form_1['Height']; ?>" />
                                 </div>
 
                                 <div class="form-group">
                                     <label for="BMI" class="form-label">BMI?</label>
-                                    <input type="text" name="BMI" id="BMI" onchange="calculateBMI()" placeholder="BMI Score" value="<?php echo $row_form_1['BMI']; ?>" />
+                                    <input type="number" name="BMI" id="BMI" onchange="calculateBMI()" placeholder="BMI Score" step=".01" value="<?php echo $row_form_1['BMI']; ?>" />
                                 </div>
                             </div>
 
@@ -758,7 +758,7 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                 var Height = thisform.Height.value;
                 var study_no = thisform.study_no.value;
                 var allocate_study_no = thisform.allocate_study_no.value;
-                var phoneno = /^\d{10}$/;
+                var phoneno = /^\d{10,}$/;
                 var staff_mobile_no = thisform.staff_mobile_no.value;
                 var BMI = thisform.BMI.value;
 
@@ -806,7 +806,7 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                 if (Weight < 40) {
                     alert("Weight Should Be Greater than 40 kilograms");
                     thisform.Weight.focus();
-                    return false;
+                    // return false;
                 }
                 if (isNaN(Weight)) {
                     alert("Enter a Valid Weight");
@@ -825,7 +825,7 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                     return false;
                 }
                 if (!staff_mobile_no.match(phoneno)) {
-                    alert("Enter Valid 10-digit Staff Mobile Number");
+                    alert("Enter a Valid Staff Mobile Number");
                     thisform.staff_mobile_no.focus();
                     return false;
                 }
@@ -837,7 +837,7 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                 if (document.getElementById('contrano').checked) {
                     alert("Cannot Have Contra-indications");
                     document.getElementById('contrano').focus();
-                    return false;
+                    // return false;
                 }
                 if (BMI < 18.5) {
                     alert("BMI Should be Greater Than 18.5");
@@ -845,9 +845,9 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                     return false;
                 }
                 if (document.getElementById('pregno').checked) {
-                    alert("Not Eligible as The Patient is Pregnant");
+                    alert("May Not Be Eligible as The Patient is Pregnant");
                     document.getElementById('pregno').focus();
-                    return false;
+                    // return false;
                 }
                 if (document.getElementById('attendno').checked) {
                     alert("Not Eligible as The Patient is Not Being Able To Attend Regularly");
@@ -855,9 +855,9 @@ while ($row_form_1 = mysqli_fetch_assoc($result_form_1)) {
                     return false;
                 }
                 if (document.getElementById('consno').checked) {
-                    alert("Not Eligible as The Patient Does Not Provide Informed Consent");
+                    alert("May Not Be Eligible as The Patient Does Not Provide Informed Consent");
                     document.getElementById('consno').focus();
-                    return false;
+                    // return false;
                 }
 
                 return true;
