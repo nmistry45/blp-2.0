@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 07, 2020 at 01:04 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.6
+-- Host: localhost:3306
+-- Generation Time: Mar 06, 2021 at 01:35 PM
+-- Server version: 5.6.43-84.3
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -60,6 +61,13 @@ CREATE TABLE `form1` (
   `others` varchar(700) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form1`
+--
+
+INSERT INTO `form1` (`pid`, `patient_name`, `study_no`, `date`, `staff_name`, `patient_name1`, `clinic_regno`, `address`, `email_id`, `local_staff_contact`, `staff_mobile_no`, `dateMDT`, `dateRFT`, `SmearDiagnosis`, `SmearDate`, `mdiag`, `type`, `Age`, `sex`, `Weight`, `Height`, `BMI`, `any_contra_indication_steroids`, `able_to_attend_regularly`, `not_pregnant`, `long_term`, `inform_consent`, `allocate_study_no`, `history_of_enl`, `others`) VALUES
+(1, 'Nishit', '12345', '2021-02-10', 'Parth', 'Nishit Mistry', '13928', 'Malad East', 'nmistry45@gmail.com', 'hiiiiiiiii', '9517368420', '2019-03-10', '2020-03-10', '4', '2021-02-10', 'yes', 'new', '21', 'male', '92', '1.7', '31.83', 'no', 'yes', 'yes', 'hellooooo', 'yes', '12345', 'yes', '');
+
 -- --------------------------------------------------------
 
 --
@@ -76,6 +84,13 @@ CREATE TABLE `form1_checkbox` (
   `Other_Illness` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `form1_checkbox`
+--
+
+INSERT INTO `form1_checkbox` (`pid`, `HIV`, `Chronic_Moderate/Severe_Renal_Impairment`, `Tuberculosis`, `Cancer`, `Uncontrolled_Type-1_Diabetes`, `Other_Illness`) VALUES
+(1, 'no', 'yes', 'no', 'no', 'no', 'no');
+
 -- --------------------------------------------------------
 
 --
@@ -86,6 +101,13 @@ CREATE TABLE `form1_contact` (
   `pid` bigint(20) NOT NULL,
   `contact_no` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `form1_contact`
+--
+
+INSERT INTO `form1_contact` (`pid`, `contact_no`) VALUES
+(1, 9876543210);
 
 -- --------------------------------------------------------
 
@@ -127,6 +149,13 @@ CREATE TABLE `form2` (
   `next_asse_date` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form2`
+--
+
+INSERT INTO `form2` (`pid`, `patient_name`, `study_no`, `date`, `staff_name`, `current_reaction_status`, `weight_2`, `first_had_enl`, `firstPDate`, `first_sym`, `current_anti_reaction`, `date_started_predni`, `current_dose_predni`, `current_dose_clofa`, `current_dose_thal`, `nfa`, `change_in_nfi`, `change_in_nfi_desc`, `eess_2`, `bp_2`, `hb_2`, `rbsl_2`, `qol_2_score`, `vas_for_pig_2`, `obs`, `ran`, `drug_dose_predni`, `drug_dur_predni`, `drug_dose_clofa`, `drug_dur_clofa`, `next_asse_date`) VALUES
+(1, 'Nishit', '12345', '2021-02-10', 'Parth', 'RR', 92, '2021-02-10', '2021-02-10', '5', '', '2021-02-10', '7', '7', '', 'no', 'no', '', '11', '10', '10', '10', 'done', '23', 'not well', 'yes', '3', '5', '3', '5', '2021-02-17');
+
 -- --------------------------------------------------------
 
 --
@@ -153,6 +182,13 @@ CREATE TABLE `form2_checkbox` (
   `Acne` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `form2_checkbox`
+--
+
+INSERT INTO `form2_checkbox` (`pid`, `Mild_Indigestion`, `Peptic_Ulcer`, `Striae`, `Herpes_Zoster`, `Hyperglycaemia`, `Hypertension`, `Malaena`, `Glaucoma`, `Truncal_Obesity`, `Osteoporosis`, `Moon_Face`, `Psychosis`, `Gastrointestinal_bleeding`, `Haematemesis`, `Extensive_Ringworm`, `Acne`) VALUES
+(1, 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no', 'yes', 'no', 'no', 'no');
+
 -- --------------------------------------------------------
 
 --
@@ -165,6 +201,13 @@ CREATE TABLE `form2_checkbox2` (
   `Clofazmine` varchar(255) NOT NULL,
   `Thalidamide` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `form2_checkbox2`
+--
+
+INSERT INTO `form2_checkbox2` (`pid`, `Prednisolone`, `Clofazmine`, `Thalidamide`) VALUES
+(1, 'yes', 'yes', 'no');
 
 -- --------------------------------------------------------
 
@@ -179,6 +222,13 @@ CREATE TABLE `form2_others` (
   `others_drug_dosage` varchar(255) NOT NULL,
   `others_drug_duration` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `form2_others`
+--
+
+INSERT INTO `form2_others` (`oid`, `pid`, `others_drug_name`, `others_drug_dosage`, `others_drug_duration`) VALUES
+(1, 1, 'calcium', '6', '6');
 
 -- --------------------------------------------------------
 
@@ -567,7 +617,13 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`id`, `name`, `password`) VALUES
-(1, 'webmaster', '393d20c68a4c86960ffe216d73fc2945');
+(1, 'webmaster', '393d20c68a4c86960ffe216d73fc2945'),
+(2, 'DrRuth', 'c6869eadb392aabd82b3819882de8d19'),
+(3, 'dkdas', 'a1b59e4c36fa1caec4a306d3222e578b'),
+(4, 'ssarker', 'cc6dd75abbbeed901dd003a78aabbe71'),
+(5, 'kcroy', 'c192b4c141713cd20edb3f2f24c73e36'),
+(6, 'smarandi', '8cab6273f4002aa2e7f1a15229ae1162'),
+(7, 'Jsamaddar', '58ba1d46e3e8236a29f89356d97d3553');
 
 --
 -- Indexes for dumped tables
@@ -718,37 +774,37 @@ ALTER TABLE `form8_checkbox2`
 -- AUTO_INCREMENT for table `form1`
 --
 ALTER TABLE `form1`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `form1_checkbox`
 --
 ALTER TABLE `form1_checkbox`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `form2`
 --
 ALTER TABLE `form2`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `form2_checkbox`
 --
 ALTER TABLE `form2_checkbox`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `form2_checkbox2`
 --
 ALTER TABLE `form2_checkbox2`
-  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `pid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `form2_others`
 --
 ALTER TABLE `form2_others`
-  MODIFY `oid` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `oid` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `form3`

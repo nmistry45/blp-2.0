@@ -8,12 +8,12 @@ include('connection.php');
 	
 	$password = md5(mysqli_real_escape_string($conn, $_POST['password']));
 	
-	$qry = " select * from login where name='$name' and password='$password' ";
-	$result=mysqli_query($conn,$qry);
+	$result = mysqli_query($conn, "select * from login where name='$name' and password='$password'");
 
 	if(!$result){
 		echo $qry;
 	}
+	
 	else{
 		if(mysqli_num_rows($result)>0){
 			$row = mysqli_fetch_assoc($result);

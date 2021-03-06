@@ -160,9 +160,9 @@ if (!isset($_SESSION['id'])) {
                             <input type="checkbox" name="current_anti_reaction[0]" value="yes" id="Prednisolone" />
                             <label style="width:115px;" for="Prednisolone">Prednisolone</label>
                             <input type="checkbox" name="current_anti_reaction[1]" value="yes" id="Clofazmine" />
-                            <label style="width:115px;" for="Clofazmine">Clofazmine</label>
+                            <label style="width:115px;" for="Clofazmine">Clofazimine</label>
                             <input type="checkbox" name="current_anti_reaction[2]" value="yes" id="Thalidamide" />
-                            <label style="width:115px;" for="Thalidamide">Thalidamide</label>
+                            <label style="width:115px;" for="Thalidamide">Thalidomide</label>
                         </div>
                     </div>
 
@@ -184,7 +184,7 @@ if (!isset($_SESSION['id'])) {
                     </div>
 
                     <div class="form-group" style="margin-top: 9px">
-                        <label for="current_dose_thal" class="form-label">Current Daily Dose of Thalidamide</label>
+                        <label for="current_dose_thal" class="form-label">Current Daily Dose of Thalidomide</label>
                         <input type="number" style="width: 180px" name="current_dose_thal" id="current_dose_thal" />mg/day
                     </div>
 

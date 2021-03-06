@@ -209,18 +209,18 @@ while ($row_form_2 = mysqli_fetch_assoc($result_form_2)) {
                                     <?php }
                                     if ($row_form2_checkBox2['Clofazmine'] === 'yes') { ?>
                                         <input type="checkbox" name="current_anti_reaction[1]" value="yes" id="Clofazmine" checked />
-                                        <label style="width:115px;" for="Clofazmine">Clofazmine</label>
+                                        <label style="width:115px;" for="Clofazmine">Clofazimine</label>
                                     <?php } else { ?>
                                         <input type="checkbox" name="current_anti_reaction[1]" value="yes" id="Clofazmine" />
-                                        <label style="width:115px;" for="Clofazmine">Clofazmine</label>
+                                        <label style="width:115px;" for="Clofazmine">Clofazimine</label>
 
                                     <?php }
                                     if ($row_form2_checkBox2['Thalidamide'] === 'yes') { ?>
                                         <input type="checkbox" name="current_anti_reaction[2]" value="yes" id="Thalidamide" checked />
-                                        <label style="width:115px;" for="Thalidamide">Thalidamide</label>
+                                        <label style="width:115px;" for="Thalidamide">Thalidomide</label>
                                     <?php } else { ?>
                                         <input type="checkbox" name="current_anti_reaction[2]" value="yes" id="Thalidamide" />
-                                        <label style="width:115px;" for="Thalidamide">Thalidamide</label>
+                                        <label style="width:115px;" for="Thalidamide">Thalidomide</label>
                                     <?php } ?>
                                 <?php } ?>
                             </div>
@@ -244,7 +244,7 @@ while ($row_form_2 = mysqli_fetch_assoc($result_form_2)) {
                         </div>
 
                         <div class="form-group" style="margin-top: 9px;padding-left: 34px">
-                            <label for="current_dose_thal" class="form-label">Current Daily Dose of Thalidamide</label>
+                            <label for="current_dose_thal" class="form-label">Current Daily Dose of Thalidomide</label>
                             <input type="number" style="width: 180px" name="current_dose_thal" id="current_dose_thal" value="<?php echo $row_form_2['current_dose_thal']; ?>" />
                         </div>
 

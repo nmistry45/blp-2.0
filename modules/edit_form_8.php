@@ -88,10 +88,10 @@ while ($row_form_8 = mysqli_fetch_assoc($result_form_8)) {
                 ?>
                     <form method="POST" id="signup-form" class="signup-form" action="../assets/php/update_form_8.php?pid=<?php echo $pid; ?>&f8id=<?php echo $f8id ?>" enctype="multipart/form-data">
                         <div class="form-group" style="margin-top: 20px">
-                            <label for="patient_name" class="form-label" style="margin-left: 130px; font-size: 20px; color:blue;"><u><b>Patient Name:</b></u></label>
-                            <label for="op_patient_name" class="form-label" style="margin-left: -20px; font-size: 20px; color:blue;"><u><b><?php echo $row_form_8_1['patient_name']; ?></b></u></label>
-                            <label for="study_no" class="form-label" style="margin-left: 215px; font-size: 20px; color:blue;"><u><b>Study Number:</b></u></label>
-                            <label for="op_study_no" class="form-label" style="margin-left: -100px; font-size: 20px; color:blue;"><u><b><?php echo $row_form_8_1['study_no']; ?></b></u></label>
+                            <label for="patient_name" class="form-label" style="margin-left: 130px; font-size: 15px;"><u><b>Patient Name:</b></u></label>
+                            <label for="op_patient_name" class="form-label" style="margin-left: -20px; font-size: 13.8px; color:blue;"><u><b><?php echo $row_form_8_1['patient_name']; ?></b></u></label>
+                            <label for="study_no" class="form-label" style="margin-left: 215px; font-size: 15px;"><u><b>Study Number:</b></u></label>
+                            <label for="op_study_no" class="form-label" style="margin-left: -100px; font-size: 13.8px; color:blue;"><u><b><?php echo $row_form_8_1['study_no']; ?></b></u></label>
                         </div>
                     <?php } ?>
                     <hr>

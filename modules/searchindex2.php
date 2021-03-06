@@ -28,15 +28,7 @@
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
 
     <!-- Main css -->
-    <!--
-    <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-      
-      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  -->
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://localhost/BLP/assets/blp/jquery-1.11.1.min.js.download"></script>
     <!-- stylesheet -->
@@ -45,10 +37,6 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
     <link href="http://localhost/BLP/assets/css/style.css" rel="stylesheet" type="text/css" media="all">
-
-    <!-- header -->
-    <!-- Latest compiled and minified CSS -->
-
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -59,6 +47,16 @@
     <!-- Latest compiled JavaScript -->
     <link rel="stylesheet" href="../assets/css/form_style.css">
     <style type="text/css">
+        button.btn.add::before {
+            font-family: fontAwesome;
+            content: "\f067\00a0";
+        }
+
+        button.btn.excel::before {
+            font-family: fontAwesome;
+            content: "\f1c3\00a0";
+
+        }
     </style>
 
 </head>
@@ -70,10 +68,17 @@
             <h2 align="center">Search Patient</h2><br />
             <div class="form-group">
                 <div class="input-group">
-                    <input type="text" name="search_text" id="search_text" placeholder="Search by Patient Details" class="form-control; valid" style="margin-left:auto;" />
-                    <button name="new_patient" id="new_patient" class="valid" onclick="location.href='form_1.php';" style="margin-right:auto;">+ Add Patient</button>
+                    <input type="text" style="margin:0px auto; display:block;" name="search_text" id="search_text" placeholder="Search by Patient Details" class="form-control; valid" />
                 </div>
             </div>
+            <table>
+                <tr>
+                    <button name="new_patient" id="new_patient" class="btn add fa-2x btn-success" style="margin-left: 375px;" onclick="location.href='form_1.php';"> Add Patient</button>
+                    <form method="post" action="export.php">
+                        <button type="submit" name="export" style="margin-left: 50px;" class="btn excel fa-2x btn-success"> Export to Excel</button>
+                    </form>
+                </tr>
+            </table>
             <br />
             <div id="result"></div>
         </div>
