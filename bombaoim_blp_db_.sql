@@ -613,19 +613,6 @@ CREATE TABLE `login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `login`
---
-
-INSERT INTO `login` (`id`, `name`, `password`) VALUES
-(1, 'webmaster', '393d20c68a4c86960ffe216d73fc2945'),
-(2, 'DrRuth', 'c6869eadb392aabd82b3819882de8d19'),
-(3, 'dkdas', 'a1b59e4c36fa1caec4a306d3222e578b'),
-(4, 'ssarker', 'cc6dd75abbbeed901dd003a78aabbe71'),
-(5, 'kcroy', 'c192b4c141713cd20edb3f2f24c73e36'),
-(6, 'smarandi', '8cab6273f4002aa2e7f1a15229ae1162'),
-(7, 'Jsamaddar', '58ba1d46e3e8236a29f89356d97d3553');
-
---
 -- Indexes for dumped tables
 --
 
